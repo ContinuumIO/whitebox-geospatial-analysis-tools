@@ -23,23 +23,29 @@ class WhiteboxTools(object):
     # wd = ""
     # verbose = True
 
-    def __init__(self):
-        self.exe_path = path.dirname(path.abspath(__file__))
+    def __init__(self, exe_path=None):
+        self.set_whitebox_dir(exe_path)
         self.wkdir = ""
         self.verbose = True
         self.cancel_op = False
 
-    if platform == 'win32':
-        ext = '.exe'
-    else:
-        ext = ''
-
-    exe_name = "whitebox_tools{}".format(ext)
-
-    def set_whitebox_dir(self, path_str):
+    def set_whitebox_dir(self, exe_path=None):
         ''' Sets the directory to the whitebox - tools executable file.
         '''
-        self.exe_path = path_str
+        exe_path = exe_path or os.environ.get('WHITEBOX_TOOLS_BUILD', '')
+        if not exe_path or not os.path.exists(exe_path):
+            target = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              'target')
+            exe_path = os.path.join(target, 'release')
+            if not exe_path or not os.path.exists(exe_path):
+                raise ValueError('Define WHITEBOX_TOOLS_BUILD environment variable')
+
+        self.exe_path = exe_path
+        if platform == 'win32':
+            exe = "whitebox_tools.exe"
+        else:
+            exe = 'whitebox_tools'
+        self.exe_name = os.path.join(self.exe_path, exe)
 
     def set_working_dir(self, path_str):
         ''' Sets the working directory.
@@ -51,6 +57,31 @@ class WhiteboxTools(object):
         '''
         self.verbose = val
 
+    def _run_process(self, args, **kwargs):
+        callback = kwargs.get('callback', default_callback)
+        proc = Popen(args, shell=False, stdout=PIPE,
+                         stderr=STDOUT, bufsize=1,
+                         universal_newlines=True,
+                         cwd=self.exe_path)
+        lines = []
+        silent = kwargs.get('silent')
+        ret_code = 0
+        while True:
+            line = proc.stdout.readline()
+            sys.stdout.flush()
+            if line != '':
+                if not self.cancel_op and not silent:
+                    callback(line.strip())
+                else:
+                    self.cancel_op = False
+                    proc.terminate()
+                    ret_code = 2
+            else:
+                break
+            lines.append(line)
+        ret_code = ret_code or proc.poll()
+        return ret_code, lines
+
     def run_tool(self, tool_name, args, callback=default_callback):
         ''' Runs a tool and specifies tool arguments.
         Returns 0 if completes without error.
@@ -58,9 +89,8 @@ class WhiteboxTools(object):
         Returns 2 if process is cancelled by user.
         '''
         try:
-            os.chdir(self.exe_path)
             args2 = []
-            args2.append("." + path.sep + self.exe_name)
+            args2.append(self.exe_name)
             args2.append("--run=\"{}\"".format(tool_name))
 
             if self.wkdir.strip() != "":
@@ -74,25 +104,8 @@ class WhiteboxTools(object):
 
             if self.verbose:
                 args2.append("-v")
-
-            proc = Popen(args2, shell=False, stdout=PIPE,
-                         stderr=STDOUT, bufsize=1, universal_newlines=True)
-
-            while True:
-                line = proc.stdout.readline()
-                sys.stdout.flush()
-                if line != '':
-                    if not self.cancel_op:
-                        callback(line.strip())
-                    else:
-                        self.cancel_op = False
-                        proc.terminate()
-                        return 2
-
-                else:
-                    break
-
-            return 0
+            print('args2', args2)
+            return self._run_process(args2, callback=callback)[0] or 0
         except (OSError, ValueError, CalledProcessError) as err:
             callback(str(err))
             return 1
@@ -101,22 +114,10 @@ class WhiteboxTools(object):
         ''' Retrieve the help description for whitebox - tools.
         '''
         try:
-            os.chdir(self.exe_path)
             args = []
-            args.append("." + os.path.sep + self.exe_name)
+            args.append(self.exe_name)
             args.append("-h")
-
-            proc = Popen(args, shell=False, stdout=PIPE,
-                         stderr=STDOUT, bufsize=1, universal_newlines=True)
-            ret = ""
-            while True:
-                line = proc.stdout.readline()
-                if line != '':
-                    ret += line
-                else:
-                    break
-
-            return ret
+            return self._run_process(args)[1]
         except (OSError, ValueError, CalledProcessError) as err:
             return err
 
@@ -124,22 +125,10 @@ class WhiteboxTools(object):
         ''' Retrieves the license information for whitebox - tools.
         '''
         try:
-            os.chdir(self.exe_path)
             args = []
-            args.append("." + os.path.sep + self.exe_name)
+            args.append(self.exe_name)
             args.append("--license")
-
-            proc = Popen(args, shell=False, stdout=PIPE,
-                         stderr=STDOUT, bufsize=1, universal_newlines=True)
-            ret = ""
-            while True:
-                line = proc.stdout.readline()
-                if line != '':
-                    ret += line
-                else:
-                    break
-
-            return ret
+            return self._run_process(args)[1]
         except (OSError, ValueError, CalledProcessError) as err:
             return err
 
@@ -147,45 +136,22 @@ class WhiteboxTools(object):
         ''' Retrieves the version information for whitebox - tools.
         '''
         try:
-            os.chdir(self.exe_path)
             args = []
-            args.append("." + os.path.sep + self.exe_name)
+            args.append(self.exe_name)
             args.append("--version")
 
-            proc = Popen(args, shell=False, stdout=PIPE,
-                         stderr=STDOUT, bufsize=1, universal_newlines=True)
-            ret = ""
-            while True:
-                line = proc.stdout.readline()
-                if line != '':
-                    ret += line
-                else:
-                    break
-
-            return ret
+            return self._run_process(args)[1]
         except (OSError, ValueError, CalledProcessError) as err:
             return err
 
-    def tool_help(self, tool_name):
+    def tool_help(self, tool_name, silent=False):
         ''' Retrieve the help description for a specific tool.
         '''
         try:
-            os.chdir(self.exe_path)
             args = []
-            args.append("." + os.path.sep + self.exe_name)
+            args.append(self.exe_name)
             args.append("--toolhelp={}".format(tool_name))
-
-            proc = Popen(args, shell=False, stdout=PIPE,
-                         stderr=STDOUT, bufsize=1, universal_newlines=True)
-            ret = ""
-            while True:
-                line = proc.stdout.readline()
-                if line != '':
-                    ret += line
-                else:
-                    break
-
-            return ret
+            return self._run_process(args, silent=silent)[1]
         except (OSError, ValueError, CalledProcessError) as err:
             return err
 
@@ -193,21 +159,12 @@ class WhiteboxTools(object):
         ''' Lists all available tools in whitebox - tools.
         '''
         try:
-            os.chdir(self.exe_path)
             args = []
-            args.append("." + os.path.sep + self.exe_name)
+            args.append(self.exe_name)
             args.append("--listtools")
 
             proc = Popen(args, shell=False, stdout=PIPE,
                          stderr=STDOUT, bufsize=1, universal_newlines=True)
-            ret = ""
-            while True:
-                line = proc.stdout.readline()
-                if line != '':
-                    ret += line
-                else:
-                    break
-
-            return ret
+            return self._run_process(args)[1]
         except (OSError, ValueError, CalledProcessError) as err:
             return err

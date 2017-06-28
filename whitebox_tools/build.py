@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 ''' this module is used to build whitebox-tools.
 '''
+from __future__ import print_function
 import os
 import sys
-from subprocess import call
+from subprocess import call as sp_call
+
+def call(*args, **kw):
+    print('Running: ', args[0], '(with kwargs = {})'.format(kw))
+    return sp_call(*args, **kw)
 
 
 def main():
@@ -23,18 +28,16 @@ def main():
             # Update #
             retcode = call(['cargo', 'update'], shell=False)
             if retcode < 0:
-                print >>sys.stderr, "Child was terminated by signal", -retcode
+                print( "Child was terminated by signal", -retcode, file=sys.stderr)
             else:
-                print >>sys.stderr, "Update successful"
-
+                print( "Update successful", file=sys.stderr)
         if clean_code:
             # Clean #
             retcode = call(['cargo', 'clean'], shell=False)
             if retcode < 0:
-                print >>sys.stderr, "Child was terminated by signal", -retcode
+                print( "Child was terminated by signal", -retcode, file=sys.stderr)
             else:
-                print >>sys.stderr, "Clean successful"
-
+                print( "Clean successful", file=sys.stderr)
         if build_code:
             # Build #
             if mode == 'release':
@@ -45,12 +48,10 @@ def main():
                 retcode = call(['cargo', 'debug'], shell=False)
 
             if retcode < 0:
-                print >>sys.stderr, "Child was terminated by signal", -retcode
+                print( "Child was terminated by signal", -retcode, file=sys.stderr)
             else:
-                print >>sys.stderr, "Build executed successfully"
-
+                print( "Build executed successfully", file=sys.stderr)
     except OSError as err:
-        print >>sys.stderr, "Execution failed:", err
-
+        print( "Execution failed:", err, file=sys.stderr)
 
 main()
