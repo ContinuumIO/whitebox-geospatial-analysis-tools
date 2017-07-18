@@ -32,14 +32,22 @@ class WhiteboxTools(object):
     def set_whitebox_dir(self, exe_path=None):
         ''' Sets the directory to the whitebox - tools executable file.
         '''
-        exe_path = exe_path or os.environ.get('WHITEBOX_TOOLS_BUILD', '')
-        if not exe_path or not os.path.exists(exe_path):
-            target = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                              'target')
-            exe_path = os.path.join(target, 'release')
+        exe_paths = (exe_path, os.environ.get('WHITEBOX_TOOLS_BUILD', ''))
+        found_it = False
+        for exe_path in exe_paths:
             if not exe_path or not os.path.exists(exe_path):
-                raise ValueError('Define WHITEBOX_TOOLS_BUILD environment variable')
-
+                target = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                      'target')
+                exe_path = os.path.join(target, 'release')
+                if not exe_path or not os.path.exists(exe_path):
+                    pass
+                else:
+                    found_it = True
+            else:
+                found_it = True
+        if not found_it:
+            raise ValueError('Define WHITEBOX_TOOLS_BUILD '
+                             'environment variable {}'.format(exe_paths))
         self.exe_path = exe_path
         if platform == 'win32':
             exe = "whitebox_tools.exe"
