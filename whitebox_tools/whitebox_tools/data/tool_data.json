@@ -1,1 +1,1471 @@
-{"Slope": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--zfactor"], "Optional multiplier for when the vertical and horizontal units are not the same"], [["--wd"], "Working directory"]], "LidarInfo": [[["--geokeys"], "Flag indicates whether to print the geokeys"], [["--vlr"], "Flag indicates whether to print variable length records (VLRs)"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "D8FlowAccumulation": [[["--out_type"], "Output type; one of 'cells' 'sca' and 'ca'"], [["-i", "--input"], "Input file"], [["--log"], "Optional flag to request the output be log-transformed"], [["--clip"], "Optional flag to request clipping the display max by 1%"], [["-o", "--output"], "Output file"], [["--wd"], "Working directory"]], "RuggednessIndex": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--zfactor"], "Optional multiplier for when the vertical and horizontal units are not the same"], [["--wd"], "Working directory"]], "TotalCurvature": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--zfactor"], "Optional multiplier for when the vertical and horizontal units are not the same"], [["--wd"], "Working directory"]], "ElevPercentile": [[["--filtery", "--filter"], "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"], [["-i", "--input"], "Input file"], [["--filter"], "Size of the filter kernel (default is 11)"], [["--filterx", "--filter"], "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"], [["-o", "--output"], "Output file"], [["--wd"], "Working directory"]], "Aspect": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--zfactor"], "Optional multiplier for when the vertical and horizontal units are not the same"], [["--wd"], "Working directory"]], "FD8FlowAccumulation": [[["--out_type"], "Output type; one of 'cells' 'sca' and 'ca'"], [["-i", "--input"], "Input file"], [["--threshold"], "Optional convergence threshold parameter in grid cells; default is inifinity"], [["--clip"], "Optional flag to request clipping the display max by 1%"], [["--log"], "Optional flag to request the output be log-transformed"], [["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["--exponent"], "Optional exponent parameter; default is 1 1"]], "LidarGroundPointFilter": [[["--radius"], "Search radius; default is 1 0"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input LAS file"], [["--wd"], "Working directory"]], "MaxAbsoluteOverlay": [[["-i", "--inputs"], "Input raster files separated by commas or semicolons"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "Clump": [[["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--diag", "--zero_back"], "Optional flag indicating whether diagonal connections should be considered Optional flag indicating whether zero values should be treated as a background"]], "Quantiles": [[["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input raster DEM file"], [["--num_quantiles"], "Number of quantiles (default 4)"]], "MaxOverlay": [[["-i", "--inputs"], "Input raster files separated by commas or semicolons"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "LidarTophatTransform": [[["--radius"], "Search radius; default is 1 0"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input LAS file"], [["--wd"], "Working directory"]], "NumInflowingNeighbours": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "NumUpslopeNeighbours": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "PlanCurvature": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--zfactor"], "Optional multiplier for when the vertical and horizontal units are not the same"], [["--wd"], "Working directory"]], "FillMissingData": [[["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--filter"], "Size of the filter kernel (default is 11)"]], "ProfileCurvature": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--zfactor"], "Optional multiplier for when the vertical and horizontal units are not the same"], [["--wd"], "Working directory"]], "RelativeAspect": [[["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--zfactor"], "Optional multiplier for when the vertical and horizontal units are not the same"], [["--azimuth"], "Illumination source azimuth"]], "NumDownslopeNeighbours": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "RemoveOffTerrainObjects": [[["--slope"], "Slope threshold; default is 15 0"], [["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--filter"], "Filter size (cells); default is 11"]], "EuclideanDistance": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input raster DEM file"], [["--wd"], "Working directory"]], "AverageOverlay": [[["-i", "--inputs"], "Input raster files separated by commas or semicolons"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "LidarHillshade": [[["--altitude"], "Optional altitude in degrees of illumination source (efault is 30 0)"], [["--radius"], "Search radius; default is 1 0"], [["-i", "--input"], "Input LAS file"], [["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["--azimuth"], "Optional azimuth in degrees of illumination source (default is 315 0)"]], "DevFromMeanElev": [[["--filtery", "--filter"], "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"], [["-i", "--input"], "Input raster DEM file"], [["--filter"], "Size of the filter kernel (default is 11)"], [["--filterx", "--filter"], "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"], [["-o", "--output"], "Output file"], [["--wd"], "Working directory"]], "TangentialCurvature": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--zfactor"], "Optional multiplier for when the vertical and horizontal units are not the same"], [["--wd"], "Working directory"]], "Hillshade": [[["--altitude"], "Illumination source altitude"], [["-i", "--input"], "Input file"], [["--zfactor"], "Optional multiplier for when the vertical and horizontal units are not the same"], [["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["--azimuth"], "Illumination source azimuth"]], "MinAbsoluteOverlay": [[["-i", "--inputs"], "Input raster files separated by commas or semicolons"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "DiffFromMeanElev": [[["--filtery", "--filter"], "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"], [["-i", "--input"], "Input file"], [["--filter"], "Size of the filter kernel (default is 11)"], [["--filterx", "--filter"], "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"], [["-o", "--output"], "Output file"], [["--wd"], "Working directory"]], "LidarJoin": [[["-i", "--inputs"], "Input LAS files separated by commas"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "HighestPosition": [[["-i", "--inputs"], "Input raster files separated by commas or semicolons"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "EuclideanAllocation": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "LidarElevationSlice": [[["-i", "--input"], "Input LAS file"], [["--minz"], "Minimum elevation value"], [["--outclassval"], "Optional parameter specifying the class value assigned to points outside the slice; default is 1"], [["--inclassval"], "Optional parameter specifying the class value assigned to points within the slice; default is 2"], [["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["--class"], "Optional boolean flag indicating whether points outside the range should be retained in output but reclassified"], [["--maxz"], "Maximum elevation value"]], "FlightlineOverlap": [[["--wd"], "Working directory"], [["--palette"], "Optional palette name (for use with Whitebox raster files)"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input LAS file"], [["--resolution"], "Output raster's grid resolution"]], "BufferRaster": [[["--size"], "Buffer size"], [["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input raster DEM file"], [["--gridcells"], "Optional flag to indicate that the 'size' threshold should be measured in grid cells instead of the default"]], "Watershed": [[["--d8_pntr"], "Input D8 pointer raster file"], [["--pour_pts"], "Input pour points (outlet) raster file"], [["-o", "--output"], "Output file"], [["--esri_pntr"], "D8 pointer uses the ESRI style scheme (default is false)"], [["--wd"], "Working directory"]], "NormalVectors": [[["--radius"], "Search radius; default is 1 0"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input LAS file"], [["--wd"], "Working directory"]], "ZScores": [[["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "DInfFlowAccumulation": [[["--out_type"], "Output type; one of 'cells' 'sca' and 'ca'"], [["--threshold"], "Optional convergence threshold parameter in grid cells; default is inifinity"], [["-i", "--input"], "Input file"], [["--log"], "Optional flag to request the output be log-transformed"], [["--clip"], "Optional flag to request clipping the display max by 1%"], [["-o", "--output"], "Output file"], [["--wd"], "Working directory"]], "WeightedSum": [[["-i", "--inputs"], "Input raster files contained in quotes and separated by commas or semicolons"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["-w", "--weights"], "Weight values contained in quotes and separated by commas or semicolons"], [["--wd"], "Working directory"]], "D8Pointer": [[["--wd"], "Working directory"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--esri_style"], "Uses the ESRI style D8 pointer output (default is false)"]], "MinOverlay": [[["-i", "--inputs"], "Input raster files separated by commas or semicolons"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "RelativeTopographicPosition": [[["--filtery", "--filter"], "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"], [["-i", "--input"], "Input file"], [["--filter"], "Size of the filter kernel (default is 11)"], [["--filterx", "--filter"], "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"], [["-o", "--output"], "Output file"], [["--wd"], "Working directory"]], "LowestPosition": [[["-i", "--inputs"], "Input raster files separated by commas or semicolons"], [["-o", "--output"], "Output file"], [["-i", "--input"], "Input file"], [["--wd"], "Working directory"]], "PercentElevRange": [[["--filtery", "--filter"], "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"], [["-i", "--input"], "Input file"], [["--filter"], "Size of the filter kernel (default is 11)"], [["--filterx", "--filter"], "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"], [["-o", "--output"], "Output file"], [["--wd"], "Working directory"]]}
+{
+  "LidarHillshade": [
+    [
+      [
+        "--azimuth"
+      ],
+      "Optional azimuth in degrees of illumination source (default is 315 0)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 1 0"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--altitude"
+      ],
+      "Optional altitude in degrees of illumination source (efault is 30 0)"
+    ]
+  ],
+  "LidarTophatTransform": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 1 0"
+    ]
+  ],
+  "NumDownslopeNeighbours": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "Slope": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "TotalCurvature": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "D8Pointer": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--esri_style"
+      ],
+      "Uses the ESRI style D8 pointer output (default is false)"
+    ]
+  ],
+  "ProfileCurvature": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "NormalVectors": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 1 0"
+    ]
+  ],
+  "EuclideanAllocation": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "MaxOverlay": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "-i",
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ]
+  ],
+  "LowestPosition": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "-i",
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ]
+  ],
+  "HighestPosition": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "-i",
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ]
+  ],
+  "ElevPercentile": [
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--filterx",
+        "--filter"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery",
+        "--filter"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ]
+  ],
+  "LidarGroundPointFilter": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 1 0"
+    ]
+  ],
+  "D8FlowAccumulation": [
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--log"
+      ],
+      "Optional flag to request the output be log-transformed"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--out_type"
+      ],
+      "Output type; one of 'cells' 'sca' and 'ca'"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional flag to request clipping the display max by 1%"
+    ]
+  ],
+  "RuggednessIndex": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "EuclideanDistance": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster DEM file"
+    ]
+  ],
+  "FD8FlowAccumulation": [
+    [
+      [
+        "--clip"
+      ],
+      "Optional flag to request clipping the display max by 1%"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--out_type"
+      ],
+      "Output type; one of 'cells' 'sca' and 'ca'"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--log"
+      ],
+      "Optional flag to request the output be log-transformed"
+    ],
+    [
+      [
+        "--exponent"
+      ],
+      "Optional exponent parameter; default is 1 1"
+    ],
+    [
+      [
+        "--threshold"
+      ],
+      "Optional convergence threshold parameter in grid cells; default is inifinity"
+    ]
+  ],
+  "TangentialCurvature": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "PercentElevRange": [
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--filterx",
+        "--filter"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery",
+        "--filter"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ]
+  ],
+  "RelativeTopographicPosition": [
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--filterx",
+        "--filter"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery",
+        "--filter"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ]
+  ],
+  "DevFromMeanElev": [
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--filterx",
+        "--filter"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery",
+        "--filter"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ]
+  ],
+  "RemoveOffTerrainObjects": [
+    [
+      [
+        "--slope"
+      ],
+      "Slope threshold; default is 15 0"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Filter size (cells); default is 11"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "MinOverlay": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "-i",
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ]
+  ],
+  "Quantiles": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--num_quantiles"
+      ],
+      "Number of quantiles (default 4)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster DEM file"
+    ]
+  ],
+  "NumUpslopeNeighbours": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "LidarInfo": [
+    [
+      [
+        "--vlr"
+      ],
+      "Flag indicates whether to print variable length records (VLRs)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--geokeys"
+      ],
+      "Flag indicates whether to print the geokeys"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "LidarElevationSlice": [
+    [
+      [
+        "--class"
+      ],
+      "Optional boolean flag indicating whether points outside the range should be retained in output but reclassified"
+    ],
+    [
+      [
+        "--outclassval"
+      ],
+      "Optional parameter specifying the class value assigned to points outside the slice; default is 1"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--minz"
+      ],
+      "Minimum elevation value"
+    ],
+    [
+      [
+        "--maxz"
+      ],
+      "Maximum elevation value"
+    ],
+    [
+      [
+        "--inclassval"
+      ],
+      "Optional parameter specifying the class value assigned to points within the slice; default is 2"
+    ]
+  ],
+  "WeightedSum": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-w",
+        "--weights"
+      ],
+      "Weight values contained in quotes and separated by commas or semicolons"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "-i",
+        "--inputs"
+      ],
+      "Input raster files contained in quotes and separated by commas or semicolons"
+    ]
+  ],
+  "Aspect": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "RelativeAspect": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--azimuth"
+      ],
+      "Illumination source azimuth"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "PlanCurvature": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "Clump": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--diag",
+        "--zero_back"
+      ],
+      "Optional flag indicating whether diagonal connections should be considered Optional flag indicating whether zero values should be treated as a background"
+    ]
+  ],
+  "MinAbsoluteOverlay": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "-i",
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ]
+  ],
+  "BufferRaster": [
+    [
+      [
+        "--gridcells"
+      ],
+      "Optional flag to indicate that the 'size' threshold should be measured in grid cells instead of the default"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--size"
+      ],
+      "Buffer size"
+    ]
+  ],
+  "FillMissingData": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "AverageOverlay": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "-i",
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ]
+  ],
+  "MaxAbsoluteOverlay": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "-i",
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ]
+  ],
+  "Hillshade": [
+    [
+      [
+        "--azimuth"
+      ],
+      "Illumination source azimuth"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--altitude"
+      ],
+      "Illumination source altitude"
+    ]
+  ],
+  "NumInflowingNeighbours": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "DiffFromMeanElev": [
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--filterx",
+        "--filter"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery",
+        "--filter"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ]
+  ],
+  "FlightlineOverlap": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--resolution"
+      ],
+      "Output raster's grid resolution"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--palette"
+      ],
+      "Optional palette name (for use with Whitebox raster files)"
+    ]
+  ],
+  "ZScores": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "LidarJoin": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "-i",
+        "--inputs"
+      ],
+      "Input LAS files separated by commas"
+    ]
+  ],
+  "DInfFlowAccumulation": [
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--log"
+      ],
+      "Optional flag to request the output be log-transformed"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--out_type"
+      ],
+      "Output type; one of 'cells' 'sca' and 'ca'"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional flag to request clipping the display max by 1%"
+    ],
+    [
+      [
+        "--threshold"
+      ],
+      "Optional convergence threshold parameter in grid cells; default is inifinity"
+    ]
+  ],
+  "Watershed": [
+    [
+      [
+        "--esri_pntr"
+      ],
+      "D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "--pour_pts"
+      ],
+      "Input pour points (outlet) raster file"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ]
+}
