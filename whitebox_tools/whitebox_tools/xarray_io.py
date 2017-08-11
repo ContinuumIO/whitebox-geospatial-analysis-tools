@@ -148,27 +148,45 @@ def xarray_whitebox_io(func, **kwargs):
     load_afterwards = {}
     delete_tempdir = kwargs.pop('delete_tempdir', True)
     fnames = {}
+    dumped_an_xarray = False
+    print('kw', kwargs)
     for k, v in kwargs.items():
         if k in INPUT_ARGS:
+            print('k in INPUT_ARGS')
             if isinstance(v, strings):
+
                 kwargs[k] = fix_path(v)
+                print('Fix path', k)
             elif isinstance(v, xr.Dataset):
+                print('DATASET')
                 for k2 in v.data_vars:
+                    print('k2', k2)
                     data_arr = getattr(v, k2)
                     dep, tas = data_array_to_dep(arr, k2)
                     fnames[(k, k2)] = [dep, tas]
                 kwargs[k] = ', '.join(dep for (k1, k2), (dep, tas) in fnames.items()
                                       if k1 == k)
+                print('kw2', kwargs)
+                dumped_an_xarray = True
             elif isinstance(v, xr.DataArray):
-                kwargs[k] = data_array_to_dep(v, k)
+                kwargs[k] = data_array_to_dep(v, k)[0]
+                print('DataArray', k)
+                dumped_an_xarray = True
         elif k in OUTPUT_ARGS:
+            print('k in output_args', k)
             load_afterwards[k] = fix_path(v)
+    if not load_afterwards and dumped_an_xarray:
+        output_fname = kwargs['input'].replace('.dep', '-output.dep')
+        load_afterwards[k] = kwargs['output'] = output_fname
     ret_val = func(**kwargs)
+    print('ret_val', ret_val)
     if ret_val:
         raise ValueError('{} ({}) failed with return code {}'.format(func, kwargs, ret_val))
     data_arrs = {}
     for k, paths in load_afterwards.items():
+        print('load after', k)
         for path in v:
+            print('from_tas_and_dep', path)
             data_arrs[k] = from_tas_and_dep(path)
     attrs = dict(kwargs=kwargs, return_code=ret_val)
     dset = xr.Dataset(data_arrs, attrs=attrs)

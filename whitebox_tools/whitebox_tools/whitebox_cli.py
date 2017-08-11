@@ -5,6 +5,10 @@ import json
 import os
 import re
 import sys
+try:
+    unicode
+except:
+    unicode = str
 
 from whitebox_tools.whitebox_base import WhiteboxTools
 from whitebox_tools.xarray_io import xarray_whitebox_io
@@ -165,7 +169,22 @@ def convert_help_extract_params(tool, wbt, to_parser=True, silent=False):
 def to_rust(tool, args):
     s = []
     for k, v in vars(args).items():
-        s.append('--{}={}'.format(k, v))
+
+        if v not in ('', None):
+            try:
+                float(v)
+                fmt = '--{}={}'
+            except:
+                if k in ('input', 'output', 'wd'):
+                    if v != os.path.abspath(v):
+                        v = os.path.join(os.path.abspath(os.curdir), v)
+                        setattr(args, k, v)
+                fmt = '--{}="{}"'
+            s.append(fmt.format(k, v))
+    if not 'wd' in vars(args):
+        wd = os.path.abspath(os.curdir)
+        s.append('--wd="{}"'.format(wd))
+        setattr(args, 'wd', wd)
     return s
 
 
@@ -177,6 +196,7 @@ def call_whitebox_cli(tool, args=None, callback_func=None, silent=False):
         parser = convert_help_extract_params(tool, wbt, silent=silent)
         args = parser.parse_args()
     args = to_rust(tool, args)
+    print('to_rust', args)
     if not silent:
         print(args)
     return wbt.run_tool(tool, args, callback_func)
@@ -187,6 +207,7 @@ def call_whitebox_func(tool, **kwargs):
     if not callback_func:
         callback_func = partial(callback, silent=True)
     args = argparse.Namespace(**kwargs)
+    print('argparse', args)
     return call_whitebox_cli(tool, args=args, callback_func=callback_func)
 
 
