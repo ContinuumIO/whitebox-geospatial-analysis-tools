@@ -1,10 +1,17 @@
+import os
 
 import numpy as np
 import pytest
 import xarray as xr
 
 from whitebox_tools.whitebox_cli import * # __all__ is defined there
-
+from whitebox_tools.xarray_io import (from_dep,
+                                      data_array_to_dep,
+                                      WHITEBOX_TEMP_DIR)
+try:
+    unicode
+except:
+    unicode = str
 HELP = get_all_help()
 
 DEFAULT_ATTRS = {
@@ -20,6 +27,26 @@ DEFAULT_ATTRS = {
     'min': 0.,
     'max': 10.,
 }
+
+TESTDATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
+EXAMPLE_DEM = os.path.join(TESTDATA, 'DEM.dep')
+
+def test_xarray_io_serde_works():
+    arr = from_dep(EXAMPLE_DEM)
+    out = os.path.join(WHITEBOX_TEMP_DIR, 'out.dep')
+    dep_out, tas_out = data_array_to_dep(arr, fname=out)
+    arr2 = from_dep(dep_out)
+    assert arr.shape == arr2.shape
+    assert np.all(arr.values == arr2.values)
+    assert set(arr.attrs) ^ set(arr2.attrs) == set()
+    assert np.all(np.array(sorted(arr.attrs)) == np.array(sorted(arr2.attrs)))
+    for k, v in arr.attrs.items():
+        if k in ('filename',): continue
+        v2 = arr2.attrs.get(k)
+        if isinstance(v, (str, unicode)):
+            v, v2 = v.lower(), v2.lower()
+        msg = 'With key {}, {} != {}'.format(k, v, v2)
+        assert v == v2, msg
 
 
 def example_arr(shape=(100, 100), min_max=(0, 10)):
