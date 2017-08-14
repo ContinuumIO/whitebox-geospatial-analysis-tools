@@ -158,6 +158,9 @@ def convert_help_extract_params(tool, wbt, to_parser=True, silent=False):
         return args
     parser = argparse.ArgumentParser(description=help_tool)
     for k, v in args.items():
+        print('ARGPARSE', k, v)
+        v = v.replace('%', ' percent')
+        v = re.sub('(\d)\s(\d+)', lambda x: '.'.join(x.groups()), v)
         required = '-i' in k or '-o' in k
         if '--inputs' in k:
             continue
@@ -171,7 +174,7 @@ def to_rust(tool, args):
     s = []
     delayed_load_later, kwargs = xarray_whitebox_io(globals()[tool], **vars(args))
     for k, v in kwargs.items():
-        if v not in ('', None):
+        if v is not None:
             try:
                 float(v)
                 fmt = '--{}={}'
@@ -231,7 +234,7 @@ def get_all_help(out=TOOL_DATA_FILE):
         args = [[list(k), v] for k, v in args.items()]
         tool_data[tool] = args
     with open(out, 'w') as f:
-        f.write(json.dumps(tool_data))
+        f.write(json.dumps(tool_data, indent=2))
     return tool_data
 
 

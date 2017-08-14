@@ -6,7 +6,7 @@ import struct
 import numpy as np
 import xarray as xr
 
-INPUT_ARGS = ['input', 'inputs', 'i']
+INPUT_ARGS = ['input', 'inputs', 'i', 'pour_pts', 'd8_pntr']
 OUTPUT_ARGS = ['output', 'outputs', 'o']
 WHITEBOX_TEMP_DIR = os.environ.get('WHITEBOX_TEMP_DIR')
 if not WHITEBOX_TEMP_DIR:
@@ -32,7 +32,7 @@ Rows:   {rows}
 Stacks: {stacks}
 Data Type:  {dtype}
 Z Units:    {z_units}
-XY Units:   {xy_units}
+Xy Units:   {xy_units}
 Projection: {projection}
 Data Scale: {data_scale}
 Display Min:    {display_min}
@@ -42,6 +42,9 @@ Palette Nonlinearity: {palette_nonlinearity}
 Nodata: {nodata}
 Byte Order: {byte_order}
 {metadata_entry}'''
+
+DEP_KEYS = [x.split(':')[0].strip() for x in DEP_TEMPLATE.splitlines()
+            if ':' in x]
 
 DTYPES = {'float': 'f4',
           'integer': 'i2'}
@@ -70,6 +73,26 @@ def _lower_key(k):
     return '_'.join(k.lower().split())
 
 
+def _assign_nodata(arr, no_data):
+    if 'int' in arr.dtype.name:
+        arr.values = arr.values.astype(np.float64)
+    arr.values[arr.values == no_data] = np.NaN
+    return arr
+
+
+def assign_nodata(dset_or_arr, **dep):
+    no_data = dep.get('Nodata', None)
+    if no_data is None:
+        return dset_or_arr
+    if isinstance(dset_or_arr, xr.Dataset):
+        for k, v in dset_or_arr.data_vars.items():
+            _assign_nodata(v, no_data)
+    else:
+        _assign_nodata(dset_or_arr, no_data)
+    return dset_or_arr
+
+
+
 def case_insensitive_attrs(attrs, typ):
     lower = {'dtype': typ}
     for k, v in attrs.items():
@@ -82,6 +105,7 @@ def case_insensitive_attrs(attrs, typ):
         lower['palette_nonlinearity'] = 'high_relief.pal'
     if not 'palette_nonlinearity' in lower:
         lower['palette_nonlinearity'] = 1.
+    #lower['metadata_entry'] =  lower.get('metadata_entry', '').splitlines():
     has_keys = set(lower)
     needs_keys = set(REQUIRED_DEP_FIELDS)
     if not has_keys >= needs_keys:
@@ -134,12 +158,13 @@ def _from_dep(fname):
             value = float(value)
         elif key not in UPPER_STR_FIELDS:
             value = value.upper()
-        if key == 'metadata_entry':
+        if key == 'Metadata Entry':
             if not key in attrs:
-                attrs[key] = [value]
+                attrs[key] = value
             else:
-                attrs[key].append(value)
-        attrs[key] = value
+                attrs[key] += '\n' + value
+        else:
+            attrs[key] = value
     return attrs
 
 
@@ -151,6 +176,8 @@ def _get_dtype(dtype_str):
 
 
 def from_dep(dep, tas=None):
+    if not dep or not os.path.exists(dep):
+        raise ValueError('File {} does not exist'.format(dep))
     if not tas and dep.endswith('.dep'):
         tas = dep[:-4] + '.tas'
     if not tas or not os.path.exists(tas):
@@ -184,7 +211,11 @@ def data_array_to_dep(arr, fname=None, tag=None):
         fname = os.path.join(WHITEBOX_TEMP_DIR, tag)
     dep, tas = fname + '.dep', fname + '.tas'
     with open(dep, 'w') as f:
-        f.write(DEP_TEMPLATE.format(**attrs))
+        metadata_entry = attrs.get('metadata_entry', '')
+        at = attrs.copy()
+        at['metadata_entry'] = ''.join('\nMetadata Entry: {}'.format(m)
+                                       for m in metadata_entry.splitlines())
+        f.write(DEP_TEMPLATE.format(**at))
     to_tas(val, typ_str, tas)
     return dep, tas
 
@@ -228,15 +259,19 @@ def xarray_whitebox_io(func, **kwargs):
         if not load_afterwards:
             return ret_val
         data_arrs = {}
+        attrs = dict(kwargs=kwargs, return_code=ret_val)
+
         for k, paths in load_afterwards.items():
             print('load after', k)
             for path in paths.split(', '):
                 print('from_dep', path)
                 data_arrs[k] = from_dep(path)
-        attrs = dict(kwargs=kwargs, return_code=ret_val)
-        dset = xr.Dataset(data_arrs, attrs=attrs)
+                data_arrs[k].attrs.update(attrs)
+        dset = assign_nodata(xr.Dataset(data_arrs, attrs=attrs))
         for dep, tas in fnames.values():
             for fname in (dep, tas):
                 os.remove(fname)
-        return dset
+        if len(load_afterwards) == 1:
+            return dset[k] # DataArray
+        return dset        # Dataset - TODO implment later for multi output?
     return delayed_load_later, kwargs
