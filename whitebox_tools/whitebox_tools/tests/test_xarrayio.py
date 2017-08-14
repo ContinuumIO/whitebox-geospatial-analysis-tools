@@ -7,7 +7,8 @@ import xarray as xr
 from whitebox_tools.whitebox_cli import * # __all__ is defined there
 from whitebox_tools.xarray_io import (from_dep,
                                       data_array_to_dep,
-                                      WHITEBOX_TEMP_DIR)
+                                      WHITEBOX_TEMP_DIR,
+                                      xarray_whitebox_io,)
 try:
     unicode
 except:
@@ -29,10 +30,12 @@ DEFAULT_ATTRS = {
 }
 
 TESTDATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
-EXAMPLE_DEM = os.path.join(TESTDATA, 'DEM.dep')
+EXAMPLE_DEMS = tuple(os.path.join(TESTDATA, f) for f in ('DEM.dep', 'DEV_101.dep'))
+TO_REMOVE = ['test-output.{}'.format(end) for end in ('dep', 'tas')]
 
-def test_xarray_io_serde_works():
-    arr = from_dep(EXAMPLE_DEM)
+@pytest.mark.parametrize('dem', EXAMPLE_DEMS)
+def test_xarray_io_serde_works(dem):
+    arr = from_dep(dem)
     out = os.path.join(WHITEBOX_TEMP_DIR, 'out.dep')
     dep_out, tas_out = data_array_to_dep(arr, fname=out)
     arr2 = from_dep(dep_out)
@@ -49,58 +52,43 @@ def test_xarray_io_serde_works():
         assert v == v2, msg
 
 
-def example_arr(shape=(100, 100), min_max=(0, 10)):
-    X = np.random.uniform(0, 1, shape)
-    x, y = (np.linspace(0, 10, s) for s in shape)
-    X = xr.DataArray(X, coords=[('x', x), ('y', y)], dims=('x', 'y'))
-    attrs = DEFAULT_ATTRS.copy()
-    attrs['rows'], attrs['cols'] = shape
-    X.attrs.update(attrs)
-    return X
+def pour_point_raster(arr):
+    return arr.copy(deep=True).where(arr == arr.min())
 
 
-def example_xr(shape=(100, 100), names=None):
-
-    if not names:
-        return example_arr(shape=shape)
-    X = {}
-    for name in names:
-        X[name] = example_arr(shape=shape)
-    return X
-
-
-def make_synthetic_kwargs(tool, shape=(100,100), names=None):
+def make_synthetic_kwargs(tool, as_xarr=True):
     arg_spec_help = HELP[tool]
     kwargs = {}
     for arg_names, help_str in arg_spec_help:
+        print('an', arg_names,)
         arg_name = [a[2:] for a in arg_names if '--' == a[:2]][0]
-        if 'input' == arg_name:
-            kwargs[arg_name] = example_xr(shape=shape, names=names)
-        else:
-            pass #? anything TODO here?
+        if 'input' == arg_name and as_xarr:
+            kwargs[arg_name] = from_dep(EXAMPLE_DEMS[0])
+        elif 'input' == arg_name:
+            kwargs[arg_name] = EXAMPLE_DEMS[0]
+        elif 'output' == arg_name:
+            kwargs['output'] = TO_REMOVE[0]
+        elif 'pour_pts' == arg_name:
+            kwargs[arg_name] = pour_point_raster()
     return kwargs
 
 
-def _data_arr_assert(arr, shape=(100, 100)):
-    assert arr.dims == ('x', 'y')
-    assert arr.values.shape == shape
-    assert 'kwargs' in arr.attrs
-
-
-possible_names = (None, ('one_raster'), ('raster_a', 'raster_b'))
-tools_names_list = [(tool, names) for tool in tools for names in possible_names]
-@pytest.mark.parametrize('tool, names', tools_names_list)
-def test_each_tool(tool, names):
-    shape = (100, 100)
-    kwargs = make_synthetic_kwargs(tool, shape=shape, names=names)
-    out = globals()[tool](**kwargs)
-    if names:
+as_xarray = (True, False)
+tools_names_list = [(tool, as_xarr) for tool in tools for as_xarr in as_xarray]
+@pytest.mark.parametrize('tool, as_xarr', tools_names_list)
+def test_each_tool(tool, as_xarr):
+    if tool == 'WeightedSum':
+        pytest.xfail('WeightedSum uses some delimiters for input/weights not handled yet')
+    try:
+        kwargs = make_synthetic_kwargs(tool, as_xarr=as_xarr)
+        out = globals()[tool](**kwargs)
         assert isinstance(out, xr.Dataset)
-        assert set(names) == set(out.data_vars)
-        for name in names:
-            _data_arr_assert(out[name], shape=shape)
-    else:
-        assert isinstance(out, xr.DataArray)
-        _data_arr_assert(out, shape=shape)
+        assert tuple(out.data_vars) == ('output',)
+        arr = out.output
+        assert 'kwargs' in out.attrs
+    finally:
+        for r in TO_REMOVE:
+            if os.path.exists(r):
+                os.remove(r)
 
 

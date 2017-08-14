@@ -63,6 +63,7 @@ tools = ['Aspect',
  'Watershed',
  'WeightedSum',
  'ZScores']
+
 def callback(out_str, silent=False):
     ''' Create a custom callback to process the text coming out of the tool.
     If a callback is not provided, it will simply print the output stream.
@@ -168,15 +169,15 @@ def convert_help_extract_params(tool, wbt, to_parser=True, silent=False):
 
 def to_rust(tool, args):
     s = []
-    for k, v in vars(args).items():
-
+    delayed_load_later, kwargs = xarray_whitebox_io(globals()[tool], **vars(args))
+    for k, v in kwargs.items():
         if v not in ('', None):
             try:
                 float(v)
                 fmt = '--{}={}'
             except:
                 if k in ('input', 'output', 'wd'):
-                    if v != os.path.abspath(v):
+                    if isinstance(v, (unicode, str)) and v != os.path.abspath(v):
                         v = os.path.join(os.path.abspath(os.curdir), v)
                         setattr(args, k, v)
                 fmt = '--{}="{}"'
@@ -185,7 +186,7 @@ def to_rust(tool, args):
         wd = os.path.abspath(os.curdir)
         s.append('--wd="{}"'.format(wd))
         setattr(args, 'wd', wd)
-    return s
+    return s, delayed_load_later
 
 
 def call_whitebox_cli(tool, args=None, callback_func=None, silent=False):
@@ -195,11 +196,12 @@ def call_whitebox_cli(tool, args=None, callback_func=None, silent=False):
     if not args:
         parser = convert_help_extract_params(tool, wbt, silent=silent)
         args = parser.parse_args()
-    args = to_rust(tool, args)
+    args, delayed_load_later = to_rust(tool, args)
     print('to_rust', args)
     if not silent:
         print(args)
-    return wbt.run_tool(tool, args, callback_func)
+    ret_val = wbt.run_tool(tool, args, callback_func)
+    return delayed_load_later(ret_val)
 
 
 def call_whitebox_func(tool, **kwargs):
@@ -243,10 +245,11 @@ def _no_dash(p):
     else:
         raise ValueError('Expected a string but got {}'.format(p))
 
+
 class WrappedWhiteBoxXArray(object):
 
     def __init__(self, tool):
-        self.tool = partial(call_whitebox_func, tool)
+        self.tool = partial(call_whitebox_func, tool, callback_func=partial(callback, silent=False))
         hlp = {tuple(k): v for k, v in HELP[tool]}
         self._ok_params = set()
         for k in hlp:
@@ -259,7 +262,7 @@ class WrappedWhiteBoxXArray(object):
         for k in kwargs:
             if not k in self._ok_params:
                 raise ValueError('Parameter {} is not in {}'.format(k, self._ok_params))
-        return xarray_whitebox_io(self.tool, **kwargs)
+        return self.tool(**kwargs)
 
     def __repr__(self):
         return self.__doc__

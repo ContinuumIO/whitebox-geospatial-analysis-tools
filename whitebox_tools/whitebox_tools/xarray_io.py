@@ -100,8 +100,11 @@ def case_insensitive_attrs(attrs, typ):
 
 def fix_path(path):
     paths = path.split(', ')
-    return [os.path.abspath(os.path.join(os.curdir, path))
-            for path in paths]
+    paths = [os.path.abspath(os.path.join(os.curdir, path))
+             for path in paths]
+    if len(paths) == 1:
+        return paths[0]
+    return ', '.join(paths)
 
 
 def to_tas(vals, typ_str, fname):
@@ -131,6 +134,11 @@ def _from_dep(fname):
             value = float(value)
         elif key not in UPPER_STR_FIELDS:
             value = value.upper()
+        if key == 'metadata_entry':
+            if not key in attrs:
+                attrs[key] = [value]
+            else:
+                attrs[key].append(value)
         attrs[key] = value
     return attrs
 
@@ -191,44 +199,44 @@ def xarray_whitebox_io(func, **kwargs):
         if k in INPUT_ARGS:
             print('k in INPUT_ARGS')
             if isinstance(v, strings):
-
                 kwargs[k] = fix_path(v)
                 print('Fix path', k)
             elif isinstance(v, xr.Dataset):
+                if k == 'input':
+                    raise ValueError('Cannot use xarray.Dataset unless the tool allows --inputs.  Here --input was used, and the tool must be called for each xarray.DataArray')
                 print('DATASET')
                 for k2 in v.data_vars:
                     print('k2', k2)
                     data_arr = getattr(v, k2)
-                    dep, tas = data_array_to_dep(arr, tag=k2)
+                    dep, tas = data_array_to_dep(data_arr, tag=k2)
                     fnames[(k, k2)] = [dep, tas]
                 kwargs[k] = ', '.join(dep for (k1, k2), (dep, tas) in fnames.items()
                                       if k1 == k)
                 print('kw2', kwargs)
-                dumped_an_xarray = True
+                dumped_an_xarray = k
             elif isinstance(v, xr.DataArray):
                 kwargs[k] = data_array_to_dep(v, tag=k)[0]
                 print('DataArray', k)
-                dumped_an_xarray = True
+                dumped_an_xarray = k
         elif k in OUTPUT_ARGS:
             print('k in output_args', k)
             load_afterwards[k] = fix_path(v)
     if not load_afterwards and dumped_an_xarray:
-        output_fname = kwargs['input'].replace('.dep', '-output.dep')
+        output_fname = kwargs[dumped_an_xarray].replace('.dep', '-output.dep')
         load_afterwards[k] = kwargs['output'] = output_fname
-    ret_val = func(**kwargs)
-    print('ret_val', ret_val)
-    if ret_val:
-        raise ValueError('{} ({}) failed with return code {}'.format(func, kwargs, ret_val))
-    data_arrs = {}
-    for k, paths in load_afterwards.items():
-        print('load after', k)
-        for path in v:
-            print('from_tas_and_dep', path)
-            data_arrs[k] = from_tas_and_dep(path)
-    attrs = dict(kwargs=kwargs, return_code=ret_val)
-    dset = xr.Dataset(data_arrs, attrs=attrs)
-    for dep, tas in fnames.values():
-        for fname in (dep, tas):
-            os.remove(fname)
-    return dset
-
+    def delayed_load_later(ret_val):
+        if not load_afterwards:
+            return ret_val
+        data_arrs = {}
+        for k, paths in load_afterwards.items():
+            print('load after', k)
+            for path in paths.split(', '):
+                print('from_dep', path)
+                data_arrs[k] = from_dep(path)
+        attrs = dict(kwargs=kwargs, return_code=ret_val)
+        dset = xr.Dataset(data_arrs, attrs=attrs)
+        for dep, tas in fnames.values():
+            for fname in (dep, tas):
+                os.remove(fname)
+        return dset
+    return delayed_load_later, kwargs
