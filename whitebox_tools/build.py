@@ -17,6 +17,7 @@ def main():
     try:
         update_cargo = False
         clean_code = False
+        doc_code = False
         build_code = True
         mode = 'release'  # 'check', 'debug', or 'release'
 
@@ -38,14 +39,24 @@ def main():
                 print( "Child was terminated by signal", -retcode, file=sys.stderr)
             else:
                 print( "Clean successful", file=sys.stderr)
+
+        if doc_code:
+            # Clean #
+            retcode = call(['cargo', 'doc'], shell=False)
+            if retcode < 0:
+                print("Child was terminated by signal", -retcode, file=sys.stderr)
+            else:
+                print("Clean successful", file=sys.stderr)
+
         if build_code:
             # Build #
             if mode == 'release':
-                retcode = call(['cargo', 'build', '--release'], shell=False)
+                retcode = call(['env', 'RUSTFLAGS=-C target-cpu=native',
+                                'cargo', 'build', '--release'], shell=False)
             elif mode == 'check':
                 retcode = call(['cargo', 'check'], shell=False)
             else:
-                retcode = call(['cargo', 'debug'], shell=False)
+                retcode = call(['cargo', 'build'], shell=False)
 
             if retcode < 0:
                 print( "Child was terminated by signal", -retcode, file=sys.stderr)

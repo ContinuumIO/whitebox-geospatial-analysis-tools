@@ -5,64 +5,31 @@ import json
 import os
 import re
 import sys
+import xarray as xr
+
+from whitebox_tools.whitebox_base import WhiteboxTools
+from whitebox_tools.xarray_io import xarray_whitebox_io
+
 try:
     unicode
 except:
     unicode = str
 
-from whitebox_tools.whitebox_base import WhiteboxTools
-from whitebox_tools.xarray_io import xarray_whitebox_io
-
 TOOL_DATA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               'data',
                               'tool_data.json')
 
-tools = ['Aspect',
- 'AverageOverlay',
- 'BufferRaster',
- 'Clump',
- 'D8FlowAccumulation',
- 'D8Pointer',
- 'DInfFlowAccumulation',
- 'DevFromMeanElev',
- 'DiffFromMeanElev',
- 'ElevPercentile',
- 'EuclideanAllocation',
- 'EuclideanDistance',
- 'FD8FlowAccumulation',
- 'FillMissingData',
- 'FlightlineOverlap',
- 'HighestPosition',
- 'Hillshade',
- 'LidarElevationSlice',
- 'LidarGroundPointFilter',
- 'LidarHillshade',
- 'LidarInfo',
- 'LidarJoin',
- 'LidarTophatTransform',
- 'LowestPosition',
- 'MaxAbsoluteOverlay',
- 'MaxOverlay',
- 'MinAbsoluteOverlay',
- 'MinOverlay',
- 'NormalVectors',
- 'NumDownslopeNeighbours',
- 'NumInflowingNeighbours',
- 'NumUpslopeNeighbours',
- 'PercentElevRange',
- 'PlanCurvature',
- 'ProfileCurvature',
- 'Quantiles',
- 'RelativeAspect',
- 'RelativeTopographicPosition',
- 'RemoveOffTerrainObjects',
- 'RuggednessIndex',
- 'Slope',
- 'TangentialCurvature',
- 'TotalCurvature',
- 'Watershed',
- 'WeightedSum',
- 'ZScores']
+listtools_file = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'data',
+        'listtools.txt')
+with open(listtools_file) as f:
+    listtools = filter(None, (_.strip() for _ in f.read().splitlines()))
+    listtools = (_.split(':') for _ in listtools)
+    listtools = {k.strip(): v.strip() for k, v in listtools}
+    tools = sorted(listtools)
+
+REFRESH_WHITEBOX_HELP = bool(int(os.environ.get('REFRESH_WHITEBOX_HELP', 0)))
 
 def callback(out_str, silent=False):
     ''' Create a custom callback to process the text coming out of the tool.
@@ -111,8 +78,6 @@ def callback(out_str, silent=False):
 def convert_help_extract_params(tool, wbt, to_parser=True, silent=False):
     tool = tool.strip()
     help_str = "\n".join(wbt.tool_help(tool, silent=silent))
-    if not silent:
-        print('help_str', help_str)
     pattern = './whitebox_tools -r=' + tool
     tool_name = 'whitebox-' + tool
     help_str = help_str.replace(pattern, tool_name)
@@ -147,7 +112,9 @@ def convert_help_extract_params(tool, wbt, to_parser=True, silent=False):
             if parts == ('-i',) or parts == ('-o',):
                 continue
             args[parts] = " ".join(help_str)
-
+    keys = tuple(args)
+    if ('-i', '--dem') in keys and ('-i', '--input') in keys:
+        args.pop(('-i', '--dem'))
     args[('--wd',)] = 'Working directory'
     if description:
         description = ' - {} '.format(description)
@@ -158,7 +125,6 @@ def convert_help_extract_params(tool, wbt, to_parser=True, silent=False):
         return args
     parser = argparse.ArgumentParser(description=help_tool)
     for k, v in args.items():
-        print('ARGPARSE', k, v)
         v = v.replace('%', ' percent')
         v = re.sub('(\d)\s(\d+)', lambda x: '.'.join(x.groups()), v)
         required = '-i' in k or '-o' in k
@@ -192,19 +158,21 @@ def to_rust(tool, args):
     return s, delayed_load_later
 
 
-def call_whitebox_cli(tool, args=None, callback_func=None, silent=False):
+def call_whitebox_cli(tool, args=None,
+                      callback_func=None, silent=False,
+                      return_xarr=True):
     if callback_func is None:
         callback_func = partial(callback, silent=silent)
     wbt = WhiteboxTools()
     if not args:
-        parser = convert_help_extract_params(tool, wbt, silent=silent)
+        parser = convert_help_extract_params(tool, wbt, silent=True)
         args = parser.parse_args()
     args, delayed_load_later = to_rust(tool, args)
-    print('to_rust', args)
-    if not silent:
-        print(args)
     ret_val = wbt.run_tool(tool, args, callback_func)
-    return delayed_load_later(ret_val)
+    arr_or_dset = delayed_load_later(ret_val)
+    if return_xarr:
+        return arr_or_dset
+    return ret_val
 
 
 def call_whitebox_func(tool, **kwargs):
@@ -212,7 +180,6 @@ def call_whitebox_func(tool, **kwargs):
     if not callback_func:
         callback_func = partial(callback, silent=True)
     args = argparse.Namespace(**kwargs)
-    print('argparse', args)
     return call_whitebox_cli(tool, args=args, callback_func=callback_func)
 
 
@@ -224,7 +191,9 @@ def get_all_parsers():
     return parsers
 
 
-def get_all_help(out=TOOL_DATA_FILE):
+def get_all_help(out=TOOL_DATA_FILE, refresh=REFRESH_WHITEBOX_HELP):
+    if not refresh:
+        return json.load(open(TOOL_DATA_FILE))
     tool_data = {}
     wbt = WhiteboxTools()
     for tool in tools:
@@ -274,7 +243,7 @@ class WrappedWhiteBoxXArray(object):
 
 
 for tool in tools:
-    globals()[tool + 'Cli'] = partial(call_whitebox_cli, tool)
+    globals()[tool + 'Cli'] = partial(call_whitebox_cli, tool, return_xarr=False)
     globals()[tool] = WrappedWhiteBoxXArray(tool)
 
 extras = [t + 'Cli' for t in tools]

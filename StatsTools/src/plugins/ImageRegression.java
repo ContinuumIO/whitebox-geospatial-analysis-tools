@@ -417,15 +417,15 @@ public class ImageRegression implements WhiteboxPlugin {
     
     
 //    // this is only used for debugging the tool
-    public static void main(String[] args) {
-        ImageRegression ir = new ImageRegression();
-        args = new String[3];
-        args[0] = "/Users/johnlindsay/Documents/data/DanData/EP11.dep";
-        args[1] = "/Users/johnlindsay/Documents/data/DanData/PER11.dep";
-        args[2]= "not specified";
-        
-        ir.setArgs(args);
-        ir.run();
-        
-    }
+//    public static void main(String[] args) {
+//        ImageRegression ir = new ImageRegression();
+//        args = new String[3];
+//        args[0] = "/Users/johnlindsay/Documents/data/DanData/EP11.dep";
+//        args[1] = "/Users/johnlindsay/Documents/data/DanData/PER11.dep";
+//        args[2]= "not specified";
+//        
+//        ir.setArgs(args);
+//        ir.run();
+//        
+//    }
 }

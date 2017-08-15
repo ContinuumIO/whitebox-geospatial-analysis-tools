@@ -1,6 +1,7 @@
 ''' This script is intended to experiment with the use of a whitebox_tools shared library (DLL).
 It is experimental and is not intended for widespread use.
 '''
+from __future__ import print_function
 import os
 from sys import platform
 from ctypes import cdll, c_int, c_char_p, POINTER, c_size_t
@@ -33,7 +34,7 @@ def call_tool(name, args):
 
     args_list = (c_char_p * len(args))(*args)
     ret = wb_tools.run_tool(name, args_list, len(args_list))
-    print "Return value:", ret
+    print("Return value:", ret)
 
 
 TOOL_NAME = "slope"

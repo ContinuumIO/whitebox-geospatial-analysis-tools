@@ -225,32 +225,24 @@ def xarray_whitebox_io(func, **kwargs):
     delete_tempdir = kwargs.pop('delete_tempdir', True)
     fnames = {}
     dumped_an_xarray = False
-    print('kw', kwargs)
     for k, v in kwargs.items():
         if k in INPUT_ARGS:
-            print('k in INPUT_ARGS')
             if isinstance(v, strings):
                 kwargs[k] = fix_path(v)
-                print('Fix path', k)
             elif isinstance(v, xr.Dataset):
                 if k == 'input':
                     raise ValueError('Cannot use xarray.Dataset unless the tool allows --inputs.  Here --input was used, and the tool must be called for each xarray.DataArray')
-                print('DATASET')
                 for k2 in v.data_vars:
-                    print('k2', k2)
                     data_arr = getattr(v, k2)
                     dep, tas = data_array_to_dep(data_arr, tag=k2)
                     fnames[(k, k2)] = [dep, tas]
                 kwargs[k] = ', '.join(dep for (k1, k2), (dep, tas) in fnames.items()
                                       if k1 == k)
-                print('kw2', kwargs)
                 dumped_an_xarray = k
             elif isinstance(v, xr.DataArray):
                 kwargs[k] = data_array_to_dep(v, tag=k)[0]
-                print('DataArray', k)
                 dumped_an_xarray = k
         elif k in OUTPUT_ARGS:
-            print('k in output_args', k)
             load_afterwards[k] = fix_path(v)
     if not load_afterwards and dumped_an_xarray:
         output_fname = kwargs[dumped_an_xarray].replace('.dep', '-output.dep')
@@ -262,9 +254,7 @@ def xarray_whitebox_io(func, **kwargs):
         attrs = dict(kwargs=kwargs, return_code=ret_val)
 
         for k, paths in load_afterwards.items():
-            print('load after', k)
             for path in paths.split(', '):
-                print('from_dep', path)
                 data_arrs[k] = from_dep(path)
                 data_arrs[k].attrs.update(attrs)
         dset = assign_nodata(xr.Dataset(data_arrs, attrs=attrs))

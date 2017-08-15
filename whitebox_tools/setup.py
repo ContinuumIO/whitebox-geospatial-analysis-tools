@@ -11,7 +11,7 @@ def make_console_scripts():
     import whitebox_tools as wt
     scripts = []
     for tool in wt.tools:
-        line = 'whitebox-{0} = whitebox_tools:{0}Cli'.format(tool)
+        line = 'wb-{0} = whitebox_tools:{0}Cli'.format(tool)
         scripts.append(line)
     return scripts
 

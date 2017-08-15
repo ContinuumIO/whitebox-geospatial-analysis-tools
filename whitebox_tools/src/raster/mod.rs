@@ -1,4 +1,12 @@
-// extern crate byteorder;
+/* 
+This tool is part of the WhiteboxTools geospatial analysis library.
+Authors: Dr. John Lindsay
+Created: June 2, 2017
+Last Modified: July 7, 2017
+License: MIT
+*/
+
+extern crate byteorder;
 extern crate num_cpus;
 
 pub mod arcascii_raster;
@@ -12,14 +20,15 @@ pub mod surfer_ascii_raster;
 pub mod whitebox_raster;
 
 use std::cmp::Ordering::Equal;
+use std::default::Default;
 use std::io::Error;
 use std::io::prelude::*;
 use std::io::ErrorKind;
 use std::io::BufReader;
-use std::default::Default;
 use std::fs::File;
-use std::path::Path;
 use std::f64;
+use std::path::Path;
+use std::ops::{Index, IndexMut};
 use std::sync::Arc;
 use std::sync::mpsc;
 use std::thread;
@@ -32,8 +41,8 @@ use raster::saga_raster::*;
 use raster::surfer7_raster::*;
 use raster::surfer_ascii_raster::*;
 use raster::whitebox_raster::*;
-use io_utils::byte_order_reader::*;
-use std::ops::{Index, IndexMut};
+use io_utils::*;
+use structures::Array2D;
 
 #[derive(Default, Clone)]
 pub struct Raster {
@@ -51,14 +60,22 @@ impl Index<(isize, isize)> for Raster {
         let row = index.0;
         let column = index.1;
 
-        if column < 0 { return &self.configs.nodata; }
-        if row < 0 { return &self.configs.nodata; }
+        if column < 0 {
+            return &self.configs.nodata;
+        }
+        if row < 0 {
+            return &self.configs.nodata;
+        }
 
         let c: usize = column as usize;
         let r: usize = row as usize;
 
-        if c >= self.configs.columns { return &self.configs.nodata; }
-        if r >= self.configs.rows { return &self.configs.nodata; }
+        if c >= self.configs.columns {
+            return &self.configs.nodata;
+        }
+        if r >= self.configs.rows {
+            return &self.configs.nodata;
+        }
         let idx: usize = r * self.configs.columns + c;
         &self.data[idx]
     }
@@ -68,12 +85,20 @@ impl IndexMut<(isize, isize)> for Raster {
     fn index_mut<'a>(&'a mut self, index: (isize, isize)) -> &'a mut f64 {
         let row = index.0;
         let column = index.1;
-        if column < 0 { return &mut self.configs.nodata; }
-        if row < 0 { return &mut self.configs.nodata; }
+        if column < 0 {
+            return &mut self.configs.nodata;
+        }
+        if row < 0 {
+            return &mut self.configs.nodata;
+        }
         let c: usize = column as usize;
         let r: usize = row as usize;
-        if c >= self.configs.columns { return &mut self.configs.nodata; }
-        if r >= self.configs.rows { return &mut self.configs.nodata; }
+        if c >= self.configs.columns {
+            return &mut self.configs.nodata;
+        }
+        if r >= self.configs.rows {
+            return &mut self.configs.nodata;
+        }
         let idx = r * self.configs.columns + c;
         &mut self.data[idx as usize]
     }
@@ -93,49 +118,58 @@ impl Raster {
                 RasterType::ArcBinary => {
                     let _ = read_arcbinary(&r.file_name, &mut r.configs, &mut r.data).unwrap();
                     return Ok(r);
-                },
+                }
                 RasterType::ArcAscii => {
                     let _ = read_arcascii(&r.file_name, &mut r.configs, &mut r.data).unwrap();
                     return Ok(r);
-                },
+                }
                 RasterType::GeoTiff => {
                     let _ = read_geotiff(&r.file_name, &mut r.configs, &mut r.data).unwrap();
+                    r.update_min_max();
                     return Ok(r);
-                },
+                }
                 RasterType::GrassAscii => {
                     let _ = read_grass_raster(&r.file_name, &mut r.configs, &mut r.data).unwrap();
                     return Ok(r);
-                },
+                }
                 RasterType::IdrisiBinary => {
                     let _ = read_idrisi(&r.file_name, &mut r.configs, &mut r.data).unwrap();
                     return Ok(r);
-                },
+                }
                 RasterType::SagaBinary => {
                     let _ = read_saga(&r.file_name, &mut r.configs, &mut r.data).unwrap();
                     return Ok(r);
-                },
+                }
                 RasterType::Surfer7Binary => {
                     let _ = read_surfer7(&r.file_name, &mut r.configs, &mut r.data).unwrap();
                     return Ok(r);
-                },
+                }
                 RasterType::SurferAscii => {
-                    let _ = read_surfer_ascii_raster(&r.file_name, &mut r.configs, &mut r.data).unwrap();
+                    let _ = read_surfer_ascii_raster(&r.file_name, &mut r.configs, &mut r.data)
+                        .unwrap();
                     return Ok(r);
-                },
+                }
                 RasterType::Whitebox => {
                     let _ = read_whitebox(&r.file_name, &mut r.configs, &mut r.data).unwrap();
                     return Ok(r);
-                },
-                RasterType::Unknown => { return Err(Error::new(ErrorKind::Other, "Unrecognized raster type")); },
+                }
+                RasterType::Unknown => {
+                    return Err(Error::new(ErrorKind::Other, "Unrecognized raster type"));
+                }
             }
-        } else { // write
+        } else {
+            // write
             return Ok(r);
         }
         // Err(Error::new(ErrorKind::Other, "Error creating raster"))
     }
 
     pub fn initialize_using_config<'a>(file_name: &'a str, configs: &'a RasterConfigs) -> Raster {
-        let mut output = Raster { file_name: file_name.to_string(), configs: configs.clone(), ..Default::default() };
+        let mut output = Raster {
+            file_name: file_name.to_string(),
+            configs: configs.clone(),
+            ..Default::default()
+        };
         output.file_mode = "w".to_string();
         output.raster_type = get_raster_type_from_file(file_name.to_string(), "w".to_string());
 
@@ -145,7 +179,10 @@ impl Raster {
     }
 
     pub fn initialize_using_file<'a>(file_name: &'a str, input: &'a Raster) -> Raster {
-        let mut output = Raster { file_name: file_name.to_string(), ..Default::default() };
+        let mut output = Raster {
+            file_name: file_name.to_string(),
+            ..Default::default()
+        };
         output.file_mode = "w".to_string();
         output.raster_type = get_raster_type_from_file(file_name.to_string(), "w".to_string());
         output.configs.rows = input.configs.rows;
@@ -166,11 +203,11 @@ impl Raster {
         output.configs.endian = input.configs.endian.clone();
         output.configs.palette_nonlinearity = input.configs.palette_nonlinearity;
         output.configs.pixel_is_area = input.configs.pixel_is_area;
-    	output.configs.epsg_code = input.configs.epsg_code;
+        output.configs.epsg_code = input.configs.epsg_code;
         output.configs.coordinate_ref_system_wkt = input.configs.coordinate_ref_system_wkt.clone();
 
         if output.raster_type == RasterType::SurferAscii ||
-            output.raster_type == RasterType::Surfer7Binary {
+           output.raster_type == RasterType::Surfer7Binary {
             output.configs.nodata = 1.71041e38;
         }
 
@@ -180,14 +217,22 @@ impl Raster {
     }
 
     pub fn get_value(&self, row: isize, column: isize) -> f64 {
-        if column < 0 { return self.configs.nodata; }
-        if row < 0 { return self.configs.nodata; }
+        if column < 0 {
+            return self.configs.nodata;
+        }
+        if row < 0 {
+            return self.configs.nodata;
+        }
 
         let c: usize = column as usize;
         let r: usize = row as usize;
 
-        if c >= self.configs.columns { return self.configs.nodata; }
-        if r >= self.configs.rows { return self.configs.nodata; }
+        if c >= self.configs.columns {
+            return self.configs.nodata;
+        }
+        if r >= self.configs.rows {
+            return self.configs.nodata;
+        }
         let idx: usize = r * self.configs.columns + c;
         self.data[idx]
     }
@@ -238,10 +283,126 @@ impl Raster {
         }
     }
 
+    pub fn get_row_data(&self, row: isize) -> Vec<f64> {
+        let mut values: Vec<f64> = vec![self.configs.nodata; self.configs.columns];
+        if row >= 0 && row < self.configs.rows as isize {
+            for column in 0..values.len() {
+                values[column] = self.data[row as usize * self.configs.columns + column];
+            }
+        }
+        values
+    }
+
+    pub fn increment_row_data(&mut self, row: isize, values: Vec<f64>) {
+        for column in 0..values.len() {
+            if row >= 0 {
+                let c: usize = column as usize;
+                let r: usize = row as usize;
+                if c < self.configs.columns && r < self.configs.rows {
+                    let idx = r * self.configs.columns + c;
+                    self.data[idx] += values[c];
+                }
+            }
+        }
+    }
+
+    pub fn decrement_row_data(&mut self, row: isize, values: Vec<f64>) {
+        for column in 0..values.len() {
+            if row >= 0 {
+                let c: usize = column as usize;
+                let r: usize = row as usize;
+                if c < self.configs.columns && r < self.configs.rows {
+                    let idx = r * self.configs.columns + c;
+                    self.data[idx] -= values[c];
+                }
+            }
+        }
+    }
+
+    pub fn set_data_from_raster(&mut self, other: &Raster) -> Result<(), Error> {
+        if self.configs.rows != other.configs.rows || self.configs.columns != self.configs.columns {
+            return Err(Error::new(ErrorKind::Other,
+                                  "Rasters must have the same dimensions and extent."));
+        }
+        for row in 0..self.configs.rows as isize {
+            self.set_row_data(row, other.get_row_data(row));
+        }
+        Ok(())
+    }
+
+    pub fn get_data_as_array2d(&self) -> Array2D<f64> {
+        let mut data: Array2D<f64> = Array2D::new(self.configs.rows as isize,
+                                                  self.configs.columns as isize,
+                                                  self.configs.nodata,
+                                                  self.configs.nodata)
+                .unwrap();
+        for row in 0..self.configs.rows as isize {
+            data.set_row_data(row, self.get_row_data(row));
+        }
+        data
+    }
+
     pub fn reinitialize_values(&mut self, value: f64) {
         self.data = vec![value; self.configs.rows * self.configs.columns];
     }
 
+    pub fn get_value_as_rgba(&self, row: isize, column: isize) -> (u8, u8, u8, u8) {
+        if column < 0 {
+            return (0, 0, 0, 0); //self.configs.nodata;
+        }
+        if row < 0 {
+            return (0, 0, 0, 0); //return self.configs.nodata;
+        }
+
+        let c: usize = column as usize;
+        let r: usize = row as usize;
+
+        if c >= self.configs.columns {
+            return (0, 0, 0, 0);
+        }
+        if r >= self.configs.rows {
+            return (0, 0, 0, 0);
+        }
+        let idx: usize = r * self.configs.columns + c;
+        let z = self.data[idx];
+
+        let r = (z as u32 & 0xFF) as u8;
+        let g = ((z as u32 >> 8) & 0xFF) as u8;
+        let b = ((z as u32 >> 16) & 0xFF) as u8;
+        let a = ((z as u32 >> 24) & 0xFF) as u8;
+
+        (r, g, b, a)
+    }
+
+    pub fn set_value_from_rgba(&mut self, row: isize, column: isize, rgba: (u32, u32, u32, u32)) {
+        if column >= 0 && row >= 0 {
+            let c: usize = column as usize;
+            let r: usize = row as usize;
+            if c < self.configs.columns && r < self.configs.rows {
+                let idx = r * self.configs.columns + c;
+                let (r, g, b, a) = rgba;
+                self.data[idx] += ((a << 24) | (b << 16) | (g << 8) | r) as f64;
+            }
+        }
+    }
+
+    pub fn get_x_from_column(&self, column: isize) -> f64 {
+        self.configs.east + self.configs.resolution_x / 2f64 +
+        column as f64 * self.configs.resolution_x
+    }
+
+    pub fn get_y_from_row(&self, row: isize) -> f64 {
+        self.configs.north - self.configs.resolution_y / 2f64 -
+        row as f64 * self.configs.resolution_y
+    }
+
+    pub fn get_column_from_x(&self, x: f64) -> isize {
+        ((x - self.configs.east) / self.configs.resolution_x).floor() as isize
+    }
+
+    pub fn get_row_from_y(&self, y: f64) -> isize {
+        ((self.configs.north - y) / self.configs.resolution_y).floor() as isize
+    }
 
     pub fn clip_display_min_max(&mut self, percent: f64) {
         let t = (percent / 100.0 * (self.configs.rows * self.configs.columns) as f64) as usize;
@@ -339,14 +500,154 @@ impl Raster {
 
     }
 
-    pub fn update_min_max(&mut self) {
-        for val in &self.data {
-            let v = *val;
-            if v != self.configs.nodata {
-                if v < self.configs.minimum { self.configs.minimum = v; }
-                if v > self.configs.maximum { self.configs.maximum = v; }
+    pub fn clip_min_by_percent(&mut self, percent: f64) {
+        let t = (percent / 100.0 * (self.configs.rows * self.configs.columns) as f64) as usize;
+        let mut d = self.data.clone();
+        d.sort_by(|a, b| a.partial_cmp(b).unwrap_or(Equal));
+        let mut sum = 0;
+        let mut val = 0.0;
+        for i in 0..self.num_cells() {
+            if d[i] != self.configs.nodata {
+                sum += 1;
+                if sum >= t {
+                    val = d[i];
+                    break;
+                }
             }
         }
+
+        for i in 0..self.data.len() {
+            if self.data[i] != self.configs.nodata {
+                if self.data[i] < val {
+                    self.data[i] = val;
+                }
+            }
+        }
+
+        self.configs.display_min = val;
+    }
+
+    pub fn clip_max_by_percent(&mut self, percent: f64) {
+        let t = (percent / 100.0 * (self.configs.rows * self.configs.columns) as f64) as usize;
+        let mut d = self.data.clone();
+        d.sort_by(|a, b| a.partial_cmp(b).unwrap_or(Equal));
+        let mut sum = 0;
+        let mut val = 0.0;
+        for i in (0..self.num_cells()).rev() {
+            if d[i] != self.configs.nodata {
+                sum += 1;
+                if sum >= t {
+                    val = d[i];
+                    break;
+                }
+            }
+        }
+
+        for i in 0..self.data.len() {
+            if self.data[i] != self.configs.nodata {
+                if self.data[i] > val {
+                    self.data[i] = val;
+                }
+            }
+        }
+
+        self.configs.display_max = val;
+    }
+
+    pub fn clip_min_and_max_by_percent(&mut self, percent: f64) {
+        let t = (percent / 100.0 * (self.configs.rows * self.configs.columns) as f64) as usize;
+        let mut d = self.data.clone();
+        d.sort_by(|a, b| a.partial_cmp(b).unwrap_or(Equal));
+        let mut sum = 0;
+        let mut lower_val = 0.0;
+        for i in 0..self.num_cells() {
+            if d[i] != self.configs.nodata {
+                sum += 1;
+                if sum >= t {
+                    lower_val = d[i];
+                    break;
+                }
+            }
+        }
+
+        let mut upper_val = 0.0;
+        let mut sum = 0;
+        for i in (0..self.num_cells()).rev() {
+            if d[i] != self.configs.nodata {
+                sum += 1;
+                if sum >= t {
+                    upper_val = d[i];
+                    break;
+                }
+            }
+        }
+
+        for i in 0..self.data.len() {
+            if self.data[i] != self.configs.nodata {
+                if self.data[i] < lower_val {
+                    self.data[i] = lower_val;
+                } else if self.data[i] > upper_val {
+                    self.data[i] = upper_val;
+                }
+            }
+        }
+
+        self.configs.display_min = lower_val;
+        self.configs.display_max = upper_val;
+    }
+
+    pub fn update_min_max(&mut self) {
+        let num_procs = num_cpus::get();
+        let nodata = self.configs.nodata;
+        let values = Arc::new(self.data.clone());
+        let (tx, rx) = mpsc::channel();
+        for tid in 0..num_procs {
+            let values = values.clone();
+            let tx = tx.clone();
+            thread::spawn(move || {
+                let mut min_val = f64::INFINITY;
+                let mut max_val = f64::NEG_INFINITY;
+                let mut value: f64;
+                for i in (0..values.len()).filter(|v| v % num_procs == tid) {
+                    value = values[i];
+                    if value != nodata {
+                        if value < min_val {
+                            min_val = value;
+                        }
+                        if value > max_val {
+                            max_val = value;
+                        }
+                    }
+                }
+                tx.send((min_val, max_val)).unwrap();
+            });
+        }
+
+        for _ in 0..num_procs {
+            let (min_val, max_val) = rx.recv().unwrap();
+            if min_val != nodata {
+                if min_val < self.configs.minimum {
+                    self.configs.minimum = min_val;
+                }
+            }
+            if max_val != nodata {
+                if max_val > self.configs.maximum {
+                    self.configs.maximum = max_val;
+                }
+            }
+        }
+
+        // for val in &self.data {
+        //     let v = *val;
+        //     if v != self.configs.nodata {
+        //         if v < self.configs.minimum {
+        //             self.configs.minimum = v;
+        //         }
+        //         if v > self.configs.maximum {
+        //             self.configs.maximum = v;
+        //         }
+        //     }
+        // }
 
         if self.configs.display_min == f64::INFINITY {
             self.configs.display_min = self.configs.minimum;
@@ -414,26 +715,16 @@ impl Raster {
         let mean = self.calculate_mean();
         let nodata = self.configs.nodata;
         let values = Arc::new(self.data.clone());
-        let mut starting_idx;
-        let mut ending_idx = 0;
         let num_procs = num_cpus::get();
         let num_cells = self.num_cells();
-        let block_size = num_cells / num_procs;
         let (tx, rx) = mpsc::channel();
-        let mut id = 0;
-        while ending_idx < num_cells {
+        for tid in 0..num_procs {
             let values = values.clone();
-            starting_idx = id * block_size;
-            ending_idx = starting_idx + block_size;
-            if ending_idx > num_cells {
-                ending_idx = num_cells;
-            }
-            id += 1;
             let tx = tx.clone();
             thread::spawn(move || {
                 let mut sq_diff_sum = 0.0f64;
                 let mut count = 0.0f64;
-                for i in starting_idx..ending_idx {
+                for i in (0..num_cells).filter(|r| r % num_procs == tid) {
                     if values[i] != nodata {
                         sq_diff_sum += (values[i] - mean) * (values[i] - mean);
                         count += 1.0;
@@ -454,6 +745,37 @@ impl Raster {
         (mean, (sq_diff_sum / count).sqrt())
     }
 
+    pub fn calculate_clip_values(&self, percent: f64) -> (f64, f64) {
+        let t = (percent / 100.0 * (self.configs.rows * self.configs.columns) as f64) as usize;
+        let mut lower_tail = f64::NEG_INFINITY;
+        let mut upper_tail = f64::NEG_INFINITY;
+        let mut d = self.data.clone();
+        d.sort_by(|a, b| a.partial_cmp(b).unwrap_or(Equal));
+        let mut sum = 0;
+        for i in 0..d.len() {
+            if d[i] != self.configs.nodata {
+                sum += 1;
+                if sum >= t {
+                    lower_tail = d[i];
+                    break;
+                }
+            }
+        }
+
+        sum = 0;
+        for i in (0..d.len()).rev() {
+            if d[i] != self.configs.nodata {
+                sum += 1;
+                if sum >= t {
+                    upper_tail = d[i];
+                    break;
+                }
+            }
+        }
+
+        (lower_tail, upper_tail)
+    }
+
     pub fn write(&mut self) -> Result<(), Error> {
         match self.raster_type {
             RasterType::ArcAscii => {
@@ -461,56 +783,58 @@ impl Raster {
                     Ok(_) => (),
                     Err(e) => println!("error while writing: {:?}", e),
                 };
-            },
+            }
             RasterType::ArcBinary => {
                 let _ = match write_arcbinary(self) {
                     Ok(_) => (),
                     Err(e) => println!("error while writing: {:?}", e),
                 };
-            },
+            }
             RasterType::GeoTiff => {
                 let _ = match write_geotiff(self) {
                     Ok(_) => (),
                     Err(e) => println!("error while writing: {:?}", e),
                 };
-            },
+            }
             RasterType::GrassAscii => {
                 let _ = match write_grass_raster(self) {
                     Ok(_) => (),
                     Err(e) => println!("error while writing: {:?}", e),
                 };
-            },
+            }
             RasterType::IdrisiBinary => {
                 let _ = match write_idrisi(self) {
                     Ok(_) => (),
                     Err(e) => println!("error while writing: {:?}", e),
                 };
-            },
+            }
             RasterType::SagaBinary => {
                 let _ = match write_saga(self) {
                     Ok(_) => (),
                     Err(e) => println!("error while writing: {:?}", e),
                 };
-            },
+            }
             RasterType::Surfer7Binary => {
                 let _ = match write_surfer7(self) {
                     Ok(_) => (),
                     Err(e) => println!("error while writing: {:?}", e),
                 };
-            },
+            }
             RasterType::SurferAscii => {
                 let _ = match write_surfer_ascii_raster(self) {
                     Ok(_) => (),
                     Err(e) => println!("error while writing: {:?}", e),
                 };
-            },
+            }
             RasterType::Whitebox => {
                 let _ = match write_whitebox(self) {
                     Ok(_) => (),
                     Err(e) => println!("error while writing: {:?}", e),
                 };
-            },
-            RasterType::Unknown => { return Err(Error::new(ErrorKind::Other, "Unrecognized raster type")); },
+            }
+            RasterType::Unknown => {
+                return Err(Error::new(ErrorKind::Other, "Unrecognized raster type"));
+            }
         }
         Ok(())
     }
@@ -528,7 +852,7 @@ impl Raster {
 
     pub fn is_in_geographic_coordinates(&self) -> bool {
         if self.configs.epsg_code == 4322 || self.configs.epsg_code == 4326 ||
-            self.configs.epsg_code == 4629 || self.configs.epsg_code == 4277 {
+           self.configs.epsg_code == 4629 || self.configs.epsg_code == 4277 {
             return true;
         }
         let wkt = self.configs.coordinate_ref_system_wkt.to_lowercase();
@@ -568,8 +892,8 @@ pub struct RasterConfigs {
     pub z_units: String,
     pub xy_units: String,
     pub reflect_at_edges: bool,
-	pub pixel_is_area: bool,
-	pub epsg_code: u16,
+    pub pixel_is_area: bool,
+    pub epsg_code: u16,
     pub coordinate_ref_system_wkt: String,
     pub metadata: Vec<String>,
 }
@@ -620,22 +944,102 @@ pub enum RasterType {
     SagaBinary,
     Surfer7Binary,
     SurferAscii,
-    Whitebox
-    // EsriBIL,
+    Whitebox, // EsriBIL
 }
 
 impl Default for RasterType {
-    fn default() -> RasterType { RasterType::Unknown }
+    fn default() -> RasterType {
+        RasterType::Unknown
+    }
+}
+
+fn get_raster_type_from_file(file_name: String, file_mode: String) -> RasterType {
+    // get the file extension
+    let extension: String = match Path::new(&file_name).extension().unwrap().to_str() {
+        Some(n) => n.to_string().to_lowercase(),
+        None => "".to_string(),
+    };
+
+    if extension == "tas" || extension == "dep" {
+        return RasterType::Whitebox;
+    } else if extension == "tif" || extension == "tiff" {
+        return RasterType::GeoTiff;
+    } else if extension == "flt" {
+        return RasterType::ArcBinary;
+    } else if extension == "rdc" || extension == "rst" {
+        return RasterType::IdrisiBinary;
+    } else if extension == "sdat" || extension == "sgrd" {
+        return RasterType::SagaBinary;
+    } else if extension == "grd" {
+        if file_mode == "r" {
+            // It could be a SurferAscii or a Surfer7Binary.
+            let mut f = File::open(file_name).unwrap();
+            let mut buffer = [0; 4];
+            f.read_exact(&mut buffer).unwrap();
+            //let small_chunk = String::from_utf8_lossy(&buffer[0..8]).to_string();
+            //if small_chunk.contains("DSAA") {
+            if buffer[0] == 68 && buffer[1] == 83 && buffer[2] == 65 && buffer[3] == 65 {
+                // DSAA signature
+                return RasterType::SurferAscii;
+            } else {
+                return RasterType::Surfer7Binary;
+            }
+        }
+        return RasterType::Surfer7Binary;
+    } else if extension == "asc" || extension == "txt" || extension == "" {
+        // what mode is this raster in?
+        if file_mode == "r" {
+            // It could be an ArcAscii or a GrassAscii.
+            let f = File::open(file_name).unwrap();
+            let file = BufReader::new(&f);
+            let mut line_count = 0;
+            for line in file.lines() {
+                let l = line.unwrap();
+                if l.contains("north") || l.contains("south") || l.contains("east") ||
+                   l.contains("west") {
+                    return RasterType::GrassAscii;
+                }
+                if l.contains("xllcorner") || l.contains("yllcorner") ||
+                   l.contains("xllcenter") || l.contains("yllcenter") {
+                    return RasterType::ArcAscii;;
+                }
+                if line_count > 7 {
+                    break;
+                }
+                line_count += 1;
+            }
+        }
+        // For a file_mode "w", there is not way of knowing if it is an Arc or GRASS ASCII raster.
+        // Default to ArcAscii.
+        return RasterType::ArcAscii;
+    }
+
+    RasterType::Unknown
 }
 
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub enum DataType {
-    F64, F32, I64, I32, I16, I8, U64, U32, U16, U8, RGB24, RGB48, RGBA32, Unknown
+    F64,
+    F32,
+    I64,
+    I32,
+    I16,
+    I8,
+    U64,
+    U32,
+    U16,
+    U8,
+    RGB24,
+    RGB48,
+    RGBA32,
+    Unknown,
 }
 
 impl Default for DataType {
-    fn default() -> DataType { DataType::Unknown }
+    fn default() -> DataType {
+        DataType::Unknown
+    }
 }
 
 impl DataType {
@@ -668,72 +1072,13 @@ pub enum PhotometricInterpretation {
     Paletted,
     // Rgb32,
     // Rgb24,
-    Unknown
+    Unknown,
 }
 
 impl Default for PhotometricInterpretation {
-    fn default() -> PhotometricInterpretation { PhotometricInterpretation::Unknown }
-}
-
-fn get_raster_type_from_file(file_name: String, file_mode: String) -> RasterType {
-    // get the file extension
-    let extension: String = match Path::new(&file_name).extension().unwrap().to_str() {
-        Some(n) => n.to_string().to_lowercase(),
-        None => "".to_string(),
-    };
-
-    if extension == "tas" || extension == "dep" {
-        return RasterType::Whitebox;
-    } else if extension == "tif" || extension == "tiff" {
-        return RasterType::GeoTiff;
-    } else if extension == "flt" {
-        return RasterType::ArcBinary;
-    } else if extension == "rdc" || extension == "rst" {
-        return RasterType::IdrisiBinary;
-    } else if extension == "sdat" || extension == "sgrd" {
-        return RasterType::SagaBinary;
-    } else if extension == "grd" {
-        if file_mode == "r" {
-            // It could be a SurferAscii or a Surfer7Binary.
-            let mut f = File::open(file_name).unwrap();
-            let mut buffer = [0; 4];
-            f.read_exact(&mut buffer).unwrap();
-            //let small_chunk = String::from_utf8_lossy(&buffer[0..8]).to_string();
-            //if small_chunk.contains("DSAA") {
-            if buffer[0] == 68 && buffer[1] == 83 && buffer[2] == 65 && buffer[3] == 65  { // DSAA signature
-                return RasterType::SurferAscii;
-            } else {
-                return RasterType::Surfer7Binary;
-            }
-        }
-        return RasterType::Surfer7Binary;
-    } else if extension == "asc" || extension == "txt" || extension == "" {
-        // what mode is this raster in?
-        if file_mode == "r" {
-            // It could be an ArcAscii or a GrassAscii.
-            let f = File::open(file_name).unwrap();
-            let file = BufReader::new(&f);
-            let mut line_count = 0;
-            for line in file.lines() {
-                let l = line.unwrap();
-                if l.contains("north") || l.contains("south") || l.contains("east") || l.contains("west") {
-                    return RasterType::GrassAscii;
-                }
-                if l.contains("xllcorner") || l.contains("yllcorner") || l.contains("xllcenter") || l.contains("yllcenter") {
-                    return RasterType::ArcAscii;;
-                }
-                if line_count > 7 {
-                    break;
-                }
-                line_count += 1;
-            }
-        }
-        // For a file_mode "w", there is not way of knowing if it is an Arc or GRASS ASCII raster.
-        // Default to ArcAscii.
-        return RasterType::ArcAscii;
+    fn default() -> PhotometricInterpretation {
+        PhotometricInterpretation::Unknown
     }
-
-    RasterType::Unknown
 }
 
 // #[derive(Debug, Copy, Clone, PartialEq)]

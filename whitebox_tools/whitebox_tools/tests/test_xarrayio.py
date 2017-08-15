@@ -77,7 +77,6 @@ def make_synthetic_kwargs(tool, as_xarr=True):
     arg_spec_help = HELP[tool]
     kwargs = {}
     for arg_names, help_str in arg_spec_help:
-        print('an', arg_names,)
         arg_name = [a[2:] for a in arg_names if '--' == a[:2]][0]
         if arg_name == 'input' and as_xarr:
             kwargs[arg_name] = from_dep(EXAMPLE_DEMS[0])

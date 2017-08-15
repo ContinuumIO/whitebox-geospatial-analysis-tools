@@ -96,7 +96,6 @@ class WhiteboxTools(object):
         Returns 1 if error encountered (details are sent to callback).
         Returns 2 if process is cancelled by user.
         '''
-        print('args', args)
         try:
             args2 = []
             args2.append(self.exe_name)
@@ -113,7 +112,6 @@ class WhiteboxTools(object):
 
             if self.verbose:
                 args2.append("-v")
-            print('args2', args2)
             return self._run_process(args2, callback=callback, silent=False)[0] or 0
         except (OSError, ValueError, CalledProcessError) as err:
             callback(str(err))

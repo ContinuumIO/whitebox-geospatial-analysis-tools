@@ -5,10 +5,9 @@
         <group>
             <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/WhiteboxGIS/src/whiteboxgis/PluginInfo.java</file>
             <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/WhiteboxGIS/src/whiteboxgis/WhiteboxGui.java</file>
-            <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/WhiteboxGIS/src/whiteboxgis/user_interfaces/AboutWhitebox.java</file>
-            <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/WhiteboxGIS/src/whiteboxgis/SplashWindow.java</file>
             <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/WhiteboxGIS/resources/ReleaseNotes.txt</file>
             <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/WhiteboxGIS/src/whiteboxgis/Main.java</file>
+            <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/WhiteboxGIS/src/whiteboxgis/MapRenderer2.java</file>
         </group>
     </open-files>
 </project-private>

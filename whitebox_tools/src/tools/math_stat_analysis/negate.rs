@@ -1,29 +1,43 @@
+/* 
+This tool is part of the WhiteboxTools geospatial analysis library.
+Authors: Dr. John Lindsay
+Created: July 6, 2017
+Last Modified: July 13, 2017
+License: MIT
+
+NOTE: This tool differs from the Whitebox GAT equivalent in that in additional to changing the sign
+of continous data, it also handles Boolean data by reversing values (i.e. 0-1 to 1-0).
+*/
 extern crate time;
 extern crate num_cpus;
 
 use std::env;
 use std::path;
 use std::f64;
+use std::sync::Arc;
+use std::sync::mpsc;
+use std::thread;
 use raster::*;
 use std::io::{Error, ErrorKind};
 use tools::WhiteboxTool;
 
-pub struct Quantiles {
+pub struct Negate {
     name: String,
     description: String,
     parameters: String,
     example_usage: String,
 }
 
-impl Quantiles {
-    pub fn new() -> Quantiles { // public constructor
-        let name = "Quantiles".to_string();
+impl Negate {
+    /// public constructor
+    pub fn new() -> Negate { 
+        let name = "Negate".to_string();
         
-        let description = "Tranforms raster values into quantiles.".to_string();
+        let description = "Changes the sign of values in a raster or the 0-1 values of a Boolean raster.".to_string();
         
-        let mut parameters = "-i, --input      Input raster DEM file.\n".to_owned();
-        parameters.push_str("-o, --output     Output raster file.\n");
-        parameters.push_str("--num_quantiles  Number of quantiles (default 4)");
+        let mut parameters = "-i, --input   Input raster file.".to_owned();
+        parameters.push_str("-o, --output  Output raster file.\n");
+         
         let sep: String = path::MAIN_SEPARATOR.to_string();
         let p = format!("{}", env::current_dir().unwrap().display());
         let e = format!("{}", env::current_exe().unwrap().display());
@@ -31,13 +45,13 @@ impl Quantiles {
         if e.contains(".exe") {
             short_exe += ".exe";
         }
-        let usage = format!(">>.*{} -r={} --wd=\"*path*to*data*\" -i=DEM.dep -o=output.dep --num_quantiles=5", short_exe, name).replace("*", &sep);
+        let usage = format!(">>.*{0} -r={1} --wd=\"*path*to*data*\" -i='input.dep' -o=output.dep", short_exe, name).replace("*", &sep);
     
-        Quantiles { name: name, description: description, parameters: parameters, example_usage: usage }
+        Negate { name: name, description: description, parameters: parameters, example_usage: usage }
     }
 }
 
-impl WhiteboxTool for Quantiles {
+impl WhiteboxTool for Negate {
     fn get_tool_name(&self) -> String {
         self.name.clone()
     }
@@ -57,8 +71,7 @@ impl WhiteboxTool for Quantiles {
     fn run<'a>(&self, args: Vec<String>, working_directory: &'a str, verbose: bool) -> Result<(), Error> {
         let mut input_file = String::new();
         let mut output_file = String::new();
-        let mut num_quantiles = 5;
-        
+         
         if args.len() == 0 {
             return Err(Error::new(ErrorKind::InvalidInput,
                                 "Tool run with no paramters. Please see help (-h) for parameter descriptions."));
@@ -84,12 +97,6 @@ impl WhiteboxTool for Quantiles {
                 } else {
                     output_file = args[i+1].to_string();
                 }
-            } else if vec[0].to_lowercase() == "-num_quantiles" || vec[0].to_lowercase() == "--num_quantiles" {
-                if keyval {
-                    num_quantiles = vec[1].to_string().parse::<isize>().unwrap();
-                } else {
-                    num_quantiles = args[i+1].to_string().parse::<isize>().unwrap();
-                }
             }
         }
 
@@ -112,84 +119,71 @@ impl WhiteboxTool for Quantiles {
         }
 
         if verbose { println!("Reading data...") };
-
-        let input = Raster::new(&input_file, "r")?;
-        let out_palette = input.configs.palette.clone();
+        let input = Arc::new(Raster::new(&input_file, "r")?);
 
         let start = time::now();
-
-        let min_value = input.configs.minimum;
-        let max_value = input.configs.maximum;
-        let value_range = (max_value - min_value).ceil();
-
-        let highres_num_bins = 10000isize;
-	    let highres_bin_size = value_range / highres_num_bins as f64;
-
-	    let mut primary_histo = vec![0.0; highres_num_bins as usize];
-	    let mut num_valid_cells = 0;
-	
-        let mut output = Raster::initialize_using_file(&output_file, &input);
         let rows = input.configs.rows as isize;
         let columns = input.configs.columns as isize;
         let nodata = input.configs.nodata;
-        
-        let mut z: f64;
-        let mut bin: isize;
-        for row in 0..rows {
-            for col in 0..columns {
-                z = input[(row, col)];
-                if z != nodata {
-                    bin = ((z - min_value) / highres_bin_size).floor() as isize;
-                    if bin >= highres_num_bins {
-                        bin = highres_num_bins - 1;
+
+        let mut starting_row;
+        let mut ending_row = 0;
+        let num_procs = num_cpus::get() as isize;
+        let row_block_size = rows / num_procs;
+        let (tx, rx) = mpsc::channel();
+        let mut id = 0;
+        while ending_row < rows {
+            let input = input.clone();
+            starting_row = id * row_block_size;
+            ending_row = starting_row + row_block_size;
+            if ending_row > rows {
+                ending_row = rows;
+            }
+            id += 1;
+            let tx = tx.clone();
+            thread::spawn(move || {
+                let mut z: f64;
+                if input.configs.photometric_interp != PhotometricInterpretation::Boolean {
+                    for row in starting_row..ending_row {
+                        let mut data: Vec<f64> = vec![nodata; columns as usize];
+                        for col in 0..columns {
+                            z = input[(row, col)];
+                            if z != nodata {
+                                if z != 0.0 {
+                                    data[col as usize] = -z;
+                                } else {
+                                    data[col as usize] = 0.0;
+                                }
+                            }
+                        }
+                        tx.send((row, data)).unwrap();
                     }
-                    primary_histo[bin as usize] += 1.0;
-                    num_valid_cells += 1;
-                }
-            }
-            if verbose {
-                progress = (100.0_f64 * row as f64 / (rows - 1) as f64) as usize;
-                if progress != old_progress {
-                    println!("Progress: {}%", progress);
-                    old_progress = progress;
-                }
-            }
-        }
-
-        for i in 1..highres_num_bins as usize {
-            primary_histo[i] += primary_histo[i-1];
-        }
-
-        let mut cdf = vec![0.0; highres_num_bins as usize];
-        for i in 0..highres_num_bins as usize {
-            cdf[i] = 100.0 * primary_histo[i] as f64 / num_valid_cells as f64
-        }
-
-        let quantile_proportion = 100.0 / num_quantiles as f64;
-
-        for i in 0..highres_num_bins as usize {
-            primary_histo[i] = (cdf[i] / quantile_proportion).floor();
-            if primary_histo[i] == num_quantiles as f64 {
-                primary_histo[i] = num_quantiles as f64 - 1.0;
-            }
-        }
-
-        let mut z: f64;
-        for row in 0..rows {
-            for col in 0..columns {
-                z = input[(row, col)];
-                if z != nodata {
-                    let mut i = ((z - min_value) / highres_bin_size).floor() as usize;
-                    if i >= highres_num_bins as usize {
-                        i = highres_num_bins as usize - 1;
+                } else {
+                    for row in starting_row..ending_row {
+                        let mut data: Vec<f64> = vec![nodata; columns as usize];
+                        for col in 0..columns {
+                            z = input[(row, col)];
+                            if z != nodata {
+                                if z == 0.0 {
+                                    data[col as usize] = 1.0;
+                                } else {
+                                    data[col as usize] = 0.0;
+                                }
+                            }
+                        }
+                        tx.send((row, data)).unwrap();
                     }
-                    let bin = primary_histo[i];
-
-                    output[(row, col)] = bin + 1.0;
                 }
-            }
+            });
+        }
+
+        let mut output = Raster::initialize_using_file(&output_file, &input);
+        for r in 0..rows {
+            let (row, data) = rx.recv().unwrap();
+            output.set_row_data(row, data);
+            
             if verbose {
-                progress = (100.0_f64 * row as f64 / (rows - 1) as f64) as usize;
+                progress = (100.0_f64 * r as f64 / (rows - 1) as f64) as usize;
                 if progress != old_progress {
                     println!("Progress: {}%", progress);
                     old_progress = progress;
@@ -199,10 +193,8 @@ impl WhiteboxTool for Quantiles {
 
         let end = time::now();
         let elapsed_time = end - start;
-        output.configs.palette = out_palette;
         output.add_metadata_entry(format!("Created by whitebox_tools\' {} tool", self.get_tool_name()));
         output.add_metadata_entry(format!("Input file: {}", input_file));
-        output.add_metadata_entry(format!("Num. quantiles: {}", num_quantiles));
         output.add_metadata_entry(format!("Elapsed Time (excluding I/O): {}", elapsed_time).replace("PT", ""));
 
         if verbose { println!("Saving data...") };
@@ -212,7 +204,7 @@ impl WhiteboxTool for Quantiles {
         };
 
         println!("{}", &format!("Elapsed Time (excluding I/O): {}", elapsed_time).replace("PT", ""));
-
+        
         Ok(())
     }
 }

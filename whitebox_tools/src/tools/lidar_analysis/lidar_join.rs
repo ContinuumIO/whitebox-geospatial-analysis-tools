@@ -1,10 +1,17 @@
+/* 
+This tool is part of the WhiteboxTools geospatial analysis library.
+Authors: Dr. John Lindsay
+Created: June 21, 2017
+Last Modified: July 17, 2017
+License: MIT
+*/
 extern crate nalgebra as na;
 
 use std;
 use std::env;
 use std::io::{Error, ErrorKind};
 use std::path;
-use lidar::las;
+use lidar::*;
 use tools::WhiteboxTool;
 
 pub struct LidarJoin {
@@ -20,8 +27,8 @@ impl LidarJoin {
         
         let description = "Joins multiple LiDAR (LAS) files into a single LAS file.".to_string();
         
-        let parameters = "-i, --inputs       Input LAS files, separated by commas
--o, --output       Output LAS file.".to_owned();
+        let mut parameters = "-i, --inputs      Input LAS files, separated by commas.\n".to_owned();
+        parameters.push_str("-o, --output  Output LAS file.\n");
         
         let sep: String = path::MAIN_SEPARATOR.to_string();
         let p = format!("{}", env::current_dir().unwrap().display());
@@ -30,7 +37,7 @@ impl LidarJoin {
         if e.contains(".exe") {
             short_exe += ".exe";
         }
-        let usage = format!(">>.*{0} -r={1} --wd=\"*path*to*data*\" -i=\"file1.las, file2.las, file3.las\" -o=outfile.las\"", short_exe, name).replace("*", &sep);
+        let usage = format!(">>.*{0} -r={1} -v --wd=\"*path*to*data*\" -i=\"file1.las, file2.las, file3.las\" -o=outfile.las\"", short_exe, name).replace("*", &sep);
     
         LidarJoin { name: name, description: description, parameters: parameters, example_usage: usage }
     }
@@ -98,7 +105,7 @@ impl WhiteboxTool for LidarJoin {
             output_file = format!("{}{}", working_directory, output_file);
         }
 
-        let mut output: las::LasFile = las::LasFile::new(&output_file, "w")?;
+        let mut output: LasFile = LasFile::new(&output_file, "w")?;
 
         let mut cmd = input_files.split(";");
         let mut vec = cmd.collect::<Vec<&str>>();
@@ -116,7 +123,7 @@ impl WhiteboxTool for LidarJoin {
                     input_file = format!("{}{}", working_directory, input_file);
                 }
 
-                let input: las::LasFile = match las::LasFile::new(&input_file, "r") {
+                let input = match LasFile::new(&input_file, "r") {
                     Ok(lf) => lf,
                     Err(_) => return Err(Error::new(ErrorKind::NotFound, format!("No such file or directory ({})", input_file))),
                 };
@@ -130,12 +137,12 @@ impl WhiteboxTool for LidarJoin {
                 }
 
                 if i == 0 {
-                    output = las::LasFile::initialize_using_file(&output_file, &input);
+                    output = LasFile::initialize_using_file(&output_file, &input);
                 }
 
                 let n_points = input.header.number_of_points as usize;
 
-                let mut pr: las::LidarPointRecord;
+                let mut pr: LidarPointRecord;
                 for i in 0..n_points {
                     pr = input.get_record(i);
                     output.add_point_record(pr);
