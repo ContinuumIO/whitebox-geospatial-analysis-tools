@@ -37,7 +37,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -60,14 +59,12 @@
     [
       [
         "--filterx",
-        "--filter"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
         "--filtery",
-        "--filter"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -128,10 +125,15 @@
   "Max": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -241,7 +243,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -263,15 +264,13 @@
   "MaximumFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -312,7 +311,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files contained in quotes and separated by commas or semicolons"
@@ -440,10 +438,15 @@
   "Subtract": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -502,7 +505,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -743,10 +745,15 @@
   "EqualTo": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -787,15 +794,13 @@
   "TotalFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
         "--filtery",
-        "--filter"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -894,14 +899,12 @@
     [
       [
         "--filterx",
-        "--filter"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
         "--filtery",
-        "--filter"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -1197,7 +1200,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input LAS files separated by commas"
@@ -1274,15 +1276,13 @@
   "DiversityFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -1303,8 +1303,6 @@
     [
       [
         "--filter",
-        "--filterx",
-        "--filtery"
       ],
       "Optional size of the filter kernel (default is 11; not used if and are specified)"
     ],
@@ -1324,15 +1322,13 @@
     ],
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -1352,9 +1348,7 @@
     ],
     [
       [
-        "--filter",
-        "--filterx",
-        "--filtery"
+        "--filter"
       ],
       "Optional size of the filter kernel (default is 11; not used if and are specified)"
     ],
@@ -1407,15 +1401,13 @@
   "DiffFromMeanElev": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -1449,11 +1441,17 @@
   "NotEqualTo": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
+
     [
       [
         "--wd"
@@ -1510,15 +1508,13 @@
   "ConservativeSmoothingFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -1687,7 +1683,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -1759,10 +1754,15 @@
     ],
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -1850,7 +1850,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -1933,10 +1932,15 @@
     ],
     [
       [
-        "--sca",
+        "--sca"
+      ],
+      "Input specific contributing area (SCA) raster file"
+    ],
+    [
+      [
         "--slope"
       ],
-      "Input specific contributing area (SCA) raster file Input slope raster file"
+      "Input slope raster file"
     ],
     [
       [
@@ -2044,10 +2048,15 @@
   "Multiply": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -2241,15 +2250,13 @@
   "OlympicFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -2520,10 +2527,15 @@
   "Modulo": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -2581,15 +2593,13 @@
   "RelativeTopographicPosition": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -2772,7 +2782,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -2855,7 +2864,12 @@
   "Not": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file Input raster file"
+    ],
+    [
+      [
         "--input2"
       ],
       "Input raster file Input raster file"
@@ -3046,7 +3060,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -3068,15 +3081,13 @@
   "KNearestMeanFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 3; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 3; not used if is specified)"
     ],
@@ -3116,15 +3127,13 @@
   "StandardDeviationFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -3369,15 +3378,13 @@
     ],
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -3411,10 +3418,15 @@
   "And": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file Input raster file"
+      "Input raster file"
     ],
     [
       [
@@ -3433,15 +3445,13 @@
   "AdaptiveFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -3646,15 +3656,13 @@
   "MinimumFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -3694,10 +3702,15 @@
     ],
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -3770,15 +3783,13 @@
   "Closing": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -3918,10 +3929,15 @@
   "IntegerDivision": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -3947,7 +3963,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input LAS files separated by commas"
@@ -3974,10 +3989,15 @@
     ],
     [
       [
-        "--sca",
+        "--sca"
+      ],
+      "Input specific contributing area (SCA) raster file"
+    ],
+    [
+      [
         "--slope"
       ],
-      "Input specific contributing area (SCA) raster file Input slope raster file"
+      "Input slope raster file"
     ],
     [
       [
@@ -4075,12 +4095,27 @@
     ],
     [
       [
-        "--zfactor",
-        "--slope",
-        "--prof",
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "--slope"
+      ],
+      "Slope threshold value in degrees (default is 3 0)"
+    ],
+    [
+      [
+        "--prof"
+      ],
+      "Profile curvature threshold value (default is 0 1)"
+    ],
+    [
+      [
         "--plan"
       ],
-      "Optional multiplier for when the vertical and horizontal units are not the same Slope threshold value in degrees (default is 3 0) Profile curvature threshold value (default is 0 1) Plan curvature threshold value (default is 0 0)"
+      "Plan curvature threshold value (default is 0 0)"
     ],
     [
       [
@@ -4175,10 +4210,15 @@
   "Or": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file Input raster file"
+      "Input raster file"
     ],
     [
       [
@@ -4291,10 +4331,15 @@
   "Divide": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -4353,10 +4398,15 @@
     ],
     [
       [
-        "--nir",
+        "--nir"
+      ],
+      "Input near-infrared band image"
+    ],
+    [
+      [
         "--red"
       ],
-      "Input near-infrared band image Input red-band image"
+      "Input red-band image"
     ],
     [
       [
@@ -4431,7 +4481,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -4480,15 +4529,13 @@
   "PercentElevRange": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -4578,15 +4625,13 @@
   "HighPassFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -5149,15 +5194,13 @@
   "MajorityFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -5177,9 +5220,7 @@
     ],
     [
       [
-        "--filter",
-        "--filterx",
-        "--filtery"
+        "--filter"
       ],
       "Optional size of the filter kernel (default is 11; not used if and are specified)"
     ],
@@ -5257,7 +5298,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files contained in quotes and separated by commas or semicolons"
@@ -5356,14 +5396,14 @@
   "WriteFunctionMemoryInsertion": [
     [
       [
-        "--i2",
+        "-i2",
         "--input2"
       ],
       "Input raster file associated with the second date"
     ],
     [
       [
-        "--i1",
+        "-i1",
         "--input1"
       ],
       "Input raster file associated with the first date"
@@ -5377,7 +5417,7 @@
     ],
     [
       [
-        "--i3",
+        "-i3",
         "--input3"
       ],
       "Optional input raster file associated with the third date"
@@ -5577,10 +5617,15 @@
   "Add": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -5672,24 +5717,27 @@
     ],
     [
       [
-        "--input_y",
         "--input_x"
       ],
-      "Input y raster file or constant value (rise) Input x raster file or constant value (run)"
+      "Input x raster file or constant value (run)"
+    ],
+    [
+      [
+        "--input_y"
+      ],
+      "Input y raster file or constant value (rise)"
     ]
   ],
   "LeeFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 5; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 5; not used if is specified)"
     ],
@@ -5865,7 +5913,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -6138,10 +6185,15 @@
   "Min": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -6194,10 +6246,15 @@
     ],
     [
       [
-        "--sca",
+        "--sca"
+      ],
+      "Input specific contributing area (SCA) raster file"
+    ],
+    [
+      [
         "--slope"
       ],
-      "Input specific contributing area (SCA) raster file Input slope raster file"
+      "Input slope raster file"
     ],
     [
       [
@@ -6232,15 +6289,13 @@
   "RangeFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -6274,10 +6329,15 @@
   "LidarPointDensity": [
     [
       [
-        "--exclude_cls",
         "--exclude_cls"
       ],
-      "Optional exclude classes from interpolation; Valid class values range from 0 to 18 based on LAS specifications Example '3 4 5 6 7 18'--palette Optional palette name (for use with Whitebox raster files)"
+      "Optional exclude classes from interpolation; Valid class values range from 0 to 18 based on LAS specifications;Example '3 4 5 6 7 18'"
+    ],
+    [
+      [
+        "--palette"
+      ],
+    "Optional palette name (for use with Whitebox raster files)"
     ],
     [
       [
@@ -6333,10 +6393,15 @@
   "Power": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -6551,15 +6616,13 @@
   "Opening": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -6661,8 +6724,7 @@
   "TophatTransform": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
@@ -6674,8 +6736,7 @@
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -6836,15 +6897,13 @@
     ],
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -6864,9 +6923,7 @@
     ],
     [
       [
-        "--filter",
-        "--filterx",
-        "--filtery"
+        "--filter"
       ],
       "Optional size of the filter kernel (default is 11; not used if and are specified)"
     ],
