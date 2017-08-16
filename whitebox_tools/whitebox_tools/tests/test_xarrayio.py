@@ -31,6 +31,11 @@ DEFAULT_ATTRS = {
     'max': 10.,
 }
 
+# TODO - address arg spec or related issues for the following
+# tools:
+XFAIL = ('DownslopeIndex',
+         'DirectDecorrelationStretch')
+
 TESTDATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
 EXAMPLE_DEMS = tuple(os.path.join(TESTDATA, f) for f in ('DEM.dep', 'DEV_101.dep'))
 TO_REMOVE = ['test-output.{}'.format(end) for end in ('dep', 'tas')]
@@ -63,14 +68,19 @@ def pour_point_raster(as_xarr=True):
     fname = os.path.join(WHITEBOX_TEMP_DIR, 'pour_pts')
     return data_array_to_dep(arr, fname=fname)[0]
 
+def d8_pntr(dem=None):
+    if dem is None:
+        dem = from_dep(EXAMPLE_DEMS[0])
+    return D8Pointer(dem=dem)
 
-def d8_example_test():
-    d8_pntr = D8Pointer(input=from_dep(EXAMPLE_DEMS[0]))
-    assert isinstance(d8_pntr, xr.DataArray)
-    d8_flowacc = D8FlowAccumulation(input=d8_pntr)
+def test_d8():
+    d8 = d8_pntr()
+    assert isinstance(d8, xr.DataArray)
+    d8_flowacc = D8FlowAccumulation(dem=from_dep(EXAMPLE_DEMS[0]))
     assert isinstance(d8_flowacc, xr.DataArray)
-    w = Watershed(d8_pntr=d8_pntr, pour_pts=pour_point_raster())
+    w = Watershed(d8_pntr=d8, pour_pts=pour_point_raster())
     assert isinstance(w, xr.DataArray)
+    return dict(flow_accum=d8_flowacc, d8_pntr=d8, sca=d8_flowacc * 100)
 
 def is_input(arg_name):
     return arg_name in INPUT_ARGS
@@ -78,13 +88,18 @@ def is_input(arg_name):
 def make_synthetic_kwargs(tool, as_xarr=True):
     arg_spec_help = HELP[tool]
     kwargs = {}
+    default_inputs = test_d8()
     for arg_names, help_str in arg_spec_help:
         arg_name = [a[2:] for a in arg_names if '--' == a[:2]][0]
-        if arg_name == 'inputs':
+        if arg_name in default_inputs:
+            kwargs[arg_name] = default_inputs[arg_name]
+        elif arg_name == 'inputs':
             kwargs[arg_name] = ','.join(EXAMPLE_DEMS)
         elif arg_name == 'inputs' and as_xarr:
             kwargs[arg_name] = xr.Dataset({x: from_dep(EXAMPLE_DEMS[0])
                                            for x in ('a', 'b')})
+        elif arg_name == 'd8_pntr':
+            kwargs[arg_name] = d8_pntr()
         elif is_input(arg_name) and as_xarr:
             kwargs[arg_name] = from_dep(EXAMPLE_DEMS[0])
         elif is_input(arg_name):
@@ -100,6 +115,8 @@ tools_names_list = [(tool, as_xarr) for tool in tools
                     for as_xarr in as_xarray]
 @pytest.mark.parametrize('tool, as_xarr', tools_names_list)
 def test_each_tool(tool, as_xarr):
+    if tool in XFAIL:
+        pytest.xfail('Tool {} is not yet supported'.format(tool))
     if tool == 'WeightedSum':
         pytest.xfail('WeightedSum uses some delimiters for input/weights not handled yet')
     if tool == 'LidarInfo':

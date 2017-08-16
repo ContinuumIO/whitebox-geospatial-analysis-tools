@@ -160,7 +160,6 @@ def to_rust(tool, args):
         vars(args)['output'] = fix_path(fname)
     delayed_load_later, kwargs = xarray_whitebox_io(globals()[tool], **vars(args))
     for k, v in kwargs.items():
-        print('k', k)
         if isinstance(v, bool):
             s.append('--{}'.format(k))
             continue

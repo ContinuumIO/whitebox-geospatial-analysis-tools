@@ -372,6 +372,19 @@
         "--d8_pntr"
       ],
       "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
     ]
   ],
   "FindPatchOrClassEdgeCells": [
@@ -536,6 +549,12 @@
         "--output"
       ],
       "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "StreamLinkClass": [
@@ -691,6 +710,12 @@
         "--output"
       ],
       "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "Sink": [
@@ -871,6 +896,12 @@
         "--esri_style"
       ],
       "Uses the ESRI style D8 pointer output (default is false)"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "Exp": [
@@ -3924,7 +3955,14 @@
         "--streams"
       ],
       "Input streams raster file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
+
   ],
   "IntegerDivision": [
     [
@@ -4298,6 +4336,12 @@
         "--output"
       ],
       "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "EdgeProportion": [
@@ -6780,6 +6824,12 @@
         "--output"
       ],
       "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "Hillslopes": [

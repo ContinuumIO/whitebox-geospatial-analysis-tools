@@ -9,7 +9,12 @@ import xarray as xr
 
 INPUT_ARGS = ['input', 'inputs', 'i', 'pour_pts',
               'd8_pntr', 'dem', 'input1', 'input2', 'input3',
-              'i1', 'i2', 'i3', 'input_x', 'input_y']
+              'i1', 'i2', 'i3', 'input_x', 'input_y',
+              'streams', 'flow_accum', 'sca',
+              'nir', 'red','blue', 'green', 'pan',
+              'destination',
+              'base',
+              'seed_pts']
 OUTPUT_ARGS = ['output', 'outputs', 'o']
 
 WHITEBOX_TEMP_DIR = os.environ.get('WHITEBOX_TEMP_DIR')
@@ -232,7 +237,6 @@ def xarray_whitebox_io(func, **kwargs):
     fnames = {}
     dumped_an_xarray = used_str = False
     for k, v in kwargs.items():
-        print('kv', k, v)
         if k in INPUT_ARGS:
             if isinstance(v, strings):
                 kwargs[k] = fix_path(v)
