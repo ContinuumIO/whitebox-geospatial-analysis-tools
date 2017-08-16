@@ -72,21 +72,23 @@ def d8_example_test():
     w = Watershed(d8_pntr=d8_pntr, pour_pts=pour_point_raster())
     assert isinstance(w, xr.DataArray)
 
+def is_input(arg_name):
+    return arg_name in INPUT_ARGS
 
 def make_synthetic_kwargs(tool, as_xarr=True):
     arg_spec_help = HELP[tool]
     kwargs = {}
     for arg_names, help_str in arg_spec_help:
         arg_name = [a[2:] for a in arg_names if '--' == a[:2]][0]
-        if 'input' in arg_name and as_xarr:
-            kwargs[arg_name] = from_dep(EXAMPLE_DEMS[0])
-        elif 'input' in arg_name:
-            kwargs[arg_name] = EXAMPLE_DEMS[0]
-        if arg_name == 'inputs' and as_xarr:
+        if arg_name == 'inputs':
+            kwargs[arg_name] = ','.join(EXAMPLE_DEMS)
+        elif arg_name == 'inputs' and as_xarr:
             kwargs[arg_name] = xr.Dataset({x: from_dep(EXAMPLE_DEMS[0])
                                            for x in ('a', 'b')})
-        elif arg_name == 'inputs':
-            kwargs[arg_name] = ','.join(EXAMPLE_DEMS)
+        elif is_input(arg_name) and as_xarr:
+            kwargs[arg_name] = from_dep(EXAMPLE_DEMS[0])
+        elif is_input(arg_name):
+            kwargs[arg_name] = EXAMPLE_DEMS[0]
         elif 'output' == arg_name:
             kwargs['output'] = TO_REMOVE[0]
     return kwargs

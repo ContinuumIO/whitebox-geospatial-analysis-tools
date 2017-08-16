@@ -9,7 +9,7 @@ import xarray as xr
 
 INPUT_ARGS = ['input', 'inputs', 'i', 'pour_pts',
               'd8_pntr', 'dem', 'input1', 'input2', 'input3',
-              'i1', 'i2', 'i3']
+              'i1', 'i2', 'i3', 'input_x', 'input_y']
 OUTPUT_ARGS = ['output', 'outputs', 'o']
 
 WHITEBOX_TEMP_DIR = os.environ.get('WHITEBOX_TEMP_DIR')
