@@ -1,5 +1,5 @@
 package:
-  name: whitebox-tools
+  name: whitebox_tools
   version: 0.1.1
 
 source:

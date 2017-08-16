@@ -1,11 +1,12 @@
 #!/bin/bash
 $PYTHON build.py
-mkdir $CONDA_PREFIX/share/whitebox_tools
+mkdir -p $CONDA_PREFIX/share/whitebox_tools
 cp -av target/release $CONDA_PREFIX/share/whitebox_tools
 $PYTHON setup.py install
 
-# Copy data directory into install dir
-cp -av whitebox_tools/data $SP_DIR/whitebox_tools/
+# conda-build is finnicky about recursive cp commands
+mkdir -p $SP_DIR/whitebox_tools/data
+cp -av whitebox_tools/data/* $SP_DIR/whitebox_tools/data
 
 ACTIVATE_DIR=$PREFIX/etc/conda/activate.d
 DEACTIVATE_DIR=$PREFIX/etc/conda/deactivate.d
