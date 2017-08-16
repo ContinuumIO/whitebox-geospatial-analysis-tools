@@ -1,14 +1,39 @@
 
 import os
 import shutil
+import string
 import struct
 
 import numpy as np
 import xarray as xr
 
-INPUT_ARGS = ['input', 'inputs', 'i', 'pour_pts', 'd8_pntr']
+INPUT_ARGS = ['input', 'inputs', 'i', 'pour_pts',
+              'd8_pntr', 'dem', 'input1', 'input2', 'input3',
+              'i1', 'i2', 'i3']
 OUTPUT_ARGS = ['output', 'outputs', 'o']
+
 WHITEBOX_TEMP_DIR = os.environ.get('WHITEBOX_TEMP_DIR')
+DTYPES = {'float': 'f4',
+          'integer': 'i2'}
+ENDIAN = {'LITTLE_ENDIAN': '<',
+          'BIG_ENDIAN': '>',}
+
+OK_DATA_SCALES = ['continuous', 'categorical', 'Boolean', 'rgb']
+
+OPTIONAL_DEP_FIELDS = ['display_min', 'display_max',
+                       'metadata_entry', 'projection',
+                       'preferred_palette',
+                       'palette_nonlinearity', 'byte_order',
+                       'nodata']
+REQUIRED_DEP_FIELDS = ['max', 'min', 'north', 'south', 'east', 'west',
+                       'cols', 'rows', 'dtype', 'z_units', 'xy_units',
+                       'data_scale']
+FLOAT_DEP_FIELDS = ['Min', 'Max',
+                    'North', 'South', 'East', 'West',
+                    'Display Min', 'Display Max']
+INT_DEP_FIELDS = ['Cols', 'Rows', 'Stacks']
+UPPER_STR_FIELDS = ['Data Type', 'Byte Order']
+
 if not WHITEBOX_TEMP_DIR:
     WHITEBOX_TEMP_DIR = os.path.expanduser('~/.whitebox_tools_tempdir')
     if not os.path.exists(WHITEBOX_TEMP_DIR):
@@ -46,25 +71,6 @@ Byte Order: {byte_order}
 DEP_KEYS = [x.split(':')[0].strip() for x in DEP_TEMPLATE.splitlines()
             if ':' in x]
 
-DTYPES = {'float': 'f4',
-          'integer': 'i2'}
-ENDIAN = {'LITTLE_ENDIAN': '<',
-          'BIG_ENDIAN': '>',}
-
-OK_DATA_SCALES = ['continuous', 'categorical', 'Boolean', 'rgb']
-
-OPTIONAL_DEP_FIELDS = ['display_min', 'display_max',
-                       'metadata_entry', 'projection',
-                       'preferred_palette',
-                       'palette_nonlinearity', 'byte_order', 'nodata']
-REQUIRED_DEP_FIELDS = ['max', 'min', 'north', 'south', 'east', 'west',
-                       'cols', 'rows', 'dtype', 'z_units', 'xy_units',
-                       'data_scale']
-FLOAT_DEP_FIELDS = ['Min', 'Max',
-                    'North', 'South', 'East', 'West',
-                    'Display Min', 'Display Max']
-INT_DEP_FIELDS = ['Cols', 'Rows', 'Stacks']
-UPPER_STR_FIELDS = ['Data Type', 'Byte Order']
 def not_2d_error():
     raise NotImplementedError('Only 2-D rasters are supported by xarray wrapper currently')
 
@@ -224,13 +230,15 @@ def xarray_whitebox_io(func, **kwargs):
     load_afterwards = {}
     delete_tempdir = kwargs.pop('delete_tempdir', True)
     fnames = {}
-    dumped_an_xarray = False
+    dumped_an_xarray = used_str = False
     for k, v in kwargs.items():
+        print('kv', k, v)
         if k in INPUT_ARGS:
             if isinstance(v, strings):
                 kwargs[k] = fix_path(v)
+                used_str = True
             elif isinstance(v, xr.Dataset):
-                if k == 'input':
+                if k in ('input', 'dem'):
                     raise ValueError('Cannot use xarray.Dataset unless the tool allows --inputs.  Here --input was used, and the tool must be called for each xarray.DataArray')
                 for k2 in v.data_vars:
                     data_arr = getattr(v, k2)
@@ -244,9 +252,6 @@ def xarray_whitebox_io(func, **kwargs):
                 dumped_an_xarray = k
         elif k in OUTPUT_ARGS:
             load_afterwards[k] = fix_path(v)
-    if not load_afterwards and dumped_an_xarray:
-        output_fname = kwargs[dumped_an_xarray].replace('.dep', '-output.dep')
-        load_afterwards[k] = kwargs['output'] = output_fname
     def delayed_load_later(ret_val):
         if not load_afterwards:
             return ret_val

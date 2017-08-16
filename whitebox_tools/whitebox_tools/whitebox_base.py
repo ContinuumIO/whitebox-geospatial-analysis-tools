@@ -5,10 +5,12 @@ See whitebox_example.py for an example of how to use it.
 from __future__ import print_function
 import os
 from os import path
+import pipes
 import sys
 from sys import platform
 from subprocess import CalledProcessError, Popen, PIPE, STDOUT
 
+WHITEBOX_VERBOSE = bool(int(os.environ.get('WHITEBOX_VERBOSE', '1')))
 
 def default_callback(value):
     ''' A simple default callback that outputs using the print function.
@@ -26,7 +28,7 @@ class WhiteboxTools(object):
     def __init__(self, exe_path=None):
         self.set_whitebox_dir(exe_path)
         self.wkdir = ""
-        self.verbose = True
+        self.verbose = WHITEBOX_VERBOSE
         self.cancel_op = False
 
     def set_whitebox_dir(self, exe_path=None):
@@ -67,6 +69,9 @@ class WhiteboxTools(object):
 
     def _run_process(self, args, **kwargs):
         callback = kwargs.get('callback', default_callback)
+        if kwargs.get('verbose') or self.verbose:
+            pretty_print = ' '.join(pipes.quote(arg) for arg in args)
+            print('Running: {}'.format(pretty_print))
         proc = Popen(args, shell=False, stdout=PIPE,
                          stderr=STDOUT, bufsize=1,
                          universal_newlines=True,
@@ -90,7 +95,9 @@ class WhiteboxTools(object):
         ret_code = ret_code or proc.poll()
         return ret_code, lines
 
-    def run_tool(self, tool_name, args, callback=default_callback):
+    def run_tool(self, tool_name, args,
+                 callback=default_callback,
+                 verbose=WHITEBOX_VERBOSE):
         ''' Runs a tool and specifies tool arguments.
         Returns 0 if completes without error.
         Returns 1 if error encountered (details are sent to callback).
@@ -110,7 +117,7 @@ class WhiteboxTools(object):
             # args_str = args_str[:-1]
             # a.append("--args=\"{}\"".format(args_str))
 
-            if self.verbose:
+            if self.verbose or verbose:
                 args2.append("-v")
             return self._run_process(args2, callback=callback, silent=False)[0] or 0
         except (OSError, ValueError, CalledProcessError) as err:

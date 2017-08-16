@@ -78,9 +78,9 @@ def make_synthetic_kwargs(tool, as_xarr=True):
     kwargs = {}
     for arg_names, help_str in arg_spec_help:
         arg_name = [a[2:] for a in arg_names if '--' == a[:2]][0]
-        if arg_name == 'input' and as_xarr:
+        if 'input' in arg_name and as_xarr:
             kwargs[arg_name] = from_dep(EXAMPLE_DEMS[0])
-        elif arg_name == 'input':
+        elif 'input' in arg_name:
             kwargs[arg_name] = EXAMPLE_DEMS[0]
         if arg_name == 'inputs' and as_xarr:
             kwargs[arg_name] = xr.Dataset({x: from_dep(EXAMPLE_DEMS[0])

@@ -1,14 +1,19 @@
-from functools import partial
+from functools import partial, wraps
 from itertools import chain
 import argparse
 import json
 import os
 import re
+import string
 import sys
+
+import numpy as np
 import xarray as xr
 
-from whitebox_tools.whitebox_base import WhiteboxTools
-from whitebox_tools.xarray_io import xarray_whitebox_io
+from whitebox_tools.whitebox_base import WhiteboxTools, WHITEBOX_VERBOSE
+from whitebox_tools.xarray_io import (xarray_whitebox_io,
+                                      fix_path,
+                                      WHITEBOX_TEMP_DIR)
 
 try:
     unicode
@@ -18,6 +23,7 @@ except:
 TOOL_DATA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               'data',
                               'tool_data.json')
+REFRESH_WHITEBOX_HELP = bool(int(os.environ.get('REFRESH_WHITEBOX_HELP', 0)))
 
 listtools_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
@@ -29,7 +35,6 @@ with open(listtools_file) as f:
     listtools = {k.strip(): v.strip() for k, v in listtools}
     tools = sorted(listtools)
 
-REFRESH_WHITEBOX_HELP = bool(int(os.environ.get('REFRESH_WHITEBOX_HELP', 0)))
 
 def callback(out_str, silent=False):
     ''' Create a custom callback to process the text coming out of the tool.
@@ -75,52 +80,60 @@ def callback(out_str, silent=False):
         print(out_str)
 
 
-def convert_help_extract_params(tool, wbt, to_parser=True, silent=False):
+def convert_help_extract_params(tool, wbt,
+                                to_parser=True,
+                                silent=False,
+                                refresh=REFRESH_WHITEBOX_HELP,
+                                verbose=False):
     tool = tool.strip()
-    help_str = "\n".join(wbt.tool_help(tool, silent=silent))
-    pattern = './whitebox_tools -r=' + tool
-    tool_name = 'whitebox-' + tool
-    help_str = help_str.replace(pattern, tool_name)
-    help_lines = []
-    args = {}
-    in_params = False
-    examples = []
-    description = ''
-    for line in help_str.splitlines():
-        for tok in (',', '=', '>', '.',):
-            line = line.replace(tok, ' ').strip()
-        line = [_.strip() for _ in line.split()]
-        if line and 'Description:' == line[0]:
-            description = " ".join(line[1:])
-        if line and tool_name == line[0]:
-            examples = examples + [' '.join(line)]
-            continue
-        help_str = []
-        params_in_line = 'parameters:' in line
-        in_params = in_params or params_in_line
-
-        if '-i' in line:
-            args[('-i', '--input')] = 'Input file'
-
-        if '-o' in line:
-            args[('-o', '--output')] = 'Output file'
-            continue
-
-        parts = tuple(item for item in line if item[0] == '-')
-        help_str = [item for item in line if item[0] != '-']
-        if parts and in_params and not examples:
-            if parts == ('-i',) or parts == ('-o',):
+    if refresh:
+        help_str = "\n".join(wbt.tool_help(tool, silent=silent))
+        pattern = './whitebox_tools -r=' + tool
+        tool_name = 'whitebox-' + tool
+        help_str = help_str.replace(pattern, tool_name)
+        help_lines = []
+        args = {}
+        in_params = False
+        examples = []
+        description = ''
+        for line in help_str.splitlines():
+            for tok in (',', '=', '>', '.',):
+                line = line.replace(tok, ' ').strip()
+            line = [_.strip() for _ in line.split()]
+            if line and 'Description:' == line[0]:
+                description = " ".join(line[1:])
+            if line and tool_name == line[0]:
+                examples = examples + [' '.join(line)]
                 continue
-            args[parts] = " ".join(help_str)
-    keys = tuple(args)
-    if ('-i', '--dem') in keys and ('-i', '--input') in keys:
-        args.pop(('-i', '--dem'))
-    args[('--wd',)] = 'Working directory'
-    if description:
-        description = ' - {} '.format(description)
-    help_tool = '{}{} Usage:\n\n\t'.format(tool, description)
-    if examples:
-        help_tool += '\n\t{}'.format(' '.join(_.strip() for _ in examples))
+            help_str = []
+            params_in_line = 'parameters:' in line or 'arguments' in line
+            in_params = in_params or params_in_line
+
+            if '-i' in line:
+                args[('-i', '--input')] = 'Input file'
+
+            if '-o' in line:
+                args[('-o', '--output')] = 'Output file'
+                continue
+
+            parts = tuple(item for item in line if item[0] == '-')
+            help_str = [item for item in line if item[0] != '-']
+            if parts and in_params and not examples:
+                if parts == ('-i',) or parts == ('-o',):
+                    continue
+                args[parts] = " ".join(help_str)
+        keys = tuple(args)
+        if ('-i', '--dem') in keys and ('-i', '--input') in keys:
+            args.pop(('-i', '--dem'))
+        args[('--wd',)] = 'Working directory'
+        if description:
+            description = ' - {} '.format(description)
+        help_tool = '{}{} Usage:\n\n\t'.format(tool, description)
+        if examples:
+            help_tool += '\n\t{}'.format(' '.join(_.strip() for _ in examples))
+    else:
+        args = {tuple(k): v for k, v in HELP[tool]}
+        help_tool = listtools[tool]
     if not to_parser:
         return args
     parser = argparse.ArgumentParser(description=help_tool)
@@ -132,20 +145,31 @@ def convert_help_extract_params(tool, wbt, to_parser=True, silent=False):
             continue
         if '--filter' in k and ('--filterx' in k or '--filtery' in k):
             continue
-        parser.add_argument(*k, help=v, required=required)
+        kw = dict(help=v, required=required)
+        if ' flag ' in v or ' flag.' in v:
+            kw['action'] = 'store_true'
+        parser.add_argument(*k, **kw)
     return parser
 
 
 def to_rust(tool, args):
     s = []
+    if not getattr(args, 'output', False):
+        tok = ''.join(np.random.choice(tuple(string.ascii_letters)) for _ in range(7))
+        fname = os.path.join(WHITEBOX_TEMP_DIR, tok + '.dep')
+        vars(args)['output'] = fix_path(fname)
     delayed_load_later, kwargs = xarray_whitebox_io(globals()[tool], **vars(args))
     for k, v in kwargs.items():
+        print('k', k)
+        if isinstance(v, bool):
+            s.append('--{}'.format(k))
+            continue
         if v is not None:
             try:
                 float(v)
                 fmt = '--{}={}'
             except:
-                if k in ('input', 'output', 'wd'):
+                if k in ('input', 'output', 'wd', 'dem', 'd8_pntr'):
                     if isinstance(v, (unicode, str)) and v != os.path.abspath(v):
                         v = os.path.join(os.path.abspath(os.curdir), v)
                         setattr(args, k, v)
@@ -160,15 +184,18 @@ def to_rust(tool, args):
 
 def call_whitebox_cli(tool, args=None,
                       callback_func=None, silent=False,
-                      return_xarr=True):
+                      return_xarr=True,
+                      verbose=WHITEBOX_VERBOSE):
     if callback_func is None:
         callback_func = partial(callback, silent=silent)
     wbt = WhiteboxTools()
     if not args:
-        parser = convert_help_extract_params(tool, wbt, silent=True)
+        parser = convert_help_extract_params(tool, wbt,
+                                             silent=True,
+                                             verbose=verbose)
         args = parser.parse_args()
     args, delayed_load_later = to_rust(tool, args)
-    ret_val = wbt.run_tool(tool, args, callback_func)
+    ret_val = wbt.run_tool(tool, args, callback_func, verbose=verbose)
     arr_or_dset = delayed_load_later(ret_val)
     if return_xarr:
         return arr_or_dset
@@ -217,34 +244,35 @@ def _no_dash(p):
     else:
         raise ValueError('Expected a string but got {}'.format(p))
 
+def _fmt_help(tool):
+    hlp = {tuple(k): v for k, v in HELP[tool]}
+    ok_params = set()
+    for k in hlp:
+        for ki in k:
+            ok_params.add(_no_dash(ki))
+    hlp = '\n'.join('{}: {}'.format(', '.join(k), v) for k,v in sorted(hlp.items()))
+    return hlp, ok_params
 
-class WrappedWhiteBoxXArray(object):
 
-    def __init__(self, tool):
-        self.tool = partial(call_whitebox_func, tool, callback_func=partial(callback, silent=False))
-        hlp = {tuple(k): v for k, v in HELP[tool]}
-        self._ok_params = set()
-        for k in hlp:
-            for ki in k:
-                self._ok_params.add(_no_dash(ki))
-        hlp = '\n'.join('{}: {}'.format(', '.join(k), v) for k,v in sorted(hlp.items()))
-        self.__doc__ = hlp
-
-    def __call__(self, **kwargs):
-        for k in kwargs:
-            if not k in self._ok_params:
-                raise ValueError('Parameter {} is not in {}'.format(k, self._ok_params))
-        return self.tool(**kwargs)
-
-    def __repr__(self):
-        return self.__doc__
-
-    __str__ = __repr__
+def validate_run(tool, **kwargs):
+    _, ok_params = _fmt_help(tool)
+    for k in kwargs:
+        if not k in ok_params:
+            raise ValueError('Parameter {} is not in {}'.format(k, ok_params))
+    tool = partial(call_whitebox_func, tool, callback_func=partial(callback, silent=False))
+    return tool(**kwargs)
 
 
 for tool in tools:
     globals()[tool + 'Cli'] = partial(call_whitebox_cli, tool, return_xarr=False)
-    globals()[tool] = WrappedWhiteBoxXArray(tool)
+
+    class Wrapped(object):
+        _tool = tool
+        __doc__ = _fmt_help(tool)[0]
+        def __call__(self, **kw):
+            return validate_run(self._tool, **kw)
+
+    globals()[tool] = Wrapped()
 
 extras = [t + 'Cli' for t in tools]
 extras += ['callback', 'tools', 'WhiteboxTools', 'get_all_help']
