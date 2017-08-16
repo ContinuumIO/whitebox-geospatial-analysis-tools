@@ -1,8 +1,7 @@
 #!/bin/bash
-cd $SRC_DIR/whitebox_tools
 $PYTHON build.py
-mkdir $CONDA_PREFIX/share/whitebox_tools
-cp -av $SRC_DIR/whitebox_tools/target/release $CONDA_PREFIX/share/whitebox_tools
+mkdir -p $CONDA_PREFIX/share/whitebox_tools # TODO: remove -p
+cp -av target/release $CONDA_PREFIX/share/whitebox_tools
 $PYTHON setup.py install
 
 ACTIVATE_DIR=$PREFIX/etc/conda/activate.d

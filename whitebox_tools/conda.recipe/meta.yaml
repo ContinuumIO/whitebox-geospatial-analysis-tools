@@ -3,10 +3,7 @@ package:
   version: 0.1.1
 
 source:
-  url: https://github.com/ContinuumIO/whitebox-geospatial-analysis-tools/archive/refactor-py-interface.zip
-  md5: 28aecf31e6a6660f17e4dce4e427f636
-  sha1: fe131a1352741e81155f44b7221bd74be61b1e7d
-  sha256: 64546d738357d9d7927c0834c96cce15c1ab9b357e42ba3682e2264641dc0e71
+  path: ..
 
 build:
   number: 0
