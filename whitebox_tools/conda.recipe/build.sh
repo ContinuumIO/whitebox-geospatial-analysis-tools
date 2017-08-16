@@ -5,7 +5,7 @@ cp -av target/release $CONDA_PREFIX/share/whitebox_tools
 $PYTHON setup.py install
 
 # Copy data directory into install dir
-cp -av whitebox_tools/data $SP_DIR/whitebox_tools/data
+cp -av whitebox_tools/data $SP_DIR/whitebox_tools/
 
 ACTIVATE_DIR=$PREFIX/etc/conda/activate.d
 DEACTIVATE_DIR=$PREFIX/etc/conda/deactivate.d
