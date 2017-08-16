@@ -78,6 +78,16 @@ Byte Order: {byte_order}
 DEP_KEYS = [x.split(':')[0].strip() for x in DEP_TEMPLATE.splitlines()
             if ':' in x]
 
+def _is_output_field(field):
+    is_out = field in OUTPUT_ARGS
+    is_out2 = field.startswith('out_') and field != 'out_type'
+    return is_out or is_out2
+
+
+def _is_input_field(field):
+    return field in INPUT_ARGS
+
+
 def not_2d_error():
     raise NotImplementedError('Only 2-D rasters are supported by xarray wrapper currently')
 
@@ -239,7 +249,9 @@ def xarray_whitebox_io(func, **kwargs):
     fnames = {}
     dumped_an_xarray = used_str = False
     for k, v in kwargs.items():
-        if k in INPUT_ARGS:
+        print('kvv', k)
+        if _is_input_field(k):
+            print('Is input')
             if isinstance(v, strings):
                 kwargs[k] = fix_path(v)
                 used_str = True
@@ -256,7 +268,8 @@ def xarray_whitebox_io(func, **kwargs):
             elif isinstance(v, xr.DataArray):
                 kwargs[k] = data_array_to_dep(v, tag=k)[0]
                 dumped_an_xarray = k
-        elif k in OUTPUT_ARGS:
+        elif _is_output_field(k):
+            print('is output')
             load_afterwards[k] = fix_path(v)
     def delayed_load_later(ret_val):
         if not load_afterwards:

@@ -10,7 +10,9 @@ from whitebox_tools.xarray_io import (from_dep,
                                       WHITEBOX_TEMP_DIR,
                                       xarray_whitebox_io,
                                       INPUT_ARGS,
-                                      DEP_KEYS)
+                                      DEP_KEYS,
+                                      _is_input_field,
+                                      _is_output_field)
 try:
     unicode
 except:
@@ -34,7 +36,8 @@ DEFAULT_ATTRS = {
 # TODO - address arg spec or related issues for the following
 # tools:
 XFAIL = ('DownslopeIndex',
-         'DirectDecorrelationStretch')
+         'DirectDecorrelationStretch', # uses RGB image
+         )
 
 TESTDATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
 EXAMPLE_DEMS = tuple(os.path.join(TESTDATA, f) for f in ('DEM.dep', 'DEV_101.dep'))
@@ -77,7 +80,8 @@ def wshed():
     dem, d8 = d8_pntr()
     d8_flowacc = D8FlowAccumulation(dem=from_dep(EXAMPLE_DEMS[0]))
     w = Watershed(d8_pntr=d8, pour_pts=pour_point_raster())
-    return xr.Dataset(dict(flow_accum=d8_flowacc, dem=dem, d8_pntr=d8, sca=d8_flowacc * 100))
+    return xr.Dataset(dict(flow_accum=d8_flowacc, dem=dem, d8_pntr=d8,
+                           sca=d8_flowacc, watershed=w))
 
 default_inputs = wshed()
 
@@ -101,9 +105,18 @@ def test_cost_dist_alloc():
     assert isinstance(cost_alloc, xr.DataArray)
 
 
+def test_full_workflow():
+    kw = dict(dem=default_inputs.dem,
+              out_dem='filled.dep',
+              out_accum='flow_accum.dep',
+              out_type='sca',
+              out_pntr='d8_pntr.dep')
+    out = FlowAccumulationFullWorkflow(**kw)
+    assert isinstance(out, xr.Dataset)
+    for k in ('dem', 'accum', 'pntr'):
+        assert 'out_{}'.format(k) in out.data_vars
 
-def is_input(arg_name):
-    return arg_name in INPUT_ARGS
+
 
 def make_synthetic_kwargs(tool, as_xarr=True):
     arg_spec_help = HELP[tool]
@@ -120,12 +133,12 @@ def make_synthetic_kwargs(tool, as_xarr=True):
                                            for x in ('a', 'b')})
         elif arg_name == 'd8_pntr':
             kwargs[arg_name] = default_inputs.d8_pntr
-        elif is_input(arg_name) and as_xarr:
+        elif _is_input_field(arg_name) and as_xarr:
             kwargs[arg_name] = default_inputs.dem
-        elif is_input(arg_name):
+        elif _is_input_field(arg_name):
             kwargs[arg_name] = EXAMPLE_DEMS[0]
-        elif 'output' == arg_name:
-            kwargs['output'] = TO_REMOVE[0]
+        elif _is_output_field(arg_name):
+            kwargs[arg_name] = TO_REMOVE[0]
     return kwargs
 
 

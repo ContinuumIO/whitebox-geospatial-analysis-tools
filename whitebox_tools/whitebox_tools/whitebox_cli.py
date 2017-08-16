@@ -13,7 +13,9 @@ import xarray as xr
 from whitebox_tools.whitebox_base import WhiteboxTools, WHITEBOX_VERBOSE
 from whitebox_tools.xarray_io import (xarray_whitebox_io,
                                       fix_path,
-                                      WHITEBOX_TEMP_DIR)
+                                      WHITEBOX_TEMP_DIR,
+                                      _is_input_field,
+                                      _is_output_field)
 
 try:
     unicode
@@ -154,7 +156,7 @@ def convert_help_extract_params(tool, wbt,
 
 def to_rust(tool, args):
     s = []
-    if not getattr(args, 'output', False):
+    if not any(_is_output_field(k) and v for k, v in vars(args).items()):
         tok = ''.join(np.random.choice(tuple(string.ascii_letters)) for _ in range(7))
         fname = os.path.join(WHITEBOX_TEMP_DIR, tok + '.dep')
         vars(args)['output'] = fix_path(fname)
@@ -168,7 +170,7 @@ def to_rust(tool, args):
                 float(v)
                 fmt = '--{}={}'
             except:
-                if k in ('input', 'output', 'wd', 'dem', 'd8_pntr'):
+                if k == 'wd' or _is_input_field(k) or _is_output_field(k):
                     if isinstance(v, (unicode, str)) and v != os.path.abspath(v):
                         v = os.path.join(os.path.abspath(os.curdir), v)
                         setattr(args, k, v)
