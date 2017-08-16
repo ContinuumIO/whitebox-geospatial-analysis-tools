@@ -1168,10 +1168,9 @@
   "Aspect": [
     [
       [
-        "-i",
-        "--input"
+        "--dem"
       ],
-      "Input file"
+      "Input DEM raster"
     ],
     [
       [

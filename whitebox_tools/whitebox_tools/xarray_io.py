@@ -14,7 +14,9 @@ INPUT_ARGS = ['input', 'inputs', 'i', 'pour_pts',
               'nir', 'red','blue', 'green', 'pan',
               'destination',
               'base',
-              'seed_pts']
+              'seed_pts',
+              'source',
+              'cost']
 OUTPUT_ARGS = ['output', 'outputs', 'o']
 
 WHITEBOX_TEMP_DIR = os.environ.get('WHITEBOX_TEMP_DIR')

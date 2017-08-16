@@ -71,16 +71,36 @@ def pour_point_raster(as_xarr=True):
 def d8_pntr(dem=None):
     if dem is None:
         dem = from_dep(EXAMPLE_DEMS[0])
-    return D8Pointer(dem=dem)
+    return dem, D8Pointer(dem=dem)
 
-def test_d8():
-    d8 = d8_pntr()
-    assert isinstance(d8, xr.DataArray)
+def wshed():
+    dem, d8 = d8_pntr()
     d8_flowacc = D8FlowAccumulation(dem=from_dep(EXAMPLE_DEMS[0]))
-    assert isinstance(d8_flowacc, xr.DataArray)
     w = Watershed(d8_pntr=d8, pour_pts=pour_point_raster())
-    assert isinstance(w, xr.DataArray)
-    return dict(flow_accum=d8_flowacc, d8_pntr=d8, sca=d8_flowacc * 100)
+    return xr.Dataset(dict(flow_accum=d8_flowacc, dem=dem, d8_pntr=d8, sca=d8_flowacc * 100))
+
+default_inputs = wshed()
+
+def chain_two(tool1, tool2, kw1, kw2, tool2_input):
+    kw2[tool2_input] = tool1(**kw1)
+    return tool2(**kw2)
+
+
+def test_cost_dist_alloc():
+    cost = default_inputs.dem * 0.1
+    source = default_inputs.dem * 1.1
+    cost.attrs.update(default_inputs.dem.attrs)
+    source.attrs.update(default_inputs.dem.attrs)
+    args = (CostDistance,
+            CostAllocation,
+            dict(source=default_inputs.dem,
+                 cost=cost),
+            dict(source=source),
+            'backlink')
+    cost_alloc = chain_two(*args)
+    assert isinstance(cost_alloc, xr.DataArray)
+
+
 
 def is_input(arg_name):
     return arg_name in INPUT_ARGS
@@ -88,7 +108,7 @@ def is_input(arg_name):
 def make_synthetic_kwargs(tool, as_xarr=True):
     arg_spec_help = HELP[tool]
     kwargs = {}
-    default_inputs = test_d8()
+
     for arg_names, help_str in arg_spec_help:
         arg_name = [a[2:] for a in arg_names if '--' == a[:2]][0]
         if arg_name in default_inputs:
@@ -99,9 +119,9 @@ def make_synthetic_kwargs(tool, as_xarr=True):
             kwargs[arg_name] = xr.Dataset({x: from_dep(EXAMPLE_DEMS[0])
                                            for x in ('a', 'b')})
         elif arg_name == 'd8_pntr':
-            kwargs[arg_name] = d8_pntr()
+            kwargs[arg_name] = default_inputs.d8_pntr
         elif is_input(arg_name) and as_xarr:
-            kwargs[arg_name] = from_dep(EXAMPLE_DEMS[0])
+            kwargs[arg_name] = default_inputs.dem
         elif is_input(arg_name):
             kwargs[arg_name] = EXAMPLE_DEMS[0]
         elif 'output' == arg_name:
