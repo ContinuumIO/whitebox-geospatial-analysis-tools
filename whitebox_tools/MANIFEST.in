@@ -1,1 +1,1 @@
-graft data
+recursive-include whitebox_tools/data *

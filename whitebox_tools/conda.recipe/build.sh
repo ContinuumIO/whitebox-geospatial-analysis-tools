@@ -1,8 +1,11 @@
 #!/bin/bash
 $PYTHON build.py
-mkdir -p $CONDA_PREFIX/share/whitebox_tools # TODO: remove -p
+mkdir $CONDA_PREFIX/share/whitebox_tools
 cp -av target/release $CONDA_PREFIX/share/whitebox_tools
 $PYTHON setup.py install
+
+# Copy data directory into install dir
+cp -av whitebox_tools/data $SP_DIR/whitebox_tools/data
 
 ACTIVATE_DIR=$PREFIX/etc/conda/activate.d
 DEACTIVATE_DIR=$PREFIX/etc/conda/deactivate.d
