@@ -58,13 +58,13 @@
   "MeanFilter": [
     [
       [
-        "--filterx",
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -800,7 +800,7 @@
     ],
     [
       [
-        "--filtery",
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -898,13 +898,13 @@
   "DevFromMeanElev": [
     [
       [
-        "--filterx",
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -1302,7 +1302,7 @@
     ],
     [
       [
-        "--filter",
+        "--filter"
       ],
       "Optional size of the filter kernel (default is 11; not used if and are specified)"
     ],
