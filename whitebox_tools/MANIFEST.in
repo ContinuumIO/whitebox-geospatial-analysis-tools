@@ -1,1 +1,1 @@
-include whitebox_tools/data/*
+graft whitebox_tools/data
