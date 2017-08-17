@@ -23,7 +23,6 @@ setup(name='whitebox_tools',
       include_package_data=True,
       install_requires=[],
       packages=find_packages(),
-      package_data={},
       entry_points={
         'console_scripts': make_console_scripts(), #['whitebox_tools = whitebox_tools.whitebox_cli:call_whitebox_cli'],
       }
