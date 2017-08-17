@@ -85,69 +85,20 @@ def callback(out_str, silent=False):
 def convert_help_extract_params(tool, wbt,
                                 to_parser=True,
                                 silent=False,
-                                refresh=REFRESH_WHITEBOX_HELP,
                                 verbose=False):
+
     tool = tool.strip()
-    if refresh:
-        help_str = "\n".join(wbt.tool_help(tool, silent=silent))
-        pattern = './whitebox_tools -r=' + tool
-        tool_name = 'whitebox-' + tool
-        help_str = help_str.replace(pattern, tool_name)
-        help_lines = []
-        args = {}
-        in_params = False
-        examples = []
-        description = ''
-        for line in help_str.splitlines():
-            for tok in (',', '=', '>', '.',):
-                line = line.replace(tok, ' ').strip()
-            line = [_.strip() for _ in line.split()]
-            if line and 'Description:' == line[0]:
-                description = " ".join(line[1:])
-            if line and tool_name == line[0]:
-                examples = examples + [' '.join(line)]
-                continue
-            help_str = []
-            params_in_line = 'parameters:' in line or 'arguments' in line
-            in_params = in_params or params_in_line
-
-            if '-i' in line:
-                args[('-i', '--input')] = 'Input file'
-
-            if '-o' in line:
-                args[('-o', '--output')] = 'Output file'
-                continue
-
-            parts = tuple(item for item in line if item[0] == '-')
-            help_str = [item for item in line if item[0] != '-']
-            if parts and in_params and not examples:
-                if parts == ('-i',) or parts == ('-o',):
-                    continue
-                args[parts] = " ".join(help_str)
-        keys = tuple(args)
-        if ('-i', '--dem') in keys and ('-i', '--input') in keys:
-            args.pop(('-i', '--dem'))
-        args[('--wd',)] = 'Working directory'
-        if description:
-            description = ' - {} '.format(description)
-        help_tool = '{}{} Usage:\n\n\t'.format(tool, description)
-        if examples:
-            help_tool += '\n\t{}'.format(' '.join(_.strip() for _ in examples))
-    else:
-        args = {tuple(k): v for k, v in HELP[tool]}
-        help_tool = listtools[tool]
+    args = {tuple(k): v for k, v in HELP[tool]}
+    help_tool = listtools[tool]
     if not to_parser:
         return args
     parser = argparse.ArgumentParser(description=help_tool)
     for k, v in args.items():
-        v = v.replace('%', ' percent')
-        v = re.sub('(\d)\s(\d+)', lambda x: '.'.join(x.groups()), v)
-        required = '-i' in k or '-o' in k
         if '--inputs' in k:
             continue
         if '--filter' in k and ('--filterx' in k or '--filtery' in k):
             continue
-        kw = dict(help=v, required=required)
+        kw = dict(help=v)
         if ' flag ' in v or ' flag.' in v:
             kw['action'] = 'store_true'
         parser.add_argument(*k, **kw)
@@ -155,12 +106,17 @@ def convert_help_extract_params(tool, wbt,
 
 
 def to_rust(tool, args):
+    '''Convert arguments to formats expected by Rust'''
     s = []
-    if not any(_is_output_field(k) and v for k, v in vars(args).items()):
+    outputs = (ki for k, v in HELP[tool] for ki in k)
+    outputs = filter(lambda k: k.startswith('--'), outputs)
+    outputs = tuple(_no_dash(k) for k in outputs
+                    if _is_output_field(_no_dash(k)))
+    for output in outputs:
         tok = ''.join(np.random.choice(tuple(string.ascii_letters)) for _ in range(7))
-        fname = os.path.join(WHITEBOX_TEMP_DIR, tok + '.dep')
-        vars(args)['output'] = fix_path(fname)
-    delayed_load_later, kwargs = xarray_whitebox_io(globals()[tool], **vars(args))
+        fname = os.path.join(WHITEBOX_TEMP_DIR, '{}-{}.dep'.format(output, tok))
+        vars(args)[output] = fix_path(fname)
+    delayed_load_later, kwargs = xarray_whitebox_io(**vars(args))
     for k, v in kwargs.items():
         if isinstance(v, bool):
             s.append('--{}'.format(k))
@@ -197,6 +153,8 @@ def call_whitebox_cli(tool, args=None,
         args = parser.parse_args()
     args, delayed_load_later = to_rust(tool, args)
     ret_val = wbt.run_tool(tool, args, callback_func, verbose=verbose)
+    if ret_val:
+        raise ValueError('WhiteBox {0} (wb-{0}) failed with args: {1}'.format(tool, args))
     arr_or_dset = delayed_load_later(ret_val)
     if return_xarr:
         return arr_or_dset

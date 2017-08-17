@@ -108,7 +108,7 @@ class WhiteboxTools(object):
             args2.append(self.exe_name)
             args2.append("--run=\"{}\"".format(tool_name))
 
-            if self.wkdir.strip() != "" or not any(a.startswith('--wd=') for a in args2):
+            if not any(a.startswith('--wd=') for a in set(args2 + list(args))):
                 wkdir = self.wkdir or os.path.abspath(os.curdir)
                 args2.append("--wd=\"{}\"".format(wkdir))
 

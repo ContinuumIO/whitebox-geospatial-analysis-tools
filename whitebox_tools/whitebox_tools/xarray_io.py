@@ -12,11 +12,10 @@ INPUT_ARGS = ['input', 'inputs', 'i', 'pour_pts',
               'i1', 'i2', 'i3', 'input_x', 'input_y',
               'streams', 'flow_accum', 'sca',
               'nir', 'red','blue', 'green', 'pan',
-              'destination',
-              'base',
-              'seed_pts',
-              'source',
-              'cost']
+              'destination', 'base', 'seed_pts',
+              'source','cost', 'slope',
+              'flow_dir', 'comparison', 'linkid',
+              'watersheds']
 OUTPUT_ARGS = ['output', 'outputs', 'o']
 
 WHITEBOX_TEMP_DIR = os.environ.get('WHITEBOX_TEMP_DIR')
@@ -128,7 +127,6 @@ def case_insensitive_attrs(attrs, typ):
         lower['palette_nonlinearity'] = 'high_relief.pal'
     if not 'palette_nonlinearity' in lower:
         lower['palette_nonlinearity'] = 1.
-    #lower['metadata_entry'] =  lower.get('metadata_entry', '').splitlines():
     has_keys = set(lower)
     needs_keys = set(REQUIRED_DEP_FIELDS)
     if not has_keys >= needs_keys:
@@ -146,7 +144,11 @@ def case_insensitive_attrs(attrs, typ):
 
 
 def fix_path(path):
-    paths = path.split(', ')
+    '''Handle commas and semicolons in paths for >1 input file'''
+    if ';' in path:
+        paths = path.split(';')
+    else:
+        paths = path.split(', ')
     paths = [os.path.abspath(os.path.join(os.curdir, path))
              for path in paths]
     if len(paths) == 1:
@@ -155,6 +157,14 @@ def fix_path(path):
 
 
 def to_tas(vals, typ_str, fname):
+    '''Dump array to .tas file
+    Parameters:
+        vals: numpy array, typicall 2D
+        typ_str: "integer" or "float"
+        fname: output path
+    Returns:
+        None
+    '''
     if vals.ndim != 2:
         not_2d_error()
     r, c = vals.shape
@@ -168,6 +178,7 @@ def to_tas(vals, typ_str, fname):
 
 
 def _from_dep(fname):
+    '''Load just the .dep file's metadata, not the .tas'''
     with open(fname) as f:
         content = f.read()
     attrs = {}
@@ -192,6 +203,7 @@ def _from_dep(fname):
 
 
 def _get_dtype(dtype_str):
+    '''map numpy type to .dep Data Type'''
     if 'float' in dtype_str.lower():
         return ('float', DTYPES['float'])
     else:
@@ -199,7 +211,16 @@ def _get_dtype(dtype_str):
 
 
 def from_dep(dep, tas=None):
-    if not dep or not os.path.exists(dep):
+    '''Load a .dep file and corresponding .tas file
+
+    Parameters:
+       dep:  Path to a .dep file
+       tas:  Optional path to .tas file or guessed from .dep
+    Returns:
+       arr:  xarray.DataArray
+
+    '''
+    if not isinstance(dep, strings) or not os.path.exists(dep):
         raise ValueError('File {} does not exist'.format(dep))
     if not tas and dep.endswith('.dep'):
         tas = dep[:-4] + '.tas'
@@ -221,7 +242,16 @@ def from_dep(dep, tas=None):
 
 
 def data_array_to_dep(arr, fname=None, tag=None):
+    '''Dump a DataArray to fname or a tag (for temp dir)
 
+    Parameters:
+        arr: DataArray with the attrs composed of .dep
+             fields
+        fname: File name
+        tag: shorthand tag for use with temp dir
+    Returns:
+        (dep_file_name, tas_file_name) tuple
+    '''
     val = arr.values
     typ_str, dtype = _get_dtype(val.dtype.name)
     val = val.astype('<' + dtype)
@@ -243,15 +273,22 @@ def data_array_to_dep(arr, fname=None, tag=None):
     return dep, tas
 
 
-def xarray_whitebox_io(func, **kwargs):
+def xarray_whitebox_io(**kwargs):
+    '''Returns a callable to be used after WhiteBox tool runs -
+    the callable returns an xarray.DataArray or Dataset
+
+    Parameters:
+       kwargs:  Keyword arguments to the tool, e.g. --dem
+    Returns:
+       tuple of (func, kwargs) where kwargs are input
+           kwargs modified in place
+    '''
     load_afterwards = {}
     delete_tempdir = kwargs.pop('delete_tempdir', True)
     fnames = {}
     dumped_an_xarray = used_str = False
     for k, v in kwargs.items():
-        print('kvv', k)
         if _is_input_field(k):
-            print('Is input')
             if isinstance(v, strings):
                 kwargs[k] = fix_path(v)
                 used_str = True
@@ -269,7 +306,6 @@ def xarray_whitebox_io(func, **kwargs):
                 kwargs[k] = data_array_to_dep(v, tag=k)[0]
                 dumped_an_xarray = k
         elif _is_output_field(k):
-            print('is output')
             load_afterwards[k] = fix_path(v)
     def delayed_load_later(ret_val):
         if not load_afterwards:

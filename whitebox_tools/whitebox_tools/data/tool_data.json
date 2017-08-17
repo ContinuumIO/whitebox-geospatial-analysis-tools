@@ -621,7 +621,7 @@
       [
         "--radius"
       ],
-      "Search radius; default is 1 0"
+      "Search radius; default is 1.0"
     ]
   ],
   "FillSingleCellPits": [
@@ -696,13 +696,13 @@
       [
         "--exponent"
       ],
-      "Optional exponent parameter; default is 1 1"
+      "Optional exponent parameter; default is 1.1"
     ],
     [
       [
         "--clip"
       ],
-      "Optional flag to request clipping the display max by 1%"
+      "Optional flag to request clipping the display max by 1 percent"
     ],
     [
       [
@@ -1002,7 +1002,7 @@
       [
         "--clip"
       ],
-      "Optional flag to request clipping the display max by 1%"
+      "Optional flag to request clipping the display max by 1 percent"
     ]
   ],
   "StandardDeviationContrastStretch": [
@@ -1017,7 +1017,7 @@
       [
         "--stdev"
       ],
-      "Standard deviation clip value (default is 2 0)"
+      "Standard deviation clip value (default is 2.0)"
     ],
     [
       [
@@ -1086,6 +1086,12 @@
         "--output"
       ],
       "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "BreachSingleCellPits": [
@@ -1155,7 +1161,7 @@
       [
         "--slope"
       ],
-      "Slope threshold; default is 15 0"
+      "Slope threshold; default is 15.0"
     ],
     [
       [
@@ -1273,7 +1279,7 @@
       [
         "--radius"
       ],
-      "Search radius; default is 1 0"
+      "Search radius; default is 1.0"
     ]
   ],
   "DownslopeDistanceToStream": [
@@ -1600,7 +1606,7 @@
       [
         "--radius"
       ],
-      "Search radius; default is 1 0"
+      "Search radius; default is 1.0"
     ]
   ],
   "SquareRoot": [
@@ -1952,13 +1958,13 @@
       [
         "--sca_exponent"
       ],
-      "SCA exponent value (default is 0 4)"
+      "SCA exponent value (default is 0.4)"
     ],
     [
       [
         "--slope_exponent"
       ],
-      "Slope exponent value (default is 1 3)"
+      "Slope exponent value (default is 1.3)"
     ],
     [
       [
@@ -2025,7 +2031,7 @@
       [
         "--lightness"
       ],
-      "Image lightness value (default is 1 2)"
+      "Image lightness value (default is 1.2)"
     ],
     [
       [
@@ -2211,7 +2217,7 @@
       [
         "--weight"
       ],
-      "IDW weight value (default is 1 0)"
+      "IDW weight value (default is 1.0)"
     ],
     [
       [
@@ -2274,7 +2280,7 @@
       [
         "--radius"
       ],
-      "Search radius; default is 2 5"
+      "Search radius; default is 2.5"
     ]
   ],
   "OlympicFilter": [
@@ -2450,7 +2456,7 @@
       [
         "--radius"
       ],
-      "Search radius; default is 2 5"
+      "Search radius; default is 2.5"
     ]
   ],
   "FlightlineOverlap": [
@@ -2930,7 +2936,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -3049,7 +3055,7 @@
       [
         "--drop"
       ],
-      "Vertical drop value (default is 2 0)"
+      "Vertical drop value (default is 2.0)"
     ]
   ],
   "Tan": [
@@ -3362,7 +3368,7 @@
       [
         "--clip"
       ],
-      "Optional flag to request clipping the display max by 1%"
+      "Optional flag to request clipping the display max by 1 percent"
     ],
     [
       [
@@ -3383,7 +3389,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -3489,7 +3495,7 @@
       [
         "--threshold"
       ],
-      "Difference from mean threshold in standard deviations (default is 2 0)"
+      "Difference from mean threshold in standard deviations (default is 2.0)"
     ],
     [
       [
@@ -3659,7 +3665,7 @@
       [
         "--gamma"
       ],
-      "Gamma value (default is 0 5)"
+      "Gamma value (default is 0.5)"
     ]
   ],
   "FloodOrder": [
@@ -3895,7 +3901,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -4016,7 +4022,7 @@
       [
         "--exponent"
       ],
-      "SCA exponent value (default is 1 0)"
+      "SCA exponent value (default is 1.0)"
     ],
     [
       [
@@ -4140,19 +4146,19 @@
       [
         "--slope"
       ],
-      "Slope threshold value in degrees (default is 3 0)"
+      "Slope threshold value in degrees (default is 3.0)"
     ],
     [
       [
         "--prof"
       ],
-      "Profile curvature threshold value (default is 0 1)"
+      "Profile curvature threshold value (default is 0.1)"
     ],
     [
       [
         "--plan"
       ],
-      "Plan curvature threshold value (default is 0 0)"
+      "Plan curvature threshold value (default is 0.0)"
     ],
     [
       [
@@ -4327,7 +4333,7 @@
       [
         "--clip"
       ],
-      "Optional flag to request clipping the display max by 1%"
+      "Optional flag to request clipping the display max by 1 percent"
     ],
     [
       [
@@ -4431,7 +4437,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -4621,7 +4627,7 @@
       [
         "--sigma_int"
       ],
-      "Standard deviation in intensity in pixels (default is 1 0)"
+      "Standard deviation in intensity in pixels (default is 1.0)"
     ],
     [
       [
@@ -4640,7 +4646,7 @@
       [
         "--sigma_dist"
       ],
-      "Standard deviation in distance in pixels (default is 0 75)"
+      "Standard deviation in distance in pixels (default is 0.75)"
     ]
   ],
   "ElevRelativeToMinMax": [
@@ -4742,7 +4748,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ]
   ],
   "BlockMinimum": [
@@ -4845,13 +4851,13 @@
       [
         "--gradient"
       ],
-      "Slope gradient in degrees (-85 0 to 85 0"
+      "Slope gradient in degrees (-85.0 to 85.0"
     ],
     [
       [
         "--aspect"
       ],
-      "Aspect (direction) in degrees clockwise from north (0 0-360 0)"
+      "Aspect (direction) in degrees clockwise from north (0.0-360.0)"
     ],
     [
       [
@@ -4863,7 +4869,7 @@
       [
         "--constant"
       ],
-      "Constant value (default is 0 0)"
+      "Constant value (default is 0.0)"
     ],
     [
       [
@@ -4959,7 +4965,7 @@
       [
         "--clip"
       ],
-      "Clip size in percentage (default is 1 0)"
+      "Clip size in percentage (default is 1.0)"
     ],
     [
       [
@@ -5013,7 +5019,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -5196,7 +5202,7 @@
       [
         "--hgt_inc"
       ],
-      "Height increment value (default is 0 05)"
+      "Height increment value (default is 0.05)"
     ],
     [
       [
@@ -5209,7 +5215,7 @@
       [
         "--azimuth"
       ],
-      "Wind azimuth in degrees (default is 0 0)"
+      "Wind azimuth in degrees (default is 0.0)"
     ]
   ],
   "Sin": [
@@ -5327,13 +5333,6 @@
   "WeightedSum": [
     [
       [
-        "-i",
-        "--input"
-      ],
-      "Input file"
-    ],
-    [
-      [
         "-w",
         "--weights"
       ],
@@ -5398,7 +5397,7 @@
       [
         "-k"
       ],
-      "Achromatic factor (k) ranges between 0 (no effect) and 1 (full saturation stretch) although typical values range from 0 3 to 0 7 (default is 0 5)"
+      "Achromatic factor (k) ranges between 0 (no effect) and 1 (full saturation stretch) although typical values range from 0.3 to 0.7 (default is 0.5)"
     ],
     [
       [
@@ -5411,7 +5410,7 @@
       [
         "-clip_percent"
       ],
-      "Optional percent to clip the upper tail by during the stretch (default is 1 0)"
+      "Optional percent to clip the upper tail by during the stretch (default is 1.0)"
     ]
   ],
   "Round": [
@@ -5503,7 +5502,7 @@
       [
         "--azimuth"
       ],
-      "Wind azimuth in degrees (default is 0 0)"
+      "Wind azimuth in degrees (default is 0.0)"
     ]
   ],
   "NumDownslopeNeighbours": [
@@ -6073,7 +6072,7 @@
       [
         "--altitude"
       ],
-      "Optional altitude in degrees of illumination source (efault is 30 0)"
+      "Optional altitude in degrees of illumination source (efault is 30.0)"
     ],
     [
       [
@@ -6093,13 +6092,13 @@
       [
         "--azimuth"
       ],
-      "Optional azimuth in degrees of illumination source (default is 315 0)"
+      "Optional azimuth in degrees of illumination source (default is 315.0)"
     ],
     [
       [
         "--radius"
       ],
-      "Search radius; default is 1 0"
+      "Search radius; default is 1.0"
     ]
   ],
   "CreateColourComposite": [
@@ -6430,7 +6429,7 @@
       [
         "--radius"
       ],
-      "Search radius; default is 2 5"
+      "Search radius; default is 2.5"
     ]
   ],
   "Power": [
@@ -6491,7 +6490,7 @@
       [
         "--azimuth"
       ],
-      "Wind azimuth in degrees (default is 0 0)"
+      "Wind azimuth in degrees (default is 0.0)"
     ]
   ],
   "RobertsCrossFilter": [
@@ -6506,7 +6505,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -6571,7 +6570,7 @@
       [
         "--gain"
       ],
-      "Gain value between 0 0 and 0 95 (default is 1 0)"
+      "Gain value between 0.0 and 0.95 (default is 1.0)"
     ],
     [
       [
@@ -6596,7 +6595,7 @@
       [
         "--cutoff"
       ],
-      "Cutoff value between 0 0 and 0 95 (default is 0 0)"
+      "Cutoff value between 0.0 and 0.95 (default is 0.0)"
     ],
     [
       [
@@ -6761,7 +6760,7 @@
       [
         "--interval"
       ],
-      "Class interval size (default is 10 0)"
+      "Class interval size (default is 10.0)"
     ]
   ],
   "TophatTransform": [
@@ -6915,7 +6914,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -6994,7 +6993,7 @@
       [
         "--origin_y"
       ],
-      "Origin point for tile grid y dimension; default 0 0"
+      "Origin point for tile grid y dimension; default 0.0"
     ],
     [
       [
@@ -7006,7 +7005,7 @@
       [
         "--width_y"
       ],
-      "Width of tiles in the y dimension; default 1000 0"
+      "Width of tiles in the y dimension; default 1000.0"
     ],
     [
       [
@@ -7019,13 +7018,13 @@
       [
         "--origin_x"
       ],
-      "Origin point for tile grid x dimension; default 0 0"
+      "Origin point for tile grid x dimension; default 0.0"
     ],
     [
       [
         "-width_x"
       ],
-      "Width of tiles in the x dimension; default 1000 0"
+      "Width of tiles in the x dimension; default 1000.0"
     ]
   ],
   "MaxElevationDeviation": [
