@@ -37,7 +37,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -59,15 +58,13 @@
   "MeanFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -128,10 +125,15 @@
   "Max": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -241,7 +243,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -263,15 +264,13 @@
   "MaximumFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -312,7 +311,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files contained in quotes and separated by commas or semicolons"
@@ -374,6 +372,19 @@
         "--d8_pntr"
       ],
       "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
     ]
   ],
   "FindPatchOrClassEdgeCells": [
@@ -440,10 +451,15 @@
   "Subtract": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -502,7 +518,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -534,6 +549,12 @@
         "--output"
       ],
       "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "StreamLinkClass": [
@@ -600,7 +621,7 @@
       [
         "--radius"
       ],
-      "Search radius; default is 1 0"
+      "Search radius; default is 1.0"
     ]
   ],
   "FillSingleCellPits": [
@@ -675,13 +696,13 @@
       [
         "--exponent"
       ],
-      "Optional exponent parameter; default is 1 1"
+      "Optional exponent parameter; default is 1.1"
     ],
     [
       [
         "--clip"
       ],
-      "Optional flag to request clipping the display max by 1%"
+      "Optional flag to request clipping the display max by 1 percent"
     ],
     [
       [
@@ -689,6 +710,12 @@
         "--output"
       ],
       "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "Sink": [
@@ -743,10 +770,15 @@
   "EqualTo": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -787,15 +819,13 @@
   "TotalFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -866,6 +896,12 @@
         "--esri_style"
       ],
       "Uses the ESRI style D8 pointer output (default is false)"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "Exp": [
@@ -893,15 +929,13 @@
   "DevFromMeanElev": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -968,7 +1002,7 @@
       [
         "--clip"
       ],
-      "Optional flag to request clipping the display max by 1%"
+      "Optional flag to request clipping the display max by 1 percent"
     ]
   ],
   "StandardDeviationContrastStretch": [
@@ -983,7 +1017,7 @@
       [
         "--stdev"
       ],
-      "Standard deviation clip value (default is 2 0)"
+      "Standard deviation clip value (default is 2.0)"
     ],
     [
       [
@@ -1052,6 +1086,12 @@
         "--output"
       ],
       "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "BreachSingleCellPits": [
@@ -1121,7 +1161,7 @@
       [
         "--slope"
       ],
-      "Slope threshold; default is 15 0"
+      "Slope threshold; default is 15.0"
     ],
     [
       [
@@ -1134,10 +1174,9 @@
   "Aspect": [
     [
       [
-        "-i",
-        "--input"
+        "--dem"
       ],
-      "Input file"
+      "Input DEM raster"
     ],
     [
       [
@@ -1197,7 +1236,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input LAS files separated by commas"
@@ -1241,7 +1279,7 @@
       [
         "--radius"
       ],
-      "Search radius; default is 1 0"
+      "Search radius; default is 1.0"
     ]
   ],
   "DownslopeDistanceToStream": [
@@ -1274,15 +1312,13 @@
   "DiversityFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -1302,9 +1338,7 @@
     ],
     [
       [
-        "--filter",
-        "--filterx",
-        "--filtery"
+        "--filter"
       ],
       "Optional size of the filter kernel (default is 11; not used if and are specified)"
     ],
@@ -1324,15 +1358,13 @@
     ],
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -1352,9 +1384,7 @@
     ],
     [
       [
-        "--filter",
-        "--filterx",
-        "--filtery"
+        "--filter"
       ],
       "Optional size of the filter kernel (default is 11; not used if and are specified)"
     ],
@@ -1407,15 +1437,13 @@
   "DiffFromMeanElev": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -1449,11 +1477,17 @@
   "NotEqualTo": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
+
     [
       [
         "--wd"
@@ -1510,15 +1544,13 @@
   "ConservativeSmoothingFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -1574,7 +1606,7 @@
       [
         "--radius"
       ],
-      "Search radius; default is 1 0"
+      "Search radius; default is 1.0"
     ]
   ],
   "SquareRoot": [
@@ -1687,7 +1719,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -1759,10 +1790,15 @@
     ],
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -1850,7 +1886,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -1923,20 +1958,25 @@
       [
         "--sca_exponent"
       ],
-      "SCA exponent value (default is 0 4)"
+      "SCA exponent value (default is 0.4)"
     ],
     [
       [
         "--slope_exponent"
       ],
-      "Slope exponent value (default is 1 3)"
+      "Slope exponent value (default is 1.3)"
     ],
     [
       [
-        "--sca",
+        "--sca"
+      ],
+      "Input specific contributing area (SCA) raster file"
+    ],
+    [
+      [
         "--slope"
       ],
-      "Input specific contributing area (SCA) raster file Input slope raster file"
+      "Input slope raster file"
     ],
     [
       [
@@ -1991,7 +2031,7 @@
       [
         "--lightness"
       ],
-      "Image lightness value (default is 1 2)"
+      "Image lightness value (default is 1.2)"
     ],
     [
       [
@@ -2044,10 +2084,15 @@
   "Multiply": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -2172,7 +2217,7 @@
       [
         "--weight"
       ],
-      "IDW weight value (default is 1 0)"
+      "IDW weight value (default is 1.0)"
     ],
     [
       [
@@ -2235,21 +2280,19 @@
       [
         "--radius"
       ],
-      "Search radius; default is 2 5"
+      "Search radius; default is 2.5"
     ]
   ],
   "OlympicFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -2413,7 +2456,7 @@
       [
         "--radius"
       ],
-      "Search radius; default is 2 5"
+      "Search radius; default is 2.5"
     ]
   ],
   "FlightlineOverlap": [
@@ -2520,10 +2563,15 @@
   "Modulo": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -2581,15 +2629,13 @@
   "RelativeTopographicPosition": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -2772,7 +2818,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -2855,7 +2900,12 @@
   "Not": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file Input raster file"
+    ],
+    [
+      [
         "--input2"
       ],
       "Input raster file Input raster file"
@@ -2886,7 +2936,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -3005,7 +3055,7 @@
       [
         "--drop"
       ],
-      "Vertical drop value (default is 2 0)"
+      "Vertical drop value (default is 2.0)"
     ]
   ],
   "Tan": [
@@ -3046,7 +3096,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -3068,15 +3117,13 @@
   "KNearestMeanFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 3; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 3; not used if is specified)"
     ],
@@ -3116,15 +3163,13 @@
   "StandardDeviationFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -3323,7 +3368,7 @@
       [
         "--clip"
       ],
-      "Optional flag to request clipping the display max by 1%"
+      "Optional flag to request clipping the display max by 1 percent"
     ],
     [
       [
@@ -3344,7 +3389,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -3369,15 +3414,13 @@
     ],
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -3411,10 +3454,15 @@
   "And": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file Input raster file"
+      "Input raster file"
     ],
     [
       [
@@ -3433,15 +3481,13 @@
   "AdaptiveFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -3449,7 +3495,7 @@
       [
         "--threshold"
       ],
-      "Difference from mean threshold in standard deviations (default is 2 0)"
+      "Difference from mean threshold in standard deviations (default is 2.0)"
     ],
     [
       [
@@ -3619,7 +3665,7 @@
       [
         "--gamma"
       ],
-      "Gamma value (default is 0 5)"
+      "Gamma value (default is 0.5)"
     ]
   ],
   "FloodOrder": [
@@ -3646,15 +3692,13 @@
   "MinimumFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -3694,10 +3738,15 @@
     ],
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -3770,15 +3819,13 @@
   "Closing": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -3854,7 +3901,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -3913,15 +3960,27 @@
         "--streams"
       ],
       "Input streams raster file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
+
   ],
   "IntegerDivision": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -3947,7 +4006,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input LAS files separated by commas"
@@ -3964,7 +4022,7 @@
       [
         "--exponent"
       ],
-      "SCA exponent value (default is 1 0)"
+      "SCA exponent value (default is 1.0)"
     ],
     [
       [
@@ -3974,10 +4032,15 @@
     ],
     [
       [
-        "--sca",
+        "--sca"
+      ],
+      "Input specific contributing area (SCA) raster file"
+    ],
+    [
+      [
         "--slope"
       ],
-      "Input specific contributing area (SCA) raster file Input slope raster file"
+      "Input slope raster file"
     ],
     [
       [
@@ -4075,12 +4138,27 @@
     ],
     [
       [
-        "--zfactor",
-        "--slope",
-        "--prof",
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "--slope"
+      ],
+      "Slope threshold value in degrees (default is 3.0)"
+    ],
+    [
+      [
+        "--prof"
+      ],
+      "Profile curvature threshold value (default is 0.1)"
+    ],
+    [
+      [
         "--plan"
       ],
-      "Optional multiplier for when the vertical and horizontal units are not the same Slope threshold value in degrees (default is 3 0) Profile curvature threshold value (default is 0 1) Plan curvature threshold value (default is 0 0)"
+      "Plan curvature threshold value (default is 0.0)"
     ],
     [
       [
@@ -4175,10 +4253,15 @@
   "Or": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file Input raster file"
+      "Input raster file"
     ],
     [
       [
@@ -4250,7 +4333,7 @@
       [
         "--clip"
       ],
-      "Optional flag to request clipping the display max by 1%"
+      "Optional flag to request clipping the display max by 1 percent"
     ],
     [
       [
@@ -4258,6 +4341,12 @@
         "--output"
       ],
       "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "EdgeProportion": [
@@ -4291,10 +4380,15 @@
   "Divide": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -4343,7 +4437,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -4353,10 +4447,15 @@
     ],
     [
       [
-        "--nir",
+        "--nir"
+      ],
+      "Input near-infrared band image"
+    ],
+    [
+      [
         "--red"
       ],
-      "Input near-infrared band image Input red-band image"
+      "Input red-band image"
     ],
     [
       [
@@ -4431,7 +4530,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -4480,15 +4578,13 @@
   "PercentElevRange": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -4531,7 +4627,7 @@
       [
         "--sigma_int"
       ],
-      "Standard deviation in intensity in pixels (default is 1 0)"
+      "Standard deviation in intensity in pixels (default is 1.0)"
     ],
     [
       [
@@ -4550,7 +4646,7 @@
       [
         "--sigma_dist"
       ],
-      "Standard deviation in distance in pixels (default is 0 75)"
+      "Standard deviation in distance in pixels (default is 0.75)"
     ]
   ],
   "ElevRelativeToMinMax": [
@@ -4578,15 +4674,13 @@
   "HighPassFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -4654,7 +4748,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ]
   ],
   "BlockMinimum": [
@@ -4757,13 +4851,13 @@
       [
         "--gradient"
       ],
-      "Slope gradient in degrees (-85 0 to 85 0"
+      "Slope gradient in degrees (-85.0 to 85.0"
     ],
     [
       [
         "--aspect"
       ],
-      "Aspect (direction) in degrees clockwise from north (0 0-360 0)"
+      "Aspect (direction) in degrees clockwise from north (0.0-360.0)"
     ],
     [
       [
@@ -4775,7 +4869,7 @@
       [
         "--constant"
       ],
-      "Constant value (default is 0 0)"
+      "Constant value (default is 0.0)"
     ],
     [
       [
@@ -4871,7 +4965,7 @@
       [
         "--clip"
       ],
-      "Clip size in percentage (default is 1 0)"
+      "Clip size in percentage (default is 1.0)"
     ],
     [
       [
@@ -4925,7 +5019,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -5108,7 +5202,7 @@
       [
         "--hgt_inc"
       ],
-      "Height increment value (default is 0 05)"
+      "Height increment value (default is 0.05)"
     ],
     [
       [
@@ -5121,7 +5215,7 @@
       [
         "--azimuth"
       ],
-      "Wind azimuth in degrees (default is 0 0)"
+      "Wind azimuth in degrees (default is 0.0)"
     ]
   ],
   "Sin": [
@@ -5149,15 +5243,13 @@
   "MajorityFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -5177,9 +5269,7 @@
     ],
     [
       [
-        "--filter",
-        "--filterx",
-        "--filtery"
+        "--filter"
       ],
       "Optional size of the filter kernel (default is 11; not used if and are specified)"
     ],
@@ -5243,13 +5333,6 @@
   "WeightedSum": [
     [
       [
-        "-i",
-        "--input"
-      ],
-      "Input file"
-    ],
-    [
-      [
         "-w",
         "--weights"
       ],
@@ -5257,7 +5340,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files contained in quotes and separated by commas or semicolons"
@@ -5315,7 +5397,7 @@
       [
         "-k"
       ],
-      "Achromatic factor (k) ranges between 0 (no effect) and 1 (full saturation stretch) although typical values range from 0 3 to 0 7 (default is 0 5)"
+      "Achromatic factor (k) ranges between 0 (no effect) and 1 (full saturation stretch) although typical values range from 0.3 to 0.7 (default is 0.5)"
     ],
     [
       [
@@ -5328,7 +5410,7 @@
       [
         "-clip_percent"
       ],
-      "Optional percent to clip the upper tail by during the stretch (default is 1 0)"
+      "Optional percent to clip the upper tail by during the stretch (default is 1.0)"
     ]
   ],
   "Round": [
@@ -5356,14 +5438,14 @@
   "WriteFunctionMemoryInsertion": [
     [
       [
-        "--i2",
+        "-i2",
         "--input2"
       ],
       "Input raster file associated with the second date"
     ],
     [
       [
-        "--i1",
+        "-i1",
         "--input1"
       ],
       "Input raster file associated with the first date"
@@ -5377,7 +5459,7 @@
     ],
     [
       [
-        "--i3",
+        "-i3",
         "--input3"
       ],
       "Optional input raster file associated with the third date"
@@ -5420,7 +5502,7 @@
       [
         "--azimuth"
       ],
-      "Wind azimuth in degrees (default is 0 0)"
+      "Wind azimuth in degrees (default is 0.0)"
     ]
   ],
   "NumDownslopeNeighbours": [
@@ -5577,10 +5659,15 @@
   "Add": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -5672,24 +5759,27 @@
     ],
     [
       [
-        "--input_y",
         "--input_x"
       ],
-      "Input y raster file or constant value (rise) Input x raster file or constant value (run)"
+      "Input x raster file or constant value (run)"
+    ],
+    [
+      [
+        "--input_y"
+      ],
+      "Input y raster file or constant value (rise)"
     ]
   ],
   "LeeFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 5; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 5; not used if is specified)"
     ],
@@ -5865,7 +5955,6 @@
     ],
     [
       [
-        "-i",
         "--inputs"
       ],
       "Input raster files separated by commas or semicolons"
@@ -5983,7 +6072,7 @@
       [
         "--altitude"
       ],
-      "Optional altitude in degrees of illumination source (efault is 30 0)"
+      "Optional altitude in degrees of illumination source (efault is 30.0)"
     ],
     [
       [
@@ -6003,13 +6092,13 @@
       [
         "--azimuth"
       ],
-      "Optional azimuth in degrees of illumination source (default is 315 0)"
+      "Optional azimuth in degrees of illumination source (default is 315.0)"
     ],
     [
       [
         "--radius"
       ],
-      "Search radius; default is 1 0"
+      "Search radius; default is 1.0"
     ]
   ],
   "CreateColourComposite": [
@@ -6138,10 +6227,15 @@
   "Min": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -6194,10 +6288,15 @@
     ],
     [
       [
-        "--sca",
+        "--sca"
+      ],
+      "Input specific contributing area (SCA) raster file"
+    ],
+    [
+      [
         "--slope"
       ],
-      "Input specific contributing area (SCA) raster file Input slope raster file"
+      "Input slope raster file"
     ],
     [
       [
@@ -6232,15 +6331,13 @@
   "RangeFilter": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -6274,10 +6371,15 @@
   "LidarPointDensity": [
     [
       [
-        "--exclude_cls",
         "--exclude_cls"
       ],
-      "Optional exclude classes from interpolation; Valid class values range from 0 to 18 based on LAS specifications Example '3 4 5 6 7 18'--palette Optional palette name (for use with Whitebox raster files)"
+      "Optional exclude classes from interpolation; Valid class values range from 0 to 18 based on LAS specifications;Example '3 4 5 6 7 18'"
+    ],
+    [
+      [
+        "--palette"
+      ],
+    "Optional palette name (for use with Whitebox raster files)"
     ],
     [
       [
@@ -6327,16 +6429,21 @@
       [
         "--radius"
       ],
-      "Search radius; default is 2 5"
+      "Search radius; default is 2.5"
     ]
   ],
   "Power": [
     [
       [
-        "--input1",
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
         "--input2"
       ],
-      "Input raster file or constant value Input raster file or constant value"
+      "Input raster file or constant value"
     ],
     [
       [
@@ -6383,7 +6490,7 @@
       [
         "--azimuth"
       ],
-      "Wind azimuth in degrees (default is 0 0)"
+      "Wind azimuth in degrees (default is 0.0)"
     ]
   ],
   "RobertsCrossFilter": [
@@ -6398,7 +6505,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -6463,7 +6570,7 @@
       [
         "--gain"
       ],
-      "Gain value between 0 0 and 0 95 (default is 1 0)"
+      "Gain value between 0.0 and 0.95 (default is 1.0)"
     ],
     [
       [
@@ -6488,7 +6595,7 @@
       [
         "--cutoff"
       ],
-      "Cutoff value between 0 0 and 0 95 (default is 0 0)"
+      "Cutoff value between 0.0 and 0.95 (default is 0.0)"
     ],
     [
       [
@@ -6551,15 +6658,13 @@
   "Opening": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -6655,14 +6760,13 @@
       [
         "--interval"
       ],
-      "Class interval size (default is 10 0)"
+      "Class interval size (default is 10.0)"
     ]
   ],
   "TophatTransform": [
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
@@ -6674,8 +6778,7 @@
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -6719,6 +6822,12 @@
         "--output"
       ],
       "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
     ]
   ],
   "Hillslopes": [
@@ -6805,7 +6914,7 @@
       [
         "--clip"
       ],
-      "Optional amount to clip the distribution tails by in percent (default is 0 0)"
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
     ],
     [
       [
@@ -6836,15 +6945,13 @@
     ],
     [
       [
-        "--filterx",
-        "--filter"
+        "--filterx"
       ],
       "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
     ],
     [
       [
-        "--filtery",
-        "--filter"
+        "--filtery"
       ],
       "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
     ],
@@ -6864,9 +6971,7 @@
     ],
     [
       [
-        "--filter",
-        "--filterx",
-        "--filtery"
+        "--filter"
       ],
       "Optional size of the filter kernel (default is 11; not used if and are specified)"
     ],
@@ -6888,7 +6993,7 @@
       [
         "--origin_y"
       ],
-      "Origin point for tile grid y dimension; default 0 0"
+      "Origin point for tile grid y dimension; default 0.0"
     ],
     [
       [
@@ -6900,7 +7005,7 @@
       [
         "--width_y"
       ],
-      "Width of tiles in the y dimension; default 1000 0"
+      "Width of tiles in the y dimension; default 1000.0"
     ],
     [
       [
@@ -6913,13 +7018,13 @@
       [
         "--origin_x"
       ],
-      "Origin point for tile grid x dimension; default 0 0"
+      "Origin point for tile grid x dimension; default 0.0"
     ],
     [
       [
         "-width_x"
       ],
-      "Width of tiles in the x dimension; default 1000 0"
+      "Width of tiles in the x dimension; default 1000.0"
     ]
   ],
   "MaxElevationDeviation": [
