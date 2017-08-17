@@ -12,6 +12,28 @@ from subprocess import CalledProcessError, Popen, PIPE, STDOUT
 
 WHITEBOX_VERBOSE = bool(int(os.environ.get('WHITEBOX_VERBOSE', '1')))
 
+BUILD_PATH_PARTS = ('share', 'whitebox_tools',
+                    'release', 'whitebox_tools',)
+
+EXE_PATH = None
+CONDA_PREFIX = os.environ.get('CONDA_PREFIX')
+WHITEBOX_TOOLS_BUILD = os.environ.get('WHITEBOX_TOOLS_BUILD')
+if CONDA_PREFIX and os.path.exists(CONDA_PREFIX):
+    path_guess = os.path.join(CONDA_PREFIX, *BUILD_PATH_PARTS)
+    if platform == 'win32':
+        path_guess += '.exe'
+    if os.path.exists(path_guess):
+        EXE_PATH = path_guess
+if EXE_PATH is None or WHITEBOX_TOOLS_BUILD:
+    if WHITEBOX_TOOLS_BUILD and os.path.exists(WHITEBOX_TOOLS_BUILD):
+        for idx in range(len(BUILD_PATH_PARTS)):
+            pg = os.path.join(WHITEBOX_TOOLS_BUILD, *BUILD_PATH_PARTS[idx:])
+            if platform == 'win32':
+                pg += '.exe'
+            if os.path.exists(pg):
+                EXE_PATH = pg
+
+
 def default_callback(value):
     ''' A simple default callback that outputs using the print function.
     '''
@@ -34,28 +56,18 @@ class WhiteboxTools(object):
     def set_whitebox_dir(self, exe_path=None):
         ''' Sets the directory to the whitebox - tools executable file.
         '''
-        exe_paths = (exe_path, os.environ.get('WHITEBOX_TOOLS_BUILD', ''))
+        exe_paths = (EXE_PATH, exe_path,)
         found_it = False
         for exe_path in exe_paths:
-            if not exe_path or not os.path.exists(exe_path):
-                target = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                      'target')
-                exe_path = os.path.join(target, 'release')
-                if not exe_path or not os.path.exists(exe_path):
-                    pass
-                else:
+            if exe_path and os.path.exists(exe_path):
+                if exe_path.endswith(('whitebox_tools', 'whitebox_tools.exe')):
                     found_it = True
-            else:
-                found_it = True
+                    break
         if not found_it:
             raise ValueError('Define WHITEBOX_TOOLS_BUILD '
                              'environment variable {}'.format(exe_paths))
-        self.exe_path = exe_path
-        if platform == 'win32':
-            exe = "whitebox_tools.exe"
-        else:
-            exe = 'whitebox_tools'
-        self.exe_name = os.path.join(self.exe_path, exe)
+        self.exe_path = os.path.dirname(os.path.abspath(exe_path))
+        self.exe_name = exe_path
 
     def set_working_dir(self, path_str):
         ''' Sets the working directory.
