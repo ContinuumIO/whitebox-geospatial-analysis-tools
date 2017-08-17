@@ -95,22 +95,25 @@ def _lower_key(k):
     return '_'.join(k.lower().split())
 
 
-def _assign_nodata(arr, no_data):
+def _assign_nodata(arr):
+    attrs = arr.attrs
+    no_data = [v for k, v in attrs.items()
+               if k.lower() == 'nodata']
+    if not no_data:
+        return arr
+    no_data = np.float64(no_data[0])
     if 'int' in arr.dtype.name:
         arr.values = arr.values.astype(np.float64)
     arr.values[arr.values == no_data] = np.NaN
     return arr
 
 
-def assign_nodata(dset_or_arr, **dep):
-    no_data = dep.get('Nodata', None)
-    if no_data is None:
-        return dset_or_arr
+def assign_nodata(dset_or_arr):
     if isinstance(dset_or_arr, xr.Dataset):
         for k, v in dset_or_arr.data_vars.items():
-            _assign_nodata(v, no_data)
+            _assign_nodata(v)
     else:
-        _assign_nodata(dset_or_arr, no_data)
+        _assign_nodata(dset_or_arr)
     return dset_or_arr
 
 
