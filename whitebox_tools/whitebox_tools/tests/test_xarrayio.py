@@ -56,6 +56,10 @@ XFAIL = ('DownslopeIndex',
 
 
 TESTDATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'testdata')
+if not os.path.exists(TESTDATA):
+    TESTDATA = os.environ.get('WHITEBOX_DATA_DIR', 'not-there')
+    if not os.path.exists(TESTDATA):
+        raise ValueError('Define WHITEBOX_DATA_DIR to be the testdata folder of .dep files')
 EXAMPLE_DEMS = tuple(os.path.join(TESTDATA, f) for f in ('DEM.dep', 'DEV_101.dep'))
 TO_REMOVE = ['test-output.{}'.format(end) for end in ('dep', 'tas')]
 
