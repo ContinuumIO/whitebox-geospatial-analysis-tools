@@ -12,8 +12,8 @@ ACTIVATE_DIR=$PREFIX/etc/conda/activate.d
 DEACTIVATE_DIR=$PREFIX/etc/conda/deactivate.d
 mkdir -p $ACTIVATE_DIR $DEACTIVATE_DIR
 cat > $ACTIVATE_DIR/whitebox_tools-activate.sh <<EOF
-echo export WHITEBOX_TOOLS_BUILD=$CONDA_PREFIX/share/whitebox_tools
-export WHITEBOX_TOOLS_BUILD=$CONDA_PREFIX/share/whitebox_tools
+echo export WHITEBOX_TOOLS_BUILD=$CONDA_PREFIX/share/whitebox_tools/release/
+export WHITEBOX_TOOLS_BUILD=$CONDA_PREFIX/share/whitebox_tools/release/
 EOF
 cat > $DEACTIVATE_DIR/whitebox_tools-deactivate.sh <<EOF
 echo unset WHITEBOX_TOOLS_BUILD
