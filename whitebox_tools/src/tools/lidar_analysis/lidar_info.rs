@@ -1,11 +1,35 @@
+/* 
+This tool is part of the WhiteboxTools geospatial analysis library.
+Authors: Dr. John Lindsay
+Created: June 1, 2017
+Last Modified: July 17, 2017
+License: MIT
+*/
+
 use std;
 use std::env;
 use std::io::{Error, ErrorKind};
 use std::path;
 use std::u16;
-use lidar::las;
-use lidar::point_data::*;
+use lidar::*;
 use tools::WhiteboxTool;
+
+/// This tool can be used to print basic information about the data contained within a LAS file, used to store LiDAR
+/// data. The reported information will include including data on the header, point return frequency, and classification 
+/// data and information about the variable length records (VLRs) and geokeys.
+/// 
+/// # Input Parameters
+///
+/// | Flag      | Description                                                     |
+/// |-----------|-----------------------------------------------------------------|
+/// | -i, input | Input LAS file.                                                 |
+/// | --vlr     | Flag indicates whether to print variable length records (VLRs). |
+/// | --geokeys | Flag indicates whether to print the geokeys.                    |
+///
+/// # Example
+/// ```
+/// >>./whitebox_tools -r=LidarInfo --wd=/path/to/data/ -i=file.las --vlr --geokeys
+/// ```
 
 pub struct LidarInfo {
     name: String,
@@ -98,7 +122,7 @@ impl WhiteboxTool for LidarInfo {
             input_file = format!("{}{}", working_directory, input_file);
         }
 
-        let input: las::LasFile = match las::LasFile::new(&input_file, "r") {
+        let input = match LasFile::new(&input_file, "r") {
             Ok(lf) => lf,
             Err(_) => return Err(Error::new(ErrorKind::NotFound, format!("No such file or directory ({})", input_file))),
         };

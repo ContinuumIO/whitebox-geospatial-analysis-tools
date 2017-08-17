@@ -805,6 +805,7 @@ public class RasterLayerInfo implements MapLayer {
                                     g = (val >> 8) & 0xFF;
                                     r = val & 0xFF;
                                     pixelData[i] = (a << 24) | (r << 16) | (g << 8) | b;
+                                
                                 } else {
                                     pixelData[i] = backgroundColour;
                                 }

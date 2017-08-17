@@ -1,3 +1,10 @@
+/* 
+This tool is part of the WhiteboxTools geospatial analysis library.
+Authors: Dr. John Lindsay
+Created: June 22, 2017
+Last Modified: July 17, 2017
+License: MIT
+*/
 extern crate time;
 extern crate num_cpus;
 
@@ -8,8 +15,8 @@ use std::io::{Error, ErrorKind};
 use std::sync::Arc;
 use std::sync::mpsc;
 use std::thread;
-use lidar::las;
-use lidar::point_data::*;
+use lidar::*;
+// use lidar::point_data::*;
 use tools::WhiteboxTool;
 use structures::FixedRadiusSearch2D;
 
@@ -24,11 +31,11 @@ impl LidarTophatTransform {
     pub fn new() -> LidarTophatTransform { // public constructor
         let name = "LidarTophatTransform".to_string();
         
-        let description = "Performs a tophat transform on a Lidar dataset.".to_string();
+        let description = "Performs a white top-hat transform on a Lidar dataset; as an estimate of height above ground, this is useful for modelling the vegetation canopy".to_string();
         
-        let parameters = "-i, --input        Input LAS file.
--o, --output       Output LAS file.
---radius           Search radius; default is 1.0.".to_owned();
+        let mut parameters = "-i, --input    Input LAS file.\n".to_owned();
+        parameters.push_str("-o, --output   Output LAS file.\n");
+        parameters.push_str("--radius       Search radius; default is 1.0.\n");
   
         let sep: String = path::MAIN_SEPARATOR.to_string();
         let p = format!("{}", env::current_dir().unwrap().display());
@@ -37,7 +44,7 @@ impl LidarTophatTransform {
         if e.contains(".exe") {
             short_exe += ".exe";
         }
-        let usage = format!(">>.*{0} -r={1} --wd=\"*path*to*data*\" -i=\"input.las\" -o=\"output.las\" --radius=10.0", short_exe, name).replace("*", &sep);
+        let usage = format!(">>.*{0} -r={1} -v --wd=\"*path*to*data*\" -i=\"input.las\" -o=\"output.las\" --radius=10.0", short_exe, name).replace("*", &sep);
     
         LidarTophatTransform { name: name, description: description, parameters: parameters, example_usage: usage }
     }
@@ -112,8 +119,7 @@ impl WhiteboxTool for LidarTophatTransform {
         }
 
         if verbose { println!("Reading input LAS file..."); }
-        //let input = las::LasFile::new(&input_file, "r");
-        let input = match las::LasFile::new(&input_file, "r") {
+        let input = match LasFile::new(&input_file, "r") {
             Ok(lf) => lf,
             Err(err) => panic!("Error reading file {}: {}", input_file, err),
         };
@@ -250,29 +256,29 @@ impl WhiteboxTool for LidarTophatTransform {
         }
 
         // now output the data
-        let mut output = las::LasFile::initialize_using_file(&output_file, &input);
+        let mut output = LasFile::initialize_using_file(&output_file, &input);
         output.header.system_id = "EXTRACTION".to_string();
 
         for i in 0..n_points {
             let pr = input.get_record(i);
-            let pr2: las::LidarPointRecord;
+            let pr2: LidarPointRecord;
             match pr {
-                las::LidarPointRecord::PointRecord0 { mut point_data }  => {
+                LidarPointRecord::PointRecord0 { mut point_data }  => {
                     point_data.z = residuals[i];
-                    pr2 = las::LidarPointRecord::PointRecord0 { point_data: point_data };
+                    pr2 = LidarPointRecord::PointRecord0 { point_data: point_data };
 
                 },
-                las::LidarPointRecord::PointRecord1 { mut point_data, gps_data } => {
+                LidarPointRecord::PointRecord1 { mut point_data, gps_data } => {
                     point_data.z = residuals[i];
-                    pr2 = las::LidarPointRecord::PointRecord1 { point_data: point_data, gps_data: gps_data };
+                    pr2 = LidarPointRecord::PointRecord1 { point_data: point_data, gps_data: gps_data };
                 },
-                las::LidarPointRecord::PointRecord2 { mut point_data, rgb_data } => {
+                LidarPointRecord::PointRecord2 { mut point_data, rgb_data } => {
                     point_data.z = residuals[i];
-                    pr2 = las::LidarPointRecord::PointRecord2 { point_data: point_data, rgb_data: rgb_data };
+                    pr2 = LidarPointRecord::PointRecord2 { point_data: point_data, rgb_data: rgb_data };
                 },
-                las::LidarPointRecord::PointRecord3 { mut point_data, gps_data, rgb_data } => {
+                LidarPointRecord::PointRecord3 { mut point_data, gps_data, rgb_data } => {
                     point_data.z = residuals[i];
-                    pr2 = las::LidarPointRecord::PointRecord3 { point_data: point_data,
+                    pr2 = LidarPointRecord::PointRecord3 { point_data: point_data,
                         gps_data: gps_data, rgb_data: rgb_data};
                 },
             }

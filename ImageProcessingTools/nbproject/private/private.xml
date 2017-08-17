@@ -4,6 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/ImageProcessingTools/src/plugins/WriteFunctionMemoryInsertion.java</file>
+            <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/ImageProcessingTools/src/plugins/DirectDecorrelationStretch.java</file>
+            <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/ImageProcessingTools/src/plugins/CreateColourComposite.java</file>
+            <file>file:/Users/johnlindsay/Documents/programming/Whitebox/trunk/ImageProcessingTools/src/plugins/BalanceContrastEnhancement.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,3 +1,10 @@
+/* 
+This tool is part of the WhiteboxTools geospatial analysis library.
+Authors: Dr. John Lindsay
+Created: June 22 2017
+Last Modified: June 22, 2017
+License: MIT
+*/
 extern crate time;
 extern crate num_cpus;
 
@@ -124,12 +131,12 @@ impl WhiteboxTool for Clump {
                 
         let mut output = Raster::initialize_using_file(&output_file, &input);
 
-        let mut d_x = [ 1, 1, 1, 0, -1, -1, -1, 0 ];
-        let mut d_y = [ -1, 0, 1, 1, 1, 0, -1, -1 ];
+        let mut dx = [ 1, 1, 1, 0, -1, -1, -1, 0 ];
+        let mut dy = [ -1, 0, 1, 1, 1, 0, -1, -1 ];
         let mut num_neighbours = 8;
         if !diag {
-            d_x = [ 0, 1, 0, -1, 0, 0, 0, 0 ];
-            d_y = [ -1, 0, 1, 0, 0, 0, 0, 0 ];
+            dx = [ 0, 1, 0, -1, 0, 0, 0, 0 ];
+            dy = [ -1, 0, 1, 0, 0, 0, 0, 0 ];
             num_neighbours = 4;
         }
         let mut back_val = f64::NEG_INFINITY;
@@ -169,12 +176,12 @@ impl WhiteboxTool for Clump {
                             }
                         }
                         for i in 0..num_neighbours {
-                            zn = input[(r + d_y[i], c + d_x[i])];
-                            zout = output[(r + d_y[i], c + d_x[i])];
+                            zn = input[(r + dy[i], c + dx[i])];
+                            zout = output[(r + dy[i], c + dx[i])];
                             if zn == zin && zout == nodata {
-                                output[(r + d_y[i], c + d_x[i])] = fid;
+                                output[(r + dy[i], c + dx[i])] = fid;
                                 num_solved_cells += 1;
-                                stack.push((r + d_y[i], c + d_x[i]));
+                                stack.push((r + dy[i], c + dx[i]));
                             }
                         }
                     }

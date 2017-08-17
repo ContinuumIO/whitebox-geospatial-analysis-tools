@@ -313,7 +313,7 @@ public class WhiteboxRasterBase {
 
     public enum DataType {
 
-        DOUBLE, FLOAT, INTEGER, BYTE;
+        DOUBLE, FLOAT, INTEGER, BYTE, I32;
     }
 
     protected int cellSizeInBytes = 8;
@@ -357,6 +357,10 @@ public class WhiteboxRasterBase {
             case BYTE:
                 this.dataType = DataType.BYTE;
                 cellSizeInBytes = 1;
+                break;
+            case I32:
+                this.dataType = DataType.I32;
+                cellSizeInBytes = 4;
                 break;
         }
     }
@@ -819,6 +823,8 @@ public class WhiteboxRasterBase {
                             this.setDataType(DataType.INTEGER);
                         } else if (str[dataCol].toLowerCase().contains("byte")) {
                             this.setDataType(DataType.BYTE);
+                        } else if (str[dataCol].toLowerCase().contains("i32")) {
+                            this.setDataType(DataType.I32);
                         }
                     } else if (str[0].toLowerCase().contains("data scale")) {
                         if (str[dataCol].toLowerCase().contains("continuous")) {
@@ -1169,6 +1175,18 @@ public class WhiteboxRasterBase {
                     retVals[j] = fa[j];
                 }
                 fa = null;
+            } else if (dataType == DataType.I32) {
+                buf.rewind();
+                IntBuffer ib = buf.asIntBuffer();
+                int[] ia = new int[readLengthInCells];
+                ib.get(ia);
+                ib = null;
+                buf = null;
+                retVals = new double[readLengthInCells];
+                for (int j = 0; j < readLengthInCells; j++) {
+                    retVals[j] = ia[j];
+                }
+                ia = null;
             } else if (dataType == DataType.INTEGER) { //.equals("integer")) {
                 buf.rewind();
                 ShortBuffer ib = buf.asShortBuffer();
