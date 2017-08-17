@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 ''' this module is used to build whitebox-tools.
 '''
+from __future__ import print_function
 import os
 import sys
-from subprocess import call
+from subprocess import call as sp_call
+
+def call(*args, **kw):
+    print('Running: ', args[0], '(with kwargs = {})'.format(kw))
+    return sp_call(*args, **kw)
 
 
 def main():
@@ -12,6 +17,7 @@ def main():
     try:
         update_cargo = False
         clean_code = False
+        doc_code = False
         build_code = True
         mode = 'release'  # 'check', 'debug', or 'release'
 
@@ -23,34 +29,40 @@ def main():
             # Update #
             retcode = call(['cargo', 'update'], shell=False)
             if retcode < 0:
-                print >>sys.stderr, "Child was terminated by signal", -retcode
+                print( "Child was terminated by signal", -retcode, file=sys.stderr)
             else:
-                print >>sys.stderr, "Update successful"
-
+                print( "Update successful", file=sys.stderr)
         if clean_code:
             # Clean #
             retcode = call(['cargo', 'clean'], shell=False)
             if retcode < 0:
-                print >>sys.stderr, "Child was terminated by signal", -retcode
+                print( "Child was terminated by signal", -retcode, file=sys.stderr)
             else:
-                print >>sys.stderr, "Clean successful"
+                print( "Clean successful", file=sys.stderr)
+
+        if doc_code:
+            # Clean #
+            retcode = call(['cargo', 'doc'], shell=False)
+            if retcode < 0:
+                print("Child was terminated by signal", -retcode, file=sys.stderr)
+            else:
+                print("Clean successful", file=sys.stderr)
 
         if build_code:
             # Build #
             if mode == 'release':
-                retcode = call(['cargo', 'build', '--release'], shell=False)
+                retcode = call(['env', 'RUSTFLAGS=-C target-cpu=native',
+                                'cargo', 'build', '--release'], shell=False)
             elif mode == 'check':
                 retcode = call(['cargo', 'check'], shell=False)
             else:
-                retcode = call(['cargo', 'debug'], shell=False)
+                retcode = call(['cargo', 'build'], shell=False)
 
             if retcode < 0:
-                print >>sys.stderr, "Child was terminated by signal", -retcode
+                print( "Child was terminated by signal", -retcode, file=sys.stderr)
             else:
-                print >>sys.stderr, "Build executed successfully"
-
+                print( "Build executed successfully", file=sys.stderr)
     except OSError as err:
-        print >>sys.stderr, "Execution failed:", err
-
+        print( "Execution failed:", err, file=sys.stderr)
 
 main()

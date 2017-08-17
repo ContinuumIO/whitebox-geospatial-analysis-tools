@@ -21,6 +21,7 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Arrays;
@@ -1070,6 +1071,14 @@ public class WhiteboxRaster extends WhiteboxRasterBase {
                 fb.get(fa);
                 for (int j = 0; j < readLengthInCells; j++) {
                     grid[j] = fa[j];
+                }
+            } else if (dataType == DataType.I32) {
+                buf.rewind();
+                IntBuffer ib = buf.asIntBuffer();
+                int[] ia = new int[readLengthInCells];
+                ib.get(ia);
+                for (int j = 0; j < readLengthInCells; j++) {
+                    grid[j] = ia[j];
                 }
             } else if (dataType == DataType.INTEGER) {
                 buf.rewind();

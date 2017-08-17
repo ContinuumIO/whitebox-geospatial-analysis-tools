@@ -1,0 +1,25 @@
+package:
+  name: whitebox_tools
+  version: 0.1.1
+
+source:
+  path: ..
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - rust
+    - xarray
+
+  run:
+    - python
+    - rust
+    - xarray
+
+about:
+  home: https://github.com/ContinuumIO/whitebox-geospatial-analysis-tools
+  license: GPLv3

@@ -1,3 +1,10 @@
+/* 
+This tool is part of the WhiteboxTools geospatial analysis library.
+Authors: Dr. John Lindsay
+Created: June 22, 2017
+Last Modified: July 12, 2017
+License: MIT
+*/
 extern crate time;
 extern crate num_cpus;
 
@@ -24,9 +31,9 @@ impl TangentialCurvature {
         
         let description = "Calculates a tangential curvature raster from an input DEM.".to_string();
         
-        let mut parameters = "-i, --input   Input raster DEM file.".to_owned();
+        let mut parameters = "-i, --dem     Input raster DEM file.\n".to_owned();
         parameters.push_str("-o, --output  Output raster file.\n");
-        parameters.push_str("--zfactor     Optional multiplier for when the vertical and horizontal units are not the same.");
+        parameters.push_str("--zfactor     Optional multiplier for when the vertical and horizontal units are not the same.\n");
         
         let sep: String = path::MAIN_SEPARATOR.to_string();
         let p = format!("{}", env::current_dir().unwrap().display());
@@ -35,7 +42,7 @@ impl TangentialCurvature {
         if e.contains(".exe") {
             short_exe += ".exe";
         }
-        let usage = format!(">>.*{} -r={} --wd=\"*path*to*data*\" -i=DEM.dep -o=output.dep", short_exe, name).replace("*", &sep);
+        let usage = format!(">>.*{} -r={} --wd=\"*path*to*data*\" --dem=DEM.dep -o=output.dep", short_exe, name).replace("*", &sep);
     
         TangentialCurvature { name: name, description: description, parameters: parameters, example_usage: usage }
     }
@@ -76,7 +83,7 @@ impl WhiteboxTool for TangentialCurvature {
             if vec.len() > 1 {
                 keyval = true;
             }
-            if vec[0].to_lowercase() == "-i" || vec[0].to_lowercase() == "--input" {
+            if vec[0].to_lowercase() == "-i" || vec[0].to_lowercase() == "--input" || vec[0].to_lowercase() == "--dem" {
                 if keyval {
                     input_file = vec[1].to_string();
                 } else {

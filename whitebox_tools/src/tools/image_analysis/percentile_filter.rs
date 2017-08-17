@@ -1,3 +1,10 @@
+/* 
+This tool is part of the WhiteboxTools geospatial analysis library.
+Authors: Dr. John Lindsay
+Created: June 22, 2017
+Last Modified: July 15, 2017
+License: MIT
+*/
 extern crate time;
 extern crate num_cpus;
 
@@ -13,6 +20,7 @@ use structures::Array2D;
 use std::io::{Error, ErrorKind};
 use tools::WhiteboxTool;
 
+/// Tool struct containing the essential descriptors required to interact with the tool.
 pub struct PercentileFilter {
     name: String,
     description: String,
@@ -21,16 +29,19 @@ pub struct PercentileFilter {
 }
 
 impl PercentileFilter {
-    pub fn new() -> PercentileFilter { // public constructor
+
+    /// Public constructor.
+    pub fn new() -> PercentileFilter {
         let name = "PercentileFilter".to_string();
         
         let description = "Performs a percentile filter on an input image.".to_string();
         
         let mut parameters = "-i, --input   Input raster file.".to_owned();
         parameters.push_str("-o, --output  Output raster file.\n");
-        parameters.push_str("--filter      Size of the filter kernel (default is 11).\n");
+        parameters.push_str("--filter      Optional size of the filter kernel (default is 11; not used if --filterx and --filtery are specified).\n");
         parameters.push_str("--filterx     Optional size of the filter kernel in the x-direction (default is 11; not used if --filter is specified).\n");
         parameters.push_str("--filtery     Optional size of the filter kernel in the y-direction (default is 11; not used if --filter is specified).\n");
+        parameters.push_str("--sig_digits  Optional number of significant digits (default is 2).\n");
         
         let sep: String = path::MAIN_SEPARATOR.to_string();
         let p = format!("{}", env::current_dir().unwrap().display());
@@ -112,7 +123,7 @@ impl WhiteboxTool for PercentileFilter {
                 } else {
                     filter_size_y = args[i+1].to_string().parse::<usize>().unwrap();
                 }
-            } else if vec[0].to_lowercase() == "-numdigits" || vec[0].to_lowercase() == "--numdigits" {
+            } else if vec[0].to_lowercase() == "-sig_digits" || vec[0].to_lowercase() == "--sig_digits" {
                 if keyval {
                     num_sig_digits = vec[1].to_string().parse::<i32>().unwrap();
                 } else {
@@ -163,6 +174,7 @@ impl WhiteboxTool for PercentileFilter {
         // first bin the data
         let rows = input.configs.rows as isize;
         let columns = input.configs.columns as isize;
+        let nodata = input.configs.nodata;
         let multiplier = 10f64.powi(num_sig_digits);
         let min_val = input.configs.minimum;
         let max_val = input.configs.maximum;
@@ -172,28 +184,14 @@ impl WhiteboxTool for PercentileFilter {
         let mut binned_data : Array2D<i64> = Array2D::new(rows, columns, bin_nodata, bin_nodata)?;
 
         let num_procs = num_cpus::get() as isize;
-        let row_block_size = rows / num_procs;
         let (tx, rx) = mpsc::channel();
-
-        let mut starting_row;
-        let mut ending_row = 0;
-        let mut id = 0;
-        while ending_row < rows {
+        for tid in 0..num_procs {
             let input = input.clone();
-            let rows = rows.clone();
-            starting_row = id * row_block_size;
-            ending_row = starting_row + row_block_size;
-            if ending_row > rows {
-                ending_row = rows;
-            }
-            id += 1;
-            let tx1 = tx.clone();
+            let tx = tx.clone();
             thread::spawn(move || {
-                let nodata = input.configs.nodata;
-                let columns = input.configs.columns as isize;
                 let mut z : f64;
                 let mut val : i64;
-                for row in starting_row..ending_row {
+                for row in (0..rows).filter(|r| r % num_procs == tid) {
                     let mut data = vec![bin_nodata; columns as usize];
                     for col in 0..columns {
                         z = input.get_value(row, col);
@@ -202,7 +200,7 @@ impl WhiteboxTool for PercentileFilter {
                             data[col as usize] = val;
                         }
                     }
-                    tx1.send((row, data)).unwrap();
+                    tx.send((row, data)).unwrap();
                 }
             });
         }
@@ -221,29 +219,16 @@ impl WhiteboxTool for PercentileFilter {
 
         let bd = Arc::new(binned_data); // wrap binned_data in an Arc
         let mut output = Raster::initialize_using_file(&output_file, &input);
-        // let mut starting_row;
-        ending_row = 0;
         let (tx, rx) = mpsc::channel();
-        let mut id = 0;
-        while ending_row < rows {
-            let input = input.clone();
+        for tid in 0..num_procs {
             let binned_data = bd.clone();
-            let rows = rows.clone();
-            starting_row = id * row_block_size;
-            ending_row = starting_row + row_block_size;
-            if ending_row > rows {
-                ending_row = rows;
-            }
-            id += 1;
-            let tx1 = tx.clone();
+            let tx = tx.clone();
             thread::spawn(move || {
-                let nodata = input.configs.nodata;
-                let columns = input.configs.columns as isize;
                 let (mut bin_val, mut bin_val_n, mut old_bin_val) : (i64, i64, i64);
                 let (mut start_col, mut end_col, mut start_row, mut end_row): (isize, isize, isize, isize);
                 let mut m : i64;
                 let (mut n, mut n_less_than): (f64, f64);
-                for row in starting_row..ending_row {
+                for row in (0..rows).filter(|r| r % num_procs == tid) {
                     start_row = row - midpoint_y;
                     end_row = row + midpoint_y;
                     let mut histo : Vec<i64> = vec![];
@@ -324,7 +309,7 @@ impl WhiteboxTool for PercentileFilter {
 
                         old_bin_val = bin_val;
                     }
-                    tx1.send((row, data)).unwrap();
+                    tx.send((row, data)).unwrap();
                 }
             });
         }

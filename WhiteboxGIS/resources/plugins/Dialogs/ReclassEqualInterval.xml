@@ -22,7 +22,7 @@
 	<DialogComponent type="DialogDataInput">
 		<Name>reclassInterval</Name>
 		<Description>Enter the desired reclass interval (range size) here</Description>
-		<LabelText>Reclass Intarval:</LabelText>
+		<LabelText>Reclass Interval:</LabelText>
 		<IsVisible>True</IsVisible>
 		<InitialText></InitialText>
 		<NumericalInputOnly>True</NumericalInputOnly>

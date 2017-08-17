@@ -458,7 +458,7 @@ public class CreateColourComposite implements WhiteboxPlugin {
                     }
                     progress = (int) (100f * row / (rows - 1));
                     if (progress != oldProgress) {
-                        updateProgress("Performing Enhancement (2 of 2):", progress);
+                        updateProgress("Performing Enhancement (1 of 2):", progress);
                         oldProgress = progress;
                         if (cancelOp) {
                             cancelOperation();

@@ -1,0 +1,7130 @@
+{
+  "Cosh": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "PercentLessThan": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--comparison"
+      ],
+      "Input comparison raster file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "MeanFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "MaxBranchLength": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--log"
+      ],
+      "Optional flag to request the output be log-transformed"
+    ]
+  ],
+  "Max": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "HortonStreamOrder": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "TraceDownslopeFlowpaths": [
+    [
+      [
+        "--seed_pts"
+      ],
+      "Input seed points raster file"
+    ],
+    [
+      [
+        "--zero_background"
+      ],
+      "Optional flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Optional flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--flow_dir"
+      ],
+      "Input D8 flow direction (pointer) raster file"
+    ]
+  ],
+  "PercentEqualTo": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--comparison"
+      ],
+      "Input comparison raster file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "MaximumFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "PickFromList": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files contained in quotes and separated by commas or semicolons"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--pos_input"
+      ],
+      "Input position raster file"
+    ]
+  ],
+  "StreamLinkSlope": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--linkid"
+      ],
+      "Input streams link ID (or tributary ID) raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "FindPatchOrClassEdgeCells": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "FindMainStem": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "Subtract": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "StrahlerOrderBasins": [
+    [
+      [
+        "--esri_pntr"
+      ],
+      "D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "MaxAbsoluteOverlay": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "NumInflowingNeighbours": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ]
+  ],
+  "StreamLinkClass": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "LidarGroundPointFilter": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 1.0"
+    ]
+  ],
+  "FillSingleCellPits": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Log2": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "FD8FlowAccumulation": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--out_type"
+      ],
+      "Output type; one of 'cells' 'sca' (default) and 'ca'"
+    ],
+    [
+      [
+        "--threshold"
+      ],
+      "Optional convergence threshold parameter in grid cells; default is inifinity"
+    ],
+    [
+      [
+        "--log"
+      ],
+      "Optional flag to request the output be log-transformed"
+    ],
+    [
+      [
+        "--exponent"
+      ],
+      "Optional exponent parameter; default is 1.1"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional flag to request clipping the display max by 1 percent"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ]
+  ],
+  "Sink": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "Negate": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "EqualTo": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "EuclideanAllocation": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "TotalFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "MaxDownslopeElevChange": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Rho8Pointer": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--esri_style"
+      ],
+      "Uses the ESRI style D8 pointer output (default is false)"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ]
+  ],
+  "Exp": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "DevFromMeanElev": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "D8FlowAccumulation": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--out_type"
+      ],
+      "Output type; one of 'cells' 'sca' (default) and 'ca'"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--log"
+      ],
+      "Optional flag to request the output be log-transformed"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional flag to request clipping the display max by 1 percent"
+    ]
+  ],
+  "StandardDeviationContrastStretch": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--stdev"
+      ],
+      "Standard deviation clip value (default is 2.0)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--num_tones"
+      ],
+      "Number of tones in the output image (default is 256)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "RelativeAspect": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "--azimuth"
+      ],
+      "Illumination source azimuth"
+    ]
+  ],
+  "DInfPointer": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ]
+  ],
+  "BreachSingleCellPits": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "MinDownslopeElevChange": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "RemoveOffTerrainObjects": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Filter size (cells); default is 11"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--slope"
+      ],
+      "Slope threshold; default is 15.0"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Aspect": [
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "FlipImage": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--direction"
+      ],
+      "Direction of reflection; options include 'v' (vertical) 'h' (horizontal) and 'b' (both) Default is 'v'"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "LidarJoin": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input LAS files separated by commas"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "NormalVectors": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 1.0"
+    ]
+  ],
+  "DownslopeDistanceToStream": [
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "DiversityFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Optional size of the filter kernel (default is 11; not used if and are specified)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "PercentileFilter": [
+    [
+      [
+        "--sig_digits"
+      ],
+      "Optional number of significant digits (default is 2)"
+    ],
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Optional size of the filter kernel (default is 11; not used if and are specified)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "ShreveStreamMagnitude": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Optional flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "DiffFromMeanElev": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "NotEqualTo": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "RemoveShortStreams": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "--min_length"
+      ],
+      "Minimum tributary length (in map units) used for network prunning"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ConservativeSmoothingFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "LidarTophatTransform": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 1.0"
+    ]
+  ],
+  "SquareRoot": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ElevRelativeToWatershedMinMax": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--watersheds"
+      ],
+      "Input watersheds raster file"
+    ]
+  ],
+  "Cos": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Slope": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "HighestPosition": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "ConvertNodataToZero": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "EuclideanDistance": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "LessThan": [
+    [
+      [
+        "--incl_equals"
+      ],
+      "Perform a less-than-or-equal-to operation"
+    ],
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Increment": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "MinMaxContrastStretch": [
+    [
+      [
+        "--min_val"
+      ],
+      "Lower tail clip value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--max_val"
+      ],
+      "Upper tail clip value"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--num_tones"
+      ],
+      "Number of tones in the output image (default is 256)"
+    ]
+  ],
+  "MinAbsoluteOverlay": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "Xor": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file Input raster file"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "IntegralImage": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "SedimentTransportIndex": [
+    [
+      [
+        "--sca_exponent"
+      ],
+      "SCA exponent value (default is 0.4)"
+    ],
+    [
+      [
+        "--slope_exponent"
+      ],
+      "Slope exponent value (default is 1.3)"
+    ],
+    [
+      [
+        "--sca"
+      ],
+      "Input specific contributing area (SCA) raster file"
+    ],
+    [
+      [
+        "--slope"
+      ],
+      "Input slope raster file"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "BalanceContrastEnhancement": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input colour-composite image file"
+    ],
+    [
+      [
+        "--band_mean"
+      ],
+      "Optional band mean value (default is 100)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "MultiscaleTopographicPositionImage": [
+    [
+      [
+        "--local"
+      ],
+      "Input local-scale topographic position (DEVmax) raster file"
+    ],
+    [
+      [
+        "--lightness"
+      ],
+      "Image lightness value (default is 1.2)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--broad"
+      ],
+      "Input broad-scale topographic position (DEVmax) raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--meso"
+      ],
+      "Input meso-scale topographic position (DEVmax) raster file"
+    ]
+  ],
+  "SplitColourComposite": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input colour composite image file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Multiply": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Basins": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "D8 pointer uses the ESRI style scheme (default is false)"
+    ]
+  ],
+  "ArcTan": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "NumUpslopeNeighbours": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "JensonSnapPourPoints": [
+    [
+      [
+        "--pour_pts"
+      ],
+      "Input pour points (outlet) raster file"
+    ],
+    [
+      [
+        "--snap_dist"
+      ],
+      "Maximum snap distance in map units"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input raster streams file"
+    ]
+  ],
+  "LidarIdwInterpolation": [
+    [
+      [
+        "--weight"
+      ],
+      "IDW weight value (default is 1.0)"
+    ],
+    [
+      [
+        "--parameter"
+      ],
+      "Interapolation parameter; options are 'elevation' (default) 'intensity' 'scan angle' 'user data'"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--resolution"
+      ],
+      "Output raster's grid resolution"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--exclude_cls",
+        "--exclude_cls"
+      ],
+      "Optional exclude classes from interpolation; Valid class values range from 0 to 18 based on LAS specifications Example '3 4 5 6 7 18'--palette Optional palette name (for use with Whitebox raster files)"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file (including extension)"
+    ],
+    [
+      [
+        "--minz"
+      ],
+      "Optional minimum elevation for inclusion in interpolation"
+    ],
+    [
+      [
+        "--returns"
+      ],
+      "Point return types to include; options are 'all' (default) 'last' 'first'"
+    ],
+    [
+      [
+        "--maxz"
+      ],
+      "Optional maximum elevation for inclusion in interpolation"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 2.5"
+    ]
+  ],
+  "OlympicFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "AbsoluteValue": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "CostAllocation": [
+    [
+      [
+        "--backlink"
+      ],
+      "Input backlink raster file generated by the cost-distance tool"
+    ],
+    [
+      [
+        "--source"
+      ],
+      "Input source raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Sinh": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "LidarNearestNeighbourGridding": [
+    [
+      [
+        "--parameter"
+      ],
+      "Interapolation parameter; options are 'elevation' (default) 'intensity' 'class' 'scan angle' 'user data'"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--resolution"
+      ],
+      "Output raster's grid resolution"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--exclude_cls",
+        "--exclude_cls"
+      ],
+      "Optional exclude classes from interpolation; Valid class values range from 0 to 18 based on LAS specifications Example '3 4 5 6 7 18'--palette Optional palette name (for use with Whitebox raster files)"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file (including extension)"
+    ],
+    [
+      [
+        "--minz"
+      ],
+      "Optional minimum elevation for inclusion in interpolation"
+    ],
+    [
+      [
+        "--returns"
+      ],
+      "Point return types to include; options are 'all' (default) 'last' 'first'"
+    ],
+    [
+      [
+        "--maxz"
+      ],
+      "Optional maximum elevation for inclusion in interpolation"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 2.5"
+    ]
+  ],
+  "FlightlineOverlap": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--resolution"
+      ],
+      "Output raster's grid resolution"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--palette"
+      ],
+      "Optional palette name (for use with Whitebox raster files)"
+    ]
+  ],
+  "RasterSummaryStats": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "LidarElevationSlice": [
+    [
+      [
+        "--inclassval"
+      ],
+      "Optional parameter specifying the class value assigned to points within the slice; default is 2"
+    ],
+    [
+      [
+        "--maxz"
+      ],
+      "Maximum elevation value"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--class"
+      ],
+      "Optional boolean flag indicating whether points outside the range should be retained in output but reclassified"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--minz"
+      ],
+      "Minimum elevation value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--outclassval"
+      ],
+      "Optional parameter specifying the class value assigned to points outside the slice; default is 1"
+    ]
+  ],
+  "Modulo": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "DistanceToOutlet": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 or Rho8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "RelativeTopographicPosition": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "Clump": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--diag",
+        "--zero_back"
+      ],
+      "Optional flag indicating whether diagonal connections should be considered Optional flag indicating whether zero values should be treated as a background"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "PanchromaticSharpening": [
+    [
+      [
+        "--blue"
+      ],
+      "Input blue raster file"
+    ],
+    [
+      [
+        "--composite"
+      ],
+      "Optional input colour-composite image file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--green"
+      ],
+      "Input green raster file"
+    ],
+    [
+      [
+        "--red"
+      ],
+      "Input red band raster file"
+    ],
+    [
+      [
+        "--method"
+      ],
+      "Options include 'brovey' and 'ihs' (default is 'brovey')"
+    ],
+    [
+      [
+        "--pan"
+      ],
+      "Input panchromatic image file"
+    ]
+  ],
+  "Square": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Hillshade": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--altitude"
+      ],
+      "Illumination source altitude"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "--azimuth"
+      ],
+      "Illumination source azimuth"
+    ]
+  ],
+  "MaxOverlay": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "DownslopeFlowpathLength": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme"
+    ],
+    [
+      [
+        "--watersheds"
+      ],
+      "Optional input watershed raster file"
+    ],
+    [
+      [
+        "--weights"
+      ],
+      "Optional input weights raster file"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ToRadians": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Not": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file Input raster file"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "PrewittFilter": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ExtractValleys": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--variant"
+      ],
+      "Options include 'lq' (lower quartile) 'JandR' (Johnston and Rosenfeld) and 'PandD' (Peucker and Douglas); default is 'lq'"
+    ],
+    [
+      [
+        "--line_thin"
+      ],
+      "Optional flag indicating whether post-processing line-thinning should be performed"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Optional argument (only used when variant 'lq') providing the filter size in grid cells used for lq-filtering (default is 5)"
+    ]
+  ],
+  "CostPathway": [
+    [
+      [
+        "--destination"
+      ],
+      "Input destination raster file"
+    ],
+    [
+      [
+        "--zero_background"
+      ],
+      "Optional flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--backlink"
+      ],
+      "Input backlink raster file generated by the cost-distance tool"
+    ]
+  ],
+  "DownslopeIndex": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--out_type"
+      ],
+      "Output type options include 'tangent' 'degrees' 'radians' 'distance' (default is 'tangent')"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--drop"
+      ],
+      "Vertical drop value (default is 2.0)"
+    ]
+  ],
+  "Tan": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "PercentGreaterThan": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--comparison"
+      ],
+      "Input comparison raster file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "KNearestMeanFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 3; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 3; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 3)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-k"
+      ],
+      "k-value in pixels (default is 5); this is the number of nearest-valued neighbours to use"
+    ]
+  ],
+  "StandardDeviationFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "MaxUpslopeFlowpathLength": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ArcCos": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "RgbToIhs": [
+    [
+      [
+        "--blue"
+      ],
+      "Input blue raster file"
+    ],
+    [
+      [
+        "--composite"
+      ],
+      "Optional input colour-composite image file"
+    ],
+    [
+      [
+        "--hue"
+      ],
+      "Output hue raster file"
+    ],
+    [
+      [
+        "--green"
+      ],
+      "Input green raster file"
+    ],
+    [
+      [
+        "--red"
+      ],
+      "Input red band raster file"
+    ],
+    [
+      [
+        "--saturation"
+      ],
+      "Output saturation file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--intensity"
+      ],
+      "Output intensity raster file"
+    ]
+  ],
+  "GaussianFilter": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--sigma"
+      ],
+      "Standard deviation distance in pixels"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "FlowAccumulationFullWorkflow": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--out_accum"
+      ],
+      "Output flow accumulation raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--out_type"
+      ],
+      "Output type; one of 'cells' 'sca' (default) and 'ca'"
+    ],
+    [
+      [
+        "--out_dem"
+      ],
+      "Output hydrologically corrected DEM file"
+    ],
+    [
+      [
+        "--log"
+      ],
+      "Optional flag to request the output be log-transformed"
+    ],
+    [
+      [
+        "--out_pntr"
+      ],
+      "Output flow pointer raster file"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional flag to request clipping the display max by 1 percent"
+    ],
+    [
+      [
+        "--esri_style"
+      ],
+      "Uses the ESRI style D8 pointer output (default is false)"
+    ]
+  ],
+  "ScharrFilter": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ElevPercentile": [
+    [
+      [
+        "--sig_digits"
+      ],
+      "Optional number of significant digits (default is 2)"
+    ],
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "And": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "AdaptiveFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--threshold"
+      ],
+      "Difference from mean threshold in standard deviations (default is 2.0)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "RandomField": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--base"
+      ],
+      "Input base raster file"
+    ]
+  ],
+  "DiffOfGaussianFilter": [
+    [
+      [
+        "--sigma2"
+      ],
+      "Standard deviation distance in pixels"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--sigma1"
+      ],
+      "Standard deviation distance in pixels"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Floor": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "HackStreamOrder": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "GammaCorrection": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--gamma"
+      ],
+      "Gamma value (default is 0.5)"
+    ]
+  ],
+  "FloodOrder": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "MinimumFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "GreaterThan": [
+    [
+      [
+        "--incl_equals"
+      ],
+      "Perform a greater-than-or-equal-to operation"
+    ],
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "CostDistance": [
+    [
+      [
+        "--source"
+      ],
+      "Input source raster file"
+    ],
+    [
+      [
+        "--out_accum"
+      ],
+      "Output cost accumulation raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--cost"
+      ],
+      "Input cost (friction) raster file"
+    ],
+    [
+      [
+        "--out_backlink"
+      ],
+      "Output backlink raster file"
+    ]
+  ],
+  "Log10": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Closing": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "Watershed": [
+    [
+      [
+        "--pour_pts"
+      ],
+      "Input pour points (outlet) raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "D8 pointer uses the ESRI style scheme"
+    ]
+  ],
+  "LaplacianFilter": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
+    ],
+    [
+      [
+        "--variant"
+      ],
+      "Optional variant value Options include 3x3(1) 3x3(2) 3x3(3) 3x3(4) 5x5(1) and 5x5(2) (default is 3x3(1))"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "StreamSlopeContinuous": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ]
+
+  ],
+  "IntegerDivision": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "LasToAscii": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input LAS files separated by commas"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "RelativeStreamPowerIndex": [
+    [
+      [
+        "--exponent"
+      ],
+      "SCA exponent value (default is 1.0)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--sca"
+      ],
+      "Input specific contributing area (SCA) raster file"
+    ],
+    [
+      [
+        "--slope"
+      ],
+      "Input slope raster file"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Subbasins": [
+    [
+      [
+        "--esri_pntr"
+      ],
+      "D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "StreamLinkIdentifier": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "PennockLandformClass": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "--slope"
+      ],
+      "Slope threshold value in degrees (default is 3.0)"
+    ],
+    [
+      [
+        "--prof"
+      ],
+      "Profile curvature threshold value (default is 0.1)"
+    ],
+    [
+      [
+        "--plan"
+      ],
+      "Plan curvature threshold value (default is 0.0)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "LineThinning": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "TributaryIdentifier": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "AverageUpslopeFlowpathLength": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Or": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "DepthInSink": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "DInfFlowAccumulation": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--out_type"
+      ],
+      "Output type; one of 'cells' 'sca' (default) and 'ca'"
+    ],
+    [
+      [
+        "--threshold"
+      ],
+      "Optional convergence threshold parameter in grid cells; default is inifinity"
+    ],
+    [
+      [
+        "--log"
+      ],
+      "Optional flag to request the output be log-transformed"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional flag to request clipping the display max by 1 percent"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ]
+  ],
+  "EdgeProportion": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--output_text"
+      ],
+      "Optional flag indicating whether a text report should also be output"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Divide": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ArcSin": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "NormalizedDifferenceVegetationIndex": [
+    [
+      [
+        "--osavi"
+      ],
+      "Optional flag indicating whether the optimized soil-adjusted veg index (OSAVI) should be used"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--nir"
+      ],
+      "Input near-infrared band image"
+    ],
+    [
+      [
+        "--red"
+      ],
+      "Input red-band image"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "FindParallelFlow": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Optional input streams raster file"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Quantiles": [
+    [
+      [
+        "--num_quantiles"
+      ],
+      "Number of quantiles (default 4)"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "AverageOverlay": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "FlowLengthDiff": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme"
+    ]
+  ],
+  "PercentElevRange": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "BilateralFilter": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--sigma_int"
+      ],
+      "Standard deviation in intensity in pixels (default is 1.0)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--sigma_dist"
+      ],
+      "Standard deviation in distance in pixels (default is 0.75)"
+    ]
+  ],
+  "ElevRelativeToMinMax": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "HighPassFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "LineDetectionFilter": [
+    [
+      [
+        "--absvals"
+      ],
+      "Optional flag indicating whether outputs should be absolute values"
+    ],
+    [
+      [
+        "--variant"
+      ],
+      "Optional variant value Options include 'v' (vertical) 'h' (horizontal) '45' and '135' (default is 'v')"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
+    ]
+  ],
+  "BlockMinimum": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--resolution"
+      ],
+      "Output raster's grid resolution"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--palette"
+      ],
+      "Optional palette name (for use with Whitebox raster files)"
+    ]
+  ],
+  "FarthestChannelHead": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "ZScores": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "CreatePlane": [
+    [
+      [
+        "--gradient"
+      ],
+      "Slope gradient in degrees (-85.0 to 85.0"
+    ],
+    [
+      [
+        "--aspect"
+      ],
+      "Aspect (direction) in degrees clockwise from north (0.0-360.0)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--constant"
+      ],
+      "Constant value (default is 0.0)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--base"
+      ],
+      "Input base raster file"
+    ]
+  ],
+  "Exp2": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "LidarInfo": [
+    [
+      [
+        "--geokeys"
+      ],
+      "Flag indicates whether to print the geokeys"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--vlr"
+      ],
+      "Flag indicates whether to print variable length records (VLRs)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "PercentageContrastStretch": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--tail"
+      ],
+      "Specified which tails to clip; options include 'upper' 'lower' and 'both' (default is 'both')"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Clip size in percentage (default is 1.0)"
+    ],
+    [
+      [
+        "--num_tones"
+      ],
+      "Number of tones in the output image (default is 256)"
+    ]
+  ],
+  "ExtractStreams": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--threshold"
+      ],
+      "Threshold in flow accumulation values for channelization"
+    ],
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--flow_accum"
+      ],
+      "Input D8 flow accumulation raster file"
+    ]
+  ],
+  "EmbossFilter": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
+    ],
+    [
+      [
+        "--direction"
+      ],
+      "Direction for filter; options include 'n' 's' 'e' 'w' 'ne' 'se' 'nw' 'sw' (default is 'n')"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "Ln": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "BreachDepressions": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--max_depth"
+      ],
+      "Optional maximum breach depth (default is Inf)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--max_length"
+      ],
+      "Optional maximum breach channel length (in cells; default is Inf)"
+    ]
+  ],
+  "TopologicalStreamOrder": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 or Rho8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "FillMissingData": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "FindNoFlowCells": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "FetchAnalysis": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--hgt_inc"
+      ],
+      "Height increment value (default is 0.05)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--azimuth"
+      ],
+      "Wind azimuth in degrees (default is 0.0)"
+    ]
+  ],
+  "Sin": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "MajorityFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Optional size of the filter kernel (default is 11; not used if and are specified)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "RuggednessIndex": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ThickenRasterLine": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "WeightedSum": [
+    [
+      [
+        "-w",
+        "--weights"
+      ],
+      "Weight values contained in quotes and separated by commas or semicolons"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files contained in quotes and separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "ElevAbovePit": [
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "DirectDecorrelationStretch": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input colour-composite image file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-k"
+      ],
+      "Achromatic factor (k) ranges between 0 (no effect) and 1 (full saturation stretch) although typical values range from 0.3 to 0.7 (default is 0.5)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-clip_percent"
+      ],
+      "Optional percent to clip the upper tail by during the stretch (default is 1.0)"
+    ]
+  ],
+  "Round": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "WriteFunctionMemoryInsertion": [
+    [
+      [
+        "-i2",
+        "--input2"
+      ],
+      "Input raster file associated with the second date"
+    ],
+    [
+      [
+        "-i1",
+        "--input1"
+      ],
+      "Input raster file associated with the first date"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i3",
+        "--input3"
+      ],
+      "Optional input raster file associated with the third date"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "HorizonAngle": [
+    [
+      [
+        "--max_dist"
+      ],
+      "Optional maximum search distance (unspecified if none; in xy units)"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--azimuth"
+      ],
+      "Wind azimuth in degrees (default is 0.0)"
+    ]
+  ],
+  "NumDownslopeNeighbours": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "TangentialCurvature": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "StreamLinkLength": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--linkid"
+      ],
+      "Input streams link ID (or tributary ID) raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ]
+  ],
+  "BufferRaster": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--gridcells"
+      ],
+      "Optional flag to indicate that the 'size' threshold should be measured in grid cells instead of the default"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--size"
+      ],
+      "Buffer size"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ProfileCurvature": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Add": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "TurningBandsSimulation": [
+    [
+      [
+        "--range"
+      ],
+      "The field's range in xy-units related to the extent of spatial autocorrelation"
+    ],
+    [
+      [
+        "--iterations"
+      ],
+      "The number of iterations; default is 1000"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--base"
+      ],
+      "Input base raster file"
+    ]
+  ],
+  "FillDepressions": [
+    [
+      [
+        "--dem"
+      ],
+      "Input raster DEM file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--fix_flats"
+      ],
+      "Optional flag indicating whether flat areas should have a small gradient applied"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Atan2": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--input_x"
+      ],
+      "Input x raster file or constant value (run)"
+    ],
+    [
+      [
+        "--input_y"
+      ],
+      "Input y raster file or constant value (rise)"
+    ]
+  ],
+  "LeeFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 5; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 5; not used if is specified)"
+    ],
+    [
+      [
+        "-m"
+      ],
+      "M-threshold value the minimum allowable number of pixels within the intensity range (default is 10)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 5)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--sigma"
+      ],
+      "Sigma value should be related to the standarad deviation of the distribution of image speckle noise"
+    ]
+  ],
+  "MinOverlay": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "-i",
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "LaplacianOfGaussianFilter": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--sigma"
+      ],
+      "Standard deviation in pixels"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "LengthOfUpstreamChannels": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Optional flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "Flag indicating whether the D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "D8Pointer": [
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--esri_style"
+      ],
+      "Uses the ESRI style D8 pointer output (default is false)"
+    ]
+  ],
+  "LowestPosition": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--inputs"
+      ],
+      "Input raster files separated by commas or semicolons"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "Decrement": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "NewRasterFromBase": [
+    [
+      [
+        "--data_type"
+      ],
+      "Output raster data type; options include 'double' (64-bit) 'float' (32-bit) and 'integer' (signed 16-bit) (default is 'float')"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--base"
+      ],
+      "Input base raster file"
+    ],
+    [
+      [
+        "--value"
+      ],
+      "Constant value to fill raster with; either 'nodata' or numberic value (default is nodata)"
+    ]
+  ],
+  "SnapPourPoints": [
+    [
+      [
+        "--pour_pts"
+      ],
+      "Input pour points (outlet) raster file"
+    ],
+    [
+      [
+        "--snap_dist"
+      ],
+      "Maximum snap distance in map units"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--flow_accum"
+      ],
+      "Input D8 flow accumulation raster file"
+    ]
+  ],
+  "LidarHillshade": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--altitude"
+      ],
+      "Optional altitude in degrees of illumination source (efault is 30.0)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--azimuth"
+      ],
+      "Optional azimuth in degrees of illumination source (default is 315.0)"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 1.0"
+    ]
+  ],
+  "CreateColourComposite": [
+    [
+      [
+        "--blue"
+      ],
+      "Input raster file associated with the blue band"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--opacity"
+      ],
+      "Optional input raster file associated with the opacity (a)"
+    ],
+    [
+      [
+        "--green"
+      ],
+      "Input raster file associated with the green band"
+    ],
+    [
+      [
+        "--red"
+      ],
+      "Input raster file associated with the red band"
+    ],
+    [
+      [
+        "--enhance"
+      ],
+      "Optional flag indicating whether a balance contrast enhancement is performed"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "BlockMaximum": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--resolution"
+      ],
+      "Output raster's grid resolution"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--palette"
+      ],
+      "Optional palette name (for use with Whitebox raster files)"
+    ]
+  ],
+  "ToDegrees": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ConvertRasterFormat": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Min": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "PlanCurvature": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "WetnessIndex": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--sca"
+      ],
+      "Input specific contributing area (SCA) raster file"
+    ],
+    [
+      [
+        "--slope"
+      ],
+      "Input slope raster file"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "IsNoData": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "RangeFilter": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "LidarPointDensity": [
+    [
+      [
+        "--exclude_cls"
+      ],
+      "Optional exclude classes from interpolation; Valid class values range from 0 to 18 based on LAS specifications;Example '3 4 5 6 7 18'"
+    ],
+    [
+      [
+        "--palette"
+      ],
+    "Optional palette name (for use with Whitebox raster files)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--resolution"
+      ],
+      "Output raster's grid resolution"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file (including extension)"
+    ],
+    [
+      [
+        "--minz"
+      ],
+      "Optional minimum elevation for inclusion in interpolation"
+    ],
+    [
+      [
+        "--returns"
+      ],
+      "Point return types to include; options are 'all' (default) 'last' 'first'"
+    ],
+    [
+      [
+        "--maxz"
+      ],
+      "Optional maximum elevation for inclusion in interpolation"
+    ],
+    [
+      [
+        "--radius"
+      ],
+      "Search radius; default is 2.5"
+    ]
+  ],
+  "Power": [
+    [
+      [
+        "--input1"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--input2"
+      ],
+      "Input raster file or constant value"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "DirectionalRelief": [
+    [
+      [
+        "--max_dist"
+      ],
+      "Optional maximum search distance (unspecified if none; in xy units)"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--azimuth"
+      ],
+      "Wind azimuth in degrees (default is 0.0)"
+    ]
+  ],
+  "RobertsCrossFilter": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Reciprocal": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Tanh": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "SigmoidalContrastStretch": [
+    [
+      [
+        "--gain"
+      ],
+      "Gain value between 0.0 and 0.95 (default is 1.0)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--num_tones"
+      ],
+      "Number of tones in the output image (default is 256)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--cutoff"
+      ],
+      "Cutoff value between 0.0 and 0.95 (default is 0.0)"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ]
+  ],
+  "RemoveSpurs": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--iterations"
+      ],
+      "Maximum number of iterations (default is 10)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Ceil": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "Opening": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "TotalCurvature": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--zfactor"
+      ],
+      "Optional multiplier for when the vertical and horizontal units are not the same"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "ReclassEqualInterval": [
+    [
+      [
+        "--start_val"
+      ],
+      "Optional starting value (default is input minimum value)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--end_val"
+      ],
+      "Optional ending value (default is input maximum value)"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--interval"
+      ],
+      "Class interval size (default is 10.0)"
+    ]
+  ],
+  "TophatTransform": [
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--variant"
+      ],
+      "Optional variant value Options include 'white' and 'black' (default is 'white')"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Size of the filter kernel (default is 11)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "FD8Pointer": [
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster"
+    ]
+  ],
+  "Hillslopes": [
+    [
+      [
+        "--esri_pntr"
+      ],
+      "D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "StrahlerStreamOrder": [
+    [
+      [
+        "--zero_background"
+      ],
+      "Flag indicating whether the background value of zero should be used"
+    ],
+    [
+      [
+        "--esri_pntr"
+      ],
+      "D8 pointer uses the ESRI style scheme (default is false)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--d8_pntr"
+      ],
+      "Input D8 pointer raster file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ],
+  "SobelFilter": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--clip"
+      ],
+      "Optional amount to clip the distribution tails by in percent (default is 0.0)"
+    ],
+    [
+      [
+        "--variant"
+      ],
+      "Optional variant value Options include 3x3 and 5x5 (default is 3x3)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ]
+  ],
+  "MedianFilter": [
+    [
+      [
+        "--sig_digits"
+      ],
+      "Optional number of significant digits (default is 2)"
+    ],
+    [
+      [
+        "--filterx"
+      ],
+      "Optional size of the filter kernel in the x-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "--filtery"
+      ],
+      "Optional size of the filter kernel in the y-direction (default is 11; not used if is specified)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input raster file"
+    ],
+    [
+      [
+        "--filter"
+      ],
+      "Optional size of the filter kernel (default is 11; not used if and are specified)"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "LidarTile": [
+    [
+      [
+        "--min_points"
+      ],
+      "Minimum number of points contained in a tile for it to be output; default 0"
+    ],
+    [
+      [
+        "--origin_y"
+      ],
+      "Origin point for tile grid y dimension; default 0.0"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--width_y"
+      ],
+      "Width of tiles in the y dimension; default 1000.0"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input LAS file"
+    ],
+    [
+      [
+        "--origin_x"
+      ],
+      "Origin point for tile grid x dimension; default 0.0"
+    ],
+    [
+      [
+        "-width_x"
+      ],
+      "Width of tiles in the x dimension; default 1000.0"
+    ]
+  ],
+  "MaxElevationDeviation": [
+    [
+      [
+        "--out_mag"
+      ],
+      "Output DEVmax magnitude raster file"
+    ],
+    [
+      [
+        "--min_scale"
+      ],
+      "Minimum search neighbourhood radius in cells"
+    ],
+    [
+      [
+        "--max_scale"
+      ],
+      "Minimum search neighbourhood radius in cells"
+    ],
+    [
+      [
+        "--out_scale"
+      ],
+      "Output DEVmax scale raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "--step"
+      ],
+      "Step size as any positive non-zero integer (default is 10)"
+    ],
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ]
+  ],
+  "Truncate": [
+    [
+      [
+        "-i",
+        "--input"
+      ],
+      "Input file"
+    ],
+    [
+      [
+        "--num_decimals"
+      ],
+      "Number of decimals left after truncation (default is zero)"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ]
+  ],
+  "ElevationAboveStream": [
+    [
+      [
+        "--dem"
+      ],
+      "Input DEM raster file"
+    ],
+    [
+      [
+        "--wd"
+      ],
+      "Working directory"
+    ],
+    [
+      [
+        "-o",
+        "--output"
+      ],
+      "Output file"
+    ],
+    [
+      [
+        "--streams"
+      ],
+      "Input streams raster file"
+    ]
+  ]
+}
