@@ -1,4 +1,7 @@
 #!/bin/bash
+if [ `uname` == Linux ]; then
+    export SSL_CERT_FILE="$CONDA_PREFIX/ssl/cacert.pem"
+fi
 $PYTHON build.py
 export WHITEBOX_TOOLS_SHARE=$CONDA_PREFIX/share/whitebox_tools
 mkdir -p $WHITEBOX_TOOLS_SHARE
