@@ -13,14 +13,12 @@ requirements:
     - python
     - setuptools
     - rust
-    - xarray
     - openssl  # [linux]
     - toolchain  # [linux]
 
   run:
     - python
     - rust
-    - xarray
 
 about:
   home: https://github.com/ContinuumIO/whitebox-geospatial-analysis-tools

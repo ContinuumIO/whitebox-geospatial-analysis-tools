@@ -24,6 +24,6 @@ setup(name='whitebox_tools',
       install_requires=[],
       packages=find_packages(),
       entry_points={
-        'console_scripts': make_console_scripts(), #['whitebox_tools = whitebox_tools.whitebox_cli:call_whitebox_cli'],
+        'console_scripts': make_console_scripts(),
       }
     )

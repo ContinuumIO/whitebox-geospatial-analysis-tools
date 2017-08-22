@@ -117,7 +117,7 @@ if wbt.run_tool(tool_name, args, callback) != 0:
 
 Eventually most of *Whitebox GAT's* approximately 400 tools [will be ported](tool_porting.md) to *WhiteboxTools*, although this is an immense task. Support for vector data (Shapefile/GeoJSON) reading/writing and a topological analysis library (like the Java Topology Suite) will need to be added in order to port the tools involving vector spatial data. Opportunities to parallelize algorithms will be sought during porting. All new plugin tools will be added to *Whitebox GAT* using this library of functions. 
 
-The library currently contains the following 224 tools:
+The library currently contains the following 227 tools:
 
 **Data Tools**
 - ***ConvertNodataToZero***: Converts nodata values in a raster to zero.
@@ -127,6 +127,7 @@ The library currently contains the following 224 tools:
 **GIS Analysis**
 - ***AverageOverlay***: Calculates the average for each grid cell from a group of raster images.
 - ***BufferRaster***: Maps a distance-based buffer around each non-background (non-zero/non-nodata) grid cell in an input image.
+- ***Centroid***: Calclates the centroid, or average location, of raster polygon objects.
 - ***Clump***: Groups cells that form physically discrete areas, assigning them unique identifiers.
 - ***CostAllocation***: Identifies the source cell to which each grid cell is connected by a least-cost pathway in a cost-distance analysis.
 - ***CostDistance***: Performs cost-distance accumulation on a cost surface and a group of source cells.
@@ -150,6 +151,7 @@ The library currently contains the following 224 tools:
 - ***WeightedSum***: Performs a weighted-sum overlay on multiple input raster images.
 
 **Hydrological Analysis**
+- ***AverageFlowpathSlope***: easures the average length of all upslope flowpaths draining each grid cell.
 - ***AverageUpslopeFlowpathLength***: Measures the average length of all upslope flowpaths draining each grid cell.
 - ***Basins***: Identifies drainage basins that drain to the DEM edge.
 - ***BreachDepressions***: Breaches all of the depressions in a DEM. This should be preferred over depression filling in most cases.
@@ -262,6 +264,7 @@ The library currently contains the following 224 tools:
 - ***Ceil***: Returns the smallest (closest to negative infinity) value that is greater than or equal to the values in a raster.
 - ***Cos***: Returns the cosine (cos) of each values in a raster.
 - ***Cosh***: Returns the hyperbolic cosine (cosh) of each values in a raster.
+- ***CrispnessIndex***: Calculates the Crispness Index, which is used to quantify how crisp (or conversely how fuzzy) a probability image is.
 - ***Decrement***: Decreases the values of each grid cell in an input raster by 1.0.
 - ***Divide***: Performs a division operation on two rasters or a raster and a constant value.
 - ***EqualTo***: Performs a equal-to comparison operation on two rasters or a raster and a constant value.

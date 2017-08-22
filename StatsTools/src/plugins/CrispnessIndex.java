@@ -268,7 +268,7 @@ public class CrispnessIndex implements WhiteboxPlugin {
             image.close();
 
             double denominator;
-            denominator = Math.pow(imageTotal * (1 - imageAverage), 2) + 
+            denominator = imageTotal * Math.pow((1 - imageAverage), 2) + 
                     Math.pow(imageAverage, 2) * (imageN - imageTotal);
             crispness = imageTotalDeviation / denominator;
 

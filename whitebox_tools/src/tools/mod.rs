@@ -30,6 +30,7 @@ impl ToolManager {
         // gis_analysis
         tool_names.push("AverageOverlay".to_string());
         tool_names.push("BufferRaster".to_string());
+        tool_names.push("Centroid".to_string());
         tool_names.push("Clump".to_string());
         tool_names.push("CostAllocation".to_string());
         tool_names.push("CostDistance".to_string());
@@ -53,6 +54,7 @@ impl ToolManager {
         tool_names.push("WeightedSum".to_string());
 
         // hydro_analysis
+        tool_names.push("AverageFlowpathSlope".to_string());
         tool_names.push("AverageUpslopeFlowpathLength".to_string());
         tool_names.push("Basins".to_string());
         tool_names.push("BreachDepressions".to_string());
@@ -164,6 +166,7 @@ impl ToolManager {
         tool_names.push("Ceil".to_string());
         tool_names.push("Cos".to_string());
         tool_names.push("Cosh".to_string());
+        tool_names.push("CrispnessIndex".to_string());
         tool_names.push("Decrement".to_string());
         tool_names.push("Divide".to_string());
         tool_names.push("EqualTo".to_string());
@@ -282,6 +285,7 @@ impl ToolManager {
             // gis_analysis
             "averageoverlay" => Some(Box::new(tools::gis_analysis::AverageOverlay::new())),
             "bufferraster" => Some(Box::new(tools::gis_analysis::BufferRaster::new())),
+            "centroid" => Some(Box::new(tools::gis_analysis::Centroid::new())),
             "clump" => Some(Box::new(tools::gis_analysis::Clump::new())),
             "costallocation" => Some(Box::new(tools::gis_analysis::CostAllocation::new())),
             "costdistance" => Some(Box::new(tools::gis_analysis::CostDistance::new())),
@@ -310,6 +314,7 @@ impl ToolManager {
 
 
             // hydro_analysis
+            "averageflowpathslope" => Some(Box::new(tools::hydro_analysis::AverageFlowpathSlope::new())),
             "averageupslopeflowpathlength" => {
                 Some(Box::new(tools::hydro_analysis::AverageUpslopeFlowpathLength::new()))
             }
@@ -468,6 +473,7 @@ impl ToolManager {
             "ceil" => Some(Box::new(tools::math_stat_analysis::Ceil::new())),
             "cos" => Some(Box::new(tools::math_stat_analysis::Cos::new())),
             "cosh" => Some(Box::new(tools::math_stat_analysis::Cosh::new())),
+            "crispnessindex" => Some(Box::new(tools::math_stat_analysis::CrispnessIndex::new())),
             "decrement" => Some(Box::new(tools::math_stat_analysis::Decrement::new())),
             "divide" => Some(Box::new(tools::math_stat_analysis::Divide::new())),
             "equalto" => Some(Box::new(tools::math_stat_analysis::EqualTo::new())),
