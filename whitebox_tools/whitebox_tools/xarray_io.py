@@ -328,3 +328,52 @@ def xarray_whitebox_io(**kwargs):
             return dset[k] # DataArray
         return dset        # Dataset - TODO implment later for multi output?
     return delayed_load_later, kwargs
+
+
+def add_dep_meta(arr,
+                 projection,
+                 display_max=None,
+                 display_min=None,
+                 data_scale='continuous',
+                 z_units='meters',
+                 xy_units='meters',
+                 x_coord_name='x',
+                 y_coord_name='y',
+                 no_data=None,
+                 palette='high_relief.pal',
+                 palette_nonlinearity=1.0):
+    if not isinstance(arr, xr.DataArray):
+        raise ValueError('Expected a DataArray')
+    v = arr.values
+
+    if not v.ndim == 2:
+        raise ValueError('Expected a 2-D raster (3-D array NotImplemented)')
+    if no_data is None:
+        if np.any(np.isnan(v)):
+            raise ValueError('DataArray has NaN but no_data was not provided (NaN fill value for .dep file)')
+    else:
+        v[np.isnan(v)] = no_data
+    y = getattr(arr, y_coord_name).values
+    x = getattr(arr, x_coord_name).values
+    if 'float' in v.dtype.name:
+        dtype_str = 'float'
+        dtype = '<f4'
+    else:
+        dtype_str = 'integer'
+        dtype_str = '<2'
+    dep_file = {
+        'Min': v.min(), 'Max': v.min(),
+        'North': y.max(), 'South': y.min(),
+        'East': x.min(), 'West': x.max(),
+        'Cols': v.shape[1], 'Rows': v.shape[0],
+        'Stacks': 1, 'Data Type': dtype,
+        'Z Units': 'meters','Xy Units': 'meters',
+        'Projection': projection, 'Data Scale': data_scale,
+        'Display Min': display_min, 'Display Max': display_max,
+        'Preferred Palette': palette,
+        'Palette Nonlinearity': palette_nonlinearity,
+        'Nodata': no_data,
+        'Byte Order': 'LITTLE_ENDIAN'
+    }
+    arr.attrs.update(dep_file)
+    return arr
