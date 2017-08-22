@@ -7,8 +7,13 @@ import re
 import string
 import sys
 
-import numpy as np
-import xarray as xr
+from whitebox_tools.util import optional_imports_error
+try:
+    import numpy as np
+    import xarray as xr
+except:
+    np = xr = None
+
 
 from whitebox_tools.whitebox_base import WhiteboxTools, WHITEBOX_VERBOSE
 from whitebox_tools.xarray_io import (xarray_whitebox_io,
@@ -36,6 +41,189 @@ with open(listtools_file) as f:
     listtools = (_.split(':') for _ in listtools)
     listtools = {k.strip(): v.strip() for k, v in listtools}
     tools = sorted(listtools)
+
+
+# These are imported when doing * (more are available via CLI, e.g. wb-Max)
+PYTHON_WHITEBOX = [
+    'AdaptiveFilter',
+    'Aspect',
+    'AverageUpslopeFlowpathLength',
+    'BalanceContrastEnhancement',
+    'Basins',
+    'BilateralFilter',
+    'BlockMaximum',
+    'BlockMinimum',
+    'BreachDepressions',
+    'BreachSingleCellPits',
+    'BufferRaster',
+    'Closing',
+    'Clump',
+    'ConservativeSmoothingFilter',
+    'ConvertNodataToZero',
+    'ConvertRasterFormat',
+    'CostAllocation',
+    'CostDistance',
+    'CostPathway',
+    'CreateColourComposite',
+    'CreatePlane',
+    'D8FlowAccumulation',
+    'D8Pointer',
+    'DInfFlowAccumulation',
+    'DInfPointer',
+    'Decrement',
+    'DepthInSink',
+    'DevFromMeanElev',
+    'DiffFromMeanElev',
+    'DiffOfGaussianFilter',
+    'DirectDecorrelationStretch',
+    'DirectionalRelief',
+    'DistanceToOutlet',
+    'DiversityFilter',
+    'DownslopeDistanceToStream',
+    'DownslopeFlowpathLength',
+    'DownslopeIndex',
+    'EdgeProportion',
+    'ElevAbovePit',
+    'ElevPercentile',
+    'ElevRelativeToMinMax',
+    'ElevRelativeToWatershedMinMax',
+    'ElevationAboveStream',
+    'EmbossFilter',
+    'EuclideanAllocation',
+    'EuclideanDistance',
+    'ExtractStreams',
+    'ExtractValleys',
+    'FD8FlowAccumulation',
+    'FD8Pointer',
+    'FarthestChannelHead',
+    'FetchAnalysis',
+    'FillDepressions',
+    'FillMissingData',
+    'FillSingleCellPits',
+    'FindMainStem',
+    'FindNoFlowCells',
+    'FindParallelFlow',
+    'FindPatchOrClassEdgeCells',
+    'FlightlineOverlap',
+    'FlipImage',
+    'FloodOrder',
+    'FlowAccumulationFullWorkflow',
+    'FlowLengthDiff',
+    'GammaCorrection',
+    'GaussianFilter',
+    'GreaterThan',
+    'HackStreamOrder',
+    'HighPassFilter',
+    'HighestPosition',
+    'Hillshade',
+    'Hillslopes',
+    'HorizonAngle',
+    'HortonStreamOrder',
+    'Increment',
+    'IntegerDivision',
+    'IntegralImage',
+    'JensonSnapPourPoints',
+    'KNearestMeanFilter',
+    'LaplacianFilter',
+    'LaplacianOfGaussianFilter',
+    'LasToAscii',
+    'LeeFilter',
+    'LengthOfUpstreamChannels',
+    'LessThan',
+    'LidarElevationSlice',
+    'LidarGroundPointFilter',
+    'LidarHillshade',
+    'LidarIdwInterpolation',
+    'LidarInfo',
+    'LidarJoin',
+    'LidarNearestNeighbourGridding',
+    'LidarPointDensity',
+    'LidarTile',
+    'LidarTophatTransform',
+    'LineDetectionFilter',
+    'LineThinning',
+    'LowestPosition',
+    'MajorityFilter',
+    'MaxBranchLength',
+    'MaxDownslopeElevChange',
+    'MaxElevationDeviation',
+    'MaxOverlay',
+    'MaxUpslopeFlowpathLength',
+    'MaximumFilter',
+    'MeanFilter',
+    'MedianFilter',
+    'MinAbsoluteOverlay',
+    'MinDownslopeElevChange',
+    'MinMaxContrastStretch',
+    'MinimumFilter',
+    'Modulo',
+    'MultiscaleTopographicPositionImage',
+    'NewRasterFromBase',
+    'NormalVectors',
+    'NormalizedDifferenceVegetationIndex',
+    'NumDownslopeNeighbours',
+    'NumInflowingNeighbours',
+    'NumUpslopeNeighbours',
+    'OlympicFilter',
+    'Opening',
+    'PanchromaticSharpening',
+    'PennockLandformClass',
+    'PickFromList',
+    'PlanCurvature',
+    'Power',
+    'PrewittFilter',
+    'ProfileCurvature',
+    'RangeFilter',
+    'RasterSummaryStats',
+    'Reciprocal',
+    'ReclassEqualInterval',
+    'RelativeAspect',
+    'RelativeStreamPowerIndex',
+    'RelativeTopographicPosition',
+    'RemoveOffTerrainObjects',
+    'RemoveShortStreams',
+    'RemoveSpurs',
+    'RgbToIhs',
+    'Rho8Pointer',
+    'RobertsCrossFilter',
+    'RuggednessIndex',
+    'ScharrFilter',
+    'SedimentTransportIndex',
+    'ShreveStreamMagnitude',
+    'SigmoidalContrastStretch',
+    'Sink',
+    'Slope',
+    'SnapPourPoints',
+    'SobelFilter',
+    'SplitColourComposite',
+    'StandardDeviationContrastStretch',
+    'StandardDeviationFilter',
+    'StrahlerOrderBasins',
+    'StrahlerStreamOrder',
+    'StreamLinkClass',
+    'StreamLinkIdentifier',
+    'StreamLinkLength',
+    'StreamLinkSlope',
+    'StreamSlopeContinuous',
+    'Subbasins',
+    'TangentialCurvature',
+    'ThickenRasterLine',
+    'ToDegrees',
+    'ToRadians',
+    'TophatTransform',
+    'TopologicalStreamOrder',
+    'TotalCurvature',
+    'TotalFilter',
+    'TraceDownslopeFlowpaths',
+    'TributaryIdentifier',
+    'Truncate',
+    'TurningBandsSimulation',
+    'Watershed',
+    'WeightedSum',
+    'WetnessIndex',
+    'WriteFunctionMemoryInsertion',
+    'ZScores',
+]
 
 
 def callback(out_str, silent=False):
@@ -107,6 +295,7 @@ def convert_help_extract_params(tool, wbt,
 
 def to_rust(tool, args):
     '''Convert arguments to formats expected by Rust'''
+    optional_imports_error(np, xr)
     s = []
     outputs = (ki for k, v in HELP[tool] for ki in k)
     outputs = filter(lambda k: k.startswith('--'), outputs)
@@ -203,6 +392,7 @@ def _no_dash(p):
     else:
         raise ValueError('Expected a string but got {}'.format(p))
 
+
 def _fmt_help(tool):
     hlp = {tuple(k): v for k, v in HELP[tool]}
     ok_params = set()
@@ -233,8 +423,7 @@ for tool in tools:
 
     globals()[tool] = Wrapped()
 
-extras = [t + 'Cli' for t in tools]
-extras += ['callback', 'tools', 'WhiteboxTools', 'get_all_help']
-__all__ = tools + extras
 
-
+tool_names = [t + 'Cli' for t in tools] + PYTHON_WHITEBOX
+__all__ = ['callback', 'tools',
+           'WhiteboxTools', 'get_all_help'] + tool_names
