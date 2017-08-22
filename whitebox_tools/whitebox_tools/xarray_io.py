@@ -4,8 +4,14 @@ import shutil
 import string
 import struct
 
-import numpy as np
-import xarray as xr
+from whitebox_tools.util import optional_imports_error
+try:
+    import numpy as np
+    import xarray as xr
+except:
+    np = xr = None
+
+
 
 INPUT_ARGS = ['input', 'inputs', 'i', 'pour_pts',
               'd8_pntr', 'dem', 'input1', 'input2', 'input3',
@@ -109,6 +115,7 @@ def _assign_nodata(arr):
 
 
 def assign_nodata(dset_or_arr):
+    optional_imports_error(np, xr)
     if isinstance(dset_or_arr, xr.Dataset):
         for k, v in dset_or_arr.data_vars.items():
             _assign_nodata(v)
@@ -217,6 +224,7 @@ def _get_dtype(dtype_str):
 
 
 def from_dep(dep, tas=None):
+    optional_imports_error(np, xr)
     '''Load a .dep file and corresponding .tas file
 
     Parameters:
@@ -293,6 +301,7 @@ def xarray_whitebox_io(**kwargs):
        tuple of (func, kwargs) where kwargs are input
            kwargs modified in place
     '''
+    optional_imports_error(np, xr)
     load_afterwards = {}
     delete_tempdir = kwargs.pop('delete_tempdir', True)
     fnames = {}
@@ -350,6 +359,7 @@ def add_dep_meta(arr,
                  no_data=None,
                  palette='high_relief.pal',
                  palette_nonlinearity=1.0):
+    optional_imports_error(np, xr)
     if not isinstance(arr, xr.DataArray):
         raise ValueError('Expected a DataArray')
     v = arr.values

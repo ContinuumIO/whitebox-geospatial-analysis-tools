@@ -7,8 +7,13 @@ import re
 import string
 import sys
 
-import numpy as np
-import xarray as xr
+from whitebox_tools.util import optional_imports_error
+try:
+    import numpy as np
+    import xarray as xr
+except:
+    np = xr = None
+
 
 from whitebox_tools.whitebox_base import WhiteboxTools, WHITEBOX_VERBOSE
 from whitebox_tools.xarray_io import (xarray_whitebox_io,
@@ -290,6 +295,7 @@ def convert_help_extract_params(tool, wbt,
 
 def to_rust(tool, args):
     '''Convert arguments to formats expected by Rust'''
+    optional_imports_error(np, xr)
     s = []
     outputs = (ki for k, v in HELP[tool] for ki in k)
     outputs = filter(lambda k: k.startswith('--'), outputs)
@@ -385,6 +391,7 @@ def _no_dash(p):
         return p[1:]
     else:
         raise ValueError('Expected a string but got {}'.format(p))
+
 
 def _fmt_help(tool):
     hlp = {tuple(k): v for k, v in HELP[tool]}

@@ -1,5 +1,4 @@
 #!/bin/bash
-=======
 if [ `uname` == Linux ]; then
     export SSL_CERT_FILE="$CONDA_PREFIX/ssl/cacert.pem"
 fi
