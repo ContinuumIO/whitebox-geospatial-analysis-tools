@@ -117,6 +117,8 @@ def assign_nodata(dset_or_arr):
     return dset_or_arr
 
 
+class MissingDepMetadata(ValueError):
+    pass
 
 def case_insensitive_attrs(attrs, typ):
     lower = {'dtype': typ}
@@ -134,13 +136,13 @@ def case_insensitive_attrs(attrs, typ):
     needs_keys = set(REQUIRED_DEP_FIELDS)
     if not has_keys >= needs_keys:
         missing = needs_keys - has_keys
-        raise ValueError('Did not find the following keys in DataArray: {} (found {})'.format(missing, lower))
+        raise MissingDepMetadata('Did not find the following keys in DataArray: {} (found {})'.format(missing, lower))
     for k in OPTIONAL_DEP_FIELDS:
         if k not in lower:
             lower[k] = ''
     data_scale = (lower.get('data_scale') or '').lower()
     if not data_scale in OK_DATA_SCALES:
-        raise ValueError('Data Scale (data_scale) is not in {} - attrs: {}'.format(OK_DATA_SCALES, lower))
+        raise MissingDepMetadata('Data Scale (data_scale) is not in {} - attrs: {}'.format(OK_DATA_SCALES, lower))
     if data_scale == 'rgb':
         raise NotImplementedError('RGB DataArrays are not handled yet - serialize first, then run command line WhiteBox tool')
     return lower
@@ -244,7 +246,7 @@ def from_dep(dep, tas=None):
     return xr.DataArray(val, coords=coords, dims=dims, attrs=attrs)
 
 
-def data_array_to_dep(arr, fname=None, tag=None):
+def data_array_to_dep(arr, fname=None, tag=None, **dep_kwargs):
     '''Dump a DataArray to fname or a tag (for temp dir)
 
     Parameters:
@@ -258,7 +260,11 @@ def data_array_to_dep(arr, fname=None, tag=None):
     val = arr.values
     typ_str, dtype = _get_dtype(val.dtype.name)
     val = val.astype('<' + dtype)
-    attrs = case_insensitive_attrs(arr.attrs, typ_str)
+    try:
+        attrs = case_insensitive_attrs(arr.attrs, typ_str)
+    except MissingDepMetadata:
+        arr = add_dep_meta(arr, **dep_kwargs)
+        attrs = case_insensitive_attrs(arr.attrs, typ_str)
     attrs['byte_order'] = 'LITTLE_ENDIAN'
     if val.ndim != 2 or attrs.get('stacks') > 1:
         not_2d_error()
@@ -331,7 +337,7 @@ def xarray_whitebox_io(**kwargs):
 
 
 def add_dep_meta(arr,
-                 projection,
+                 projection='not specified',
                  display_max=None,
                  display_min=None,
                  data_scale='continuous',
