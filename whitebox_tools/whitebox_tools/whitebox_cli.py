@@ -37,6 +37,7 @@ with open(listtools_file) as f:
     listtools = {k.strip(): v.strip() for k, v in listtools}
     tools = sorted(listtools)
 
+
 # These are imported when doing * (more are available via CLI, e.g. wb-Max)
 PYTHON_WHITEBOX = [
     'AdaptiveFilter',
@@ -218,6 +219,7 @@ PYTHON_WHITEBOX = [
     'WriteFunctionMemoryInsertion',
     'ZScores',
 ]
+
 
 def callback(out_str, silent=False):
     ''' Create a custom callback to process the text coming out of the tool.
@@ -414,8 +416,7 @@ for tool in tools:
 
     globals()[tool] = Wrapped()
 
+
 tool_names = [t + 'Cli' for t in tools] + PYTHON_WHITEBOX
 __all__ = ['callback', 'tools',
            'WhiteboxTools', 'get_all_help'] + tool_names
-
-

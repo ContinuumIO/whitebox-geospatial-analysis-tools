@@ -120,6 +120,7 @@ def assign_nodata(dset_or_arr):
 class MissingDepMetadata(ValueError):
     pass
 
+
 def case_insensitive_attrs(attrs, typ):
     lower = {'dtype': typ}
     for k, v in attrs.items():
@@ -336,6 +337,7 @@ def xarray_whitebox_io(**kwargs):
     return delayed_load_later, kwargs
 
 
+
 def add_dep_meta(arr,
                  projection='not specified',
                  display_max=None,
@@ -383,3 +385,4 @@ def add_dep_meta(arr,
     }
     arr.attrs.update(dep_file)
     return arr
+
