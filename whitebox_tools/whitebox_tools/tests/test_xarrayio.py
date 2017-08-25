@@ -1,8 +1,11 @@
 import os
 
-import numpy as np
 import pytest
-import xarray as xr
+try:
+    import numpy as np
+    import xarray as xr
+except:
+    np = xr = None
 
 from whitebox_tools.whitebox_cli import * # __all__ is defined there
 from whitebox_tools.xarray_io import (from_dep,
@@ -99,6 +102,7 @@ def d8_pntr(dem=None):
     return dem, D8Pointer(dem=dem)
 
 def flow_accumulation(dem=None):
+    optional_imports_error(np, xr)
     if dem is None:
         dem = from_dep(EXAMPLE_DEMS[0])
     filled_dem = FillDepressions(dem=dem)
@@ -116,6 +120,7 @@ def flow_accumulation(dem=None):
                        'filled_dem': filled_dem})
 
 def wshed():
+    optional_imports_error(np, xr)
     dem, d8 = d8_pntr()
     w = Watershed(d8_pntr=d8, pour_pts=pour_point_raster(dem))
     dset = xr.Dataset(dict(dem=dem,
@@ -129,6 +134,7 @@ INPUT_ARRS = wshed()
 
 
 def test_stream_link_slope():
+    optional_imports_error(np, xr)
     linkid = StreamLinkIdentifier(d8_pntr=INPUT_ARRS.d8_pntr,
                                   streams=INPUT_ARRS.streams,
                                   output='linkid.dep')
@@ -139,6 +145,7 @@ def test_stream_link_slope():
     assert isinstance(link_slope, xr.DataArray)
 
 def test_FlowAccumulationFullWorkflow():
+    optional_imports_error(np, xr)
     kw = dict(out_accum='out_accum.dep',
               out_dem='out_dem.dep',
               out_type='sca',
@@ -159,12 +166,14 @@ def test_wetness_index():
     wb-WetnessIndex --sca sca.dep --slope slope.dep -o wetness_index.dep
 
     '''
+    optional_imports_error(np, xr)
     wet = WetnessIndex(sca=INPUT_ARRS.sca,
                        slope=INPUT_ARRS.slope)
     assert isinstance(wet, xr.DataArray)
 
 
 def test_cost_dist_alloc():
+    optional_imports_error(np, xr)
     pytest.xfail('This test is too slow (change input data)')
     cost = INPUT_ARRS.dem * 0.1
     source = INPUT_ARRS.dem * 1.1
@@ -180,6 +189,7 @@ def test_cost_dist_alloc():
 
 
 def test_full_workflow():
+    optional_imports_error(np, xr)
     kw = dict(dem=INPUT_ARRS.dem,
               out_dem='filled.dep',
               out_accum='flow_accum.dep',
@@ -193,6 +203,7 @@ def test_full_workflow():
 
 
 def make_synthetic_kwargs(tool, as_xarr=True):
+    optional_imports_error(np, xr)
     arg_spec_help = HELP[tool]
     kwargs = {}
 
@@ -234,6 +245,7 @@ tools_names_list = [(tool, as_xarr) for tool in tools
                     for as_xarr in as_xarray]
 @pytest.mark.parametrize('tool, as_xarr', tools_names_list)
 def test_each_tool(tool, as_xarr):
+    optional_imports_error(np, xr)
     if tool == 'RasterSummaryStats' and as_xarr:
         return # no returned array
     if tool.startswith(('Cost', 'Wetness',

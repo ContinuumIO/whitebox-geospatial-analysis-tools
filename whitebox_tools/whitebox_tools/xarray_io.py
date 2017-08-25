@@ -4,8 +4,14 @@ import shutil
 import string
 import struct
 
-import numpy as np
-import xarray as xr
+from whitebox_tools.util import optional_imports_error
+try:
+    import numpy as np
+    import xarray as xr
+except:
+    np = xr = None
+
+
 
 INPUT_ARGS = ['input', 'inputs', 'i', 'pour_pts',
               'd8_pntr', 'dem', 'input1', 'input2', 'input3',
@@ -109,6 +115,7 @@ def _assign_nodata(arr):
 
 
 def assign_nodata(dset_or_arr):
+    optional_imports_error(np, xr)
     if isinstance(dset_or_arr, xr.Dataset):
         for k, v in dset_or_arr.data_vars.items():
             _assign_nodata(v)
@@ -116,6 +123,9 @@ def assign_nodata(dset_or_arr):
         _assign_nodata(dset_or_arr)
     return dset_or_arr
 
+
+class MissingDepMetadata(ValueError):
+    pass
 
 
 def case_insensitive_attrs(attrs, typ):
@@ -134,13 +144,13 @@ def case_insensitive_attrs(attrs, typ):
     needs_keys = set(REQUIRED_DEP_FIELDS)
     if not has_keys >= needs_keys:
         missing = needs_keys - has_keys
-        raise ValueError('Did not find the following keys in DataArray: {} (found {})'.format(missing, lower))
+        raise MissingDepMetadata('Did not find the following keys in DataArray: {} (found {})'.format(missing, lower))
     for k in OPTIONAL_DEP_FIELDS:
         if k not in lower:
             lower[k] = ''
     data_scale = (lower.get('data_scale') or '').lower()
     if not data_scale in OK_DATA_SCALES:
-        raise ValueError('Data Scale (data_scale) is not in {} - attrs: {}'.format(OK_DATA_SCALES, lower))
+        raise MissingDepMetadata('Data Scale (data_scale) is not in {} - attrs: {}'.format(OK_DATA_SCALES, lower))
     if data_scale == 'rgb':
         raise NotImplementedError('RGB DataArrays are not handled yet - serialize first, then run command line WhiteBox tool')
     return lower
@@ -214,6 +224,7 @@ def _get_dtype(dtype_str):
 
 
 def from_dep(dep, tas=None):
+    optional_imports_error(np, xr)
     '''Load a .dep file and corresponding .tas file
 
     Parameters:
@@ -244,7 +255,7 @@ def from_dep(dep, tas=None):
     return xr.DataArray(val, coords=coords, dims=dims, attrs=attrs)
 
 
-def data_array_to_dep(arr, fname=None, tag=None):
+def data_array_to_dep(arr, fname=None, tag=None, **dep_kwargs):
     '''Dump a DataArray to fname or a tag (for temp dir)
 
     Parameters:
@@ -258,7 +269,11 @@ def data_array_to_dep(arr, fname=None, tag=None):
     val = arr.values
     typ_str, dtype = _get_dtype(val.dtype.name)
     val = val.astype('<' + dtype)
-    attrs = case_insensitive_attrs(arr.attrs, typ_str)
+    try:
+        attrs = case_insensitive_attrs(arr.attrs, typ_str)
+    except MissingDepMetadata:
+        arr = add_dep_meta(arr, **dep_kwargs)
+        attrs = case_insensitive_attrs(arr.attrs, typ_str)
     attrs['byte_order'] = 'LITTLE_ENDIAN'
     if val.ndim != 2 or attrs.get('stacks') > 1:
         not_2d_error()
@@ -286,6 +301,7 @@ def xarray_whitebox_io(**kwargs):
        tuple of (func, kwargs) where kwargs are input
            kwargs modified in place
     '''
+    optional_imports_error(np, xr)
     load_afterwards = {}
     delete_tempdir = kwargs.pop('delete_tempdir', True)
     fnames = {}
@@ -328,3 +344,55 @@ def xarray_whitebox_io(**kwargs):
             return dset[k] # DataArray
         return dset        # Dataset - TODO implment later for multi output?
     return delayed_load_later, kwargs
+
+
+
+def add_dep_meta(arr,
+                 projection='not specified',
+                 display_max=None,
+                 display_min=None,
+                 data_scale='continuous',
+                 z_units='meters',
+                 xy_units='meters',
+                 x_coord_name='x',
+                 y_coord_name='y',
+                 no_data=None,
+                 palette='high_relief.pal',
+                 palette_nonlinearity=1.0):
+    optional_imports_error(np, xr)
+    if not isinstance(arr, xr.DataArray):
+        raise ValueError('Expected a DataArray')
+    v = arr.values
+
+    if not v.ndim == 2:
+        raise ValueError('Expected a 2-D raster (3-D array NotImplemented)')
+    if no_data is None:
+        if np.any(np.isnan(v)):
+            raise ValueError('DataArray has NaN but no_data was not provided (NaN fill value for .dep file)')
+    else:
+        v[np.isnan(v)] = no_data
+    y = getattr(arr, y_coord_name).values
+    x = getattr(arr, x_coord_name).values
+    if 'float' in v.dtype.name:
+        dtype_str = 'float'
+        dtype = '<f4'
+    else:
+        dtype_str = 'integer'
+        dtype_str = '<2'
+    dep_file = {
+        'Min': v.min(), 'Max': v.min(),
+        'North': y.max(), 'South': y.min(),
+        'East': x.min(), 'West': x.max(),
+        'Cols': v.shape[1], 'Rows': v.shape[0],
+        'Stacks': 1, 'Data Type': dtype,
+        'Z Units': 'meters','Xy Units': 'meters',
+        'Projection': projection, 'Data Scale': data_scale,
+        'Display Min': display_min, 'Display Max': display_max,
+        'Preferred Palette': palette,
+        'Palette Nonlinearity': palette_nonlinearity,
+        'Nodata': no_data,
+        'Byte Order': 'LITTLE_ENDIAN'
+    }
+    arr.attrs.update(dep_file)
+    return arr
+
